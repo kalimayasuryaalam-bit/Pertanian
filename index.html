@@ -1,1791 +1,929 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalimaja.web.id - Pusat Alat Teknik & Pertanian</title>
-    <!-- Tailwind CSS untuk Styling -->
+    <title>PT Kalimaja Surya Alam - Pompa, Alat Berat & Sistem Hidrolik</title>
+    <meta name="description" content="PT Kalimaja Surya Alam menyediakan pompa air irigasi, alat berat, sistem hidrolik, dan suku cadang industri terbaik dan terpercaya.">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- FontAwesome untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { light: '#4ade80', DEFAULT: '#16a34a', dark: '#15803d' },
+                        accent: { DEFAULT: '#eab308', dark: '#ca8a04' }
+                    },
+                    animation: {
+                        'slide-bg': 'slide 25s infinite linear',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards'
+                    },
+                    keyframes: {
+                        slide: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '20%': { transform: 'translateX(0%)' },
+                            '25%': { transform: 'translateX(-100%)' },
+                            '45%': { transform: 'translateX(-100%)' },
+                            '50%': { transform: 'translateX(-200%)' },
+                            '70%': { transform: 'translateX(-200%)' },
+                            '75%': { transform: 'translateX(-300%)' },
+                            '95%': { transform: 'translateX(-300%)' },
+                            '100%': { transform: 'translateX(-400%)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
     <style>
-        /* Mencegah scroll horizontal yang tidak diinginkan & Custom Scrollbar */
-        body { overflow-x: hidden; }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        /* Styling Scrollbar untuk menu geser di Mobile */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
         
-        /* Scrollbar kustom untuk dropdown kategori */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+        .hero-slider-container {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            animation: slide 25s infinite ease-in-out;
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f8fafc;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        
-        /* Animasi Transisi Halus untuk Formulir */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-
-        /* Toggle Switch CSS murni untuk setting kurir */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #3b82f6;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #3b82f6;
+        .hero-slide {
+            width: 20%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
-<body class="font-sans text-gray-900 bg-gray-50 selection:bg-yellow-400 selection:text-blue-900">
+<body class="font-sans text-gray-800 bg-gray-50 antialiased selection:bg-brand selection:text-white relative">
 
-    <!-- HEADER UTAMA -->
-    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
-        <!-- Top bar -->
-        <div class="bg-blue-950 text-xs py-1.5 px-4 hidden md:flex justify-between items-center">
-            <span class="text-blue-200">Selamat datang di Pusat Alat Teknik & Pertanian Terbesar di Indonesia</span>
-            <div class="flex space-x-6 items-center">
-                <button class="hover:text-white text-blue-200 transition-colors">Promo</button>
-                <button class="hover:text-white text-blue-200 transition-colors">Bantuan</button>
-                <div class="w-px h-3 bg-blue-800"></div>
-                <!-- Tombol Pintasan Antar Dashboard -->
-                <button onclick="switchView('buyer')" class="text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1.5 transition-colors">
-                    <i class="fa-solid fa-user-circle"></i> Dashboard Pembeli
-                </button>
-                <button onclick="switchView('admin')" class="text-emerald-400 hover:text-emerald-300 font-medium flex items-center gap-1.5 transition-colors">
-                    <i class="fa-solid fa-shield-halved"></i> Panel Admin
-                </button>
-                <button onclick="switchView('seller')" class="font-bold text-yellow-400 hover:text-yellow-300 transition-colors flex items-center gap-1.5">
-                    <i class="fa-solid fa-store"></i> Buka Toko
-                </button>
-            </div>
-        </div>
+    <!-- Cloud Sync Toast Notification (Untuk Admin) -->
+    <div id="cloud-toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl z-50 transform -translate-y-32 transition-transform duration-300 flex items-center gap-3 font-bold">
+        <i class="fas fa-cloud-upload-alt text-xl animate-bounce"></i> 
+        <span id="toast-msg">Tersimpan Permanen di Server</span>
+    </div>
 
-        <!-- Main header -->
-        <div class="container mx-auto px-4 py-3 md:py-4">
-            <div class="flex items-center justify-between gap-4">
-                <!-- Logo -->
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('home')">
-                    <img id="main-site-logo" src="https://ui-avatars.com/api/?name=Kalimaja&background=eab308&color=1e3a8a&rounded=true&bold=true" alt="Logo Kalimaja" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-yellow-400 bg-white group-hover:scale-105 transition-transform shadow-sm" />
-                    <span class="font-bold text-2xl md:text-3xl tracking-tight hidden sm:block drop-shadow-sm">
-                        Kalimaja<span class="text-yellow-400">.web.id</span>
-                    </span>
+    <!-- Tombol WhatsApp Mengambang -->
+    <a href="https://wa.me/6285150973789" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 z-50 group">
+        <i class="fab fa-whatsapp"></i>
+        <span class="absolute right-20 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none font-semibold">
+            Hubungi Kami via WA!
+        </span>
+    </a>
+
+    <!-- Header / Navbar -->
+    <header class="fixed w-full top-0 bg-white/90 backdrop-blur-md shadow-sm z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img class="h-12 w-12 rounded-full object-cover shadow-sm border-2 border-white" src="https://www.ksasemesta.com/images/0/24384851/LogoKalimaja1-VOen73dOZJxAq7S_0egLJw.jpg" alt="Logo PT Kalimaja">
+                    <span class="font-bold text-xl tracking-tight text-gray-900 hidden sm:block">Kalimaja Surya Alam</span>
                 </div>
-
-                <!-- Kategori Dropdown (Desktop) - MENU SCROLL DOWN -->
-                <div class="hidden md:block relative ml-2 lg:ml-6" id="desktop-category-wrapper">
-                    <button onclick="toggleCategoryMenu()" class="text-white hover:text-yellow-400 flex items-center gap-2 font-bold transition-colors py-2 px-3 rounded-lg hover:bg-blue-800 active:scale-95">
-                        <i class="fa-solid fa-list-ul text-lg"></i> <span class="hidden lg:block">Kategori</span> <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
-                    </button>
-                    <!-- Dropdown List -->
-                    <div id="category-dropdown" class="absolute top-full mt-3 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-[100] text-gray-800 overflow-hidden transform transition-all opacity-0 scale-95 origin-top-left">
-                        <div class="bg-gray-50 px-5 py-3 border-b border-gray-100 font-black text-sm text-gray-700 flex justify-between items-center">
-                            Pilih Kategori B2B
-                            <button onclick="toggleCategoryMenu()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-lg"></i></button>
-                        </div>
-                        <div class="max-h-[60vh] overflow-y-auto custom-scrollbar">
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-wrench w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">1. Perkakas & Tools</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-tractor w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">2. Mesin Pertanian</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-bolt w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">3. Kelistrikan & Genset</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-droplet w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">4. Pompa & Kompresor</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-gears w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">5. Pabrikasi & CNC</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-industry w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">6. Mesin Manufaktur</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-truck-moving w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">7. Alat Berat & Konstruksi</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-boxes-stacked w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">8. Material Handling</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-robot w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">9. Otomasi & Robotika</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-microscope w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">10. Alat Ukur & Uji</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-user-shield w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">11. Keamanan (K3)</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-cubes w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">12. Bahan Logam</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-snowflake w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">13. HVAC & Pendingin</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-water w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">14. Water Treatment</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-laptop-code w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">15. Software Industri</span>
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-5 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-50 group">
-                                <i class="fa-solid fa-compress w-5 text-center text-gray-400 group-hover:text-blue-500"></i> <span class="text-sm font-bold">16. Hydrolik & Mesin Hydrolik</span>
-                            </a>
-                        </div>
-                    </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#beranda" class="text-gray-700 hover:text-brand font-medium transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-gray-700 hover:text-brand font-medium transition-colors">Tentang Kami</a>
+                    <a href="#produk" class="text-gray-700 hover:text-brand font-medium transition-colors">Produk</a>
+                    <a href="#layanan" class="text-gray-700 hover:text-brand font-medium transition-colors">Layanan</a>
+                    <a href="#garansi" class="text-gray-700 hover:text-brand font-medium transition-colors">Garansi</a>
+                    <a href="#galeri" class="text-gray-700 hover:text-brand font-medium transition-colors">Galeri</a>
+                    <a href="#kontak" class="text-gray-700 hover:text-brand font-medium transition-colors">Kontak</a>
+                </nav>
+                
+                <div class="hidden md:flex">
+                    <a href="#kontak" class="bg-brand text-white px-6 py-2.5 rounded-full font-semibold hover:bg-brand-dark transition-colors shadow-md">
+                        Dapatkan Penawaran
+                    </a>
                 </div>
-
-                <!-- Search Bar (Desktop) -->
-                <div class="flex-1 max-w-3xl hidden md:flex mx-4 lg:mx-8">
-                    <div class="relative w-full flex shadow-inner rounded-lg overflow-hidden border-2 border-transparent focus-within:border-yellow-400 transition-colors">
-                        <div class="bg-white text-gray-500 px-4 flex items-center justify-center">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <input type="text" placeholder="Cari mesin CNC, traktor, genset industri..." class="w-full py-2.5 px-2 text-gray-800 focus:outline-none" />
-                        <button class="bg-yellow-500 hover:bg-yellow-400 text-blue-950 font-bold px-6 flex items-center justify-center transition-colors">
-                            Cari
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Icons -->
-                <div class="flex items-center gap-5 sm:gap-7">
-                    <button class="relative hover:text-yellow-400 transition-colors hidden sm:block group">
-                        <i class="fa-solid fa-cart-shopping text-2xl group-hover:scale-110 transition-transform"></i>
-                        <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-blue-900">3</span>
-                    </button>
-                    <!-- Tombol Masuk/Daftar yang membuka modal -->
-                    <button onclick="openLoginModal()" class="hover:text-yellow-400 transition-colors hidden sm:flex items-center gap-2 group">
-                        <div class="bg-blue-800 p-2 rounded-full group-hover:bg-blue-700 transition-colors">
-                            <i class="fa-regular fa-user text-lg"></i>
-                        </div>
-                        <span class="text-sm font-medium hidden lg:block">Masuk / Daftar</span>
-                    </button>
-                    
-                    <!-- Mobile Hamburger -->
-                    <button class="md:hidden text-2xl p-1 active:scale-95 transition-transform" onclick="toggleMobileMenu()">
-                        <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Mobile Search -->
-            <div class="mt-4 md:hidden flex shadow-sm rounded-lg overflow-hidden border border-blue-800 focus-within:border-yellow-400 transition-colors">
-                <input type="text" placeholder="Cari alat teknik..." class="w-full py-2.5 px-4 text-gray-800 text-sm focus:outline-none" />
-                <button class="bg-yellow-500 text-blue-900 px-5 flex items-center justify-center active:bg-yellow-400">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Categories Swipe -->
-            <div class="mt-3 md:hidden flex overflow-x-auto hide-scrollbar gap-2 pb-1 px-1">
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Semua <i class="fa-solid fa-caret-down ml-1"></i></button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Perkakas</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Pertanian</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Pabrikasi</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Alat Berat</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Hydrolik</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">HVAC</button>
-                <button class="flex-shrink-0 bg-blue-800/50 text-blue-100 text-[11px] font-medium px-4 py-1.5 rounded-full border border-blue-700 whitespace-nowrap active:bg-blue-700">Water</button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Dropdown (Hidden by default) -->
-        <div id="mobile-menu-dropdown" class="md:hidden hidden bg-blue-950 border-t border-blue-800 shadow-inner overflow-hidden">
-            <div class="px-4 py-3 space-y-1">
-                <button onclick="switchView('home'); toggleMobileMenu();" class="w-full flex items-center gap-3 text-left text-white px-3 py-3 hover:bg-blue-900 rounded-lg transition-colors">
-                    <i class="fa-solid fa-house w-5"></i> Beranda Utama
-                </button>
-                <button onclick="openLoginModal(); toggleMobileMenu();" class="w-full flex items-center gap-3 text-left text-blue-200 px-3 py-3 hover:bg-blue-900 rounded-lg transition-colors">
-                    <i class="fa-regular fa-user w-5"></i> Masuk / Daftar Akun
-                </button>
-                <div class="h-px bg-blue-800 my-2"></div>
-                <button onclick="switchView('buyer'); toggleMobileMenu();" class="w-full flex items-center gap-3 text-left text-sky-400 px-3 py-3 hover:bg-blue-900 rounded-lg transition-colors font-medium">
-                    <i class="fa-solid fa-user-circle w-5"></i> Dashboard Pembeli (User)
-                </button>
-                <button onclick="switchView('admin'); toggleMobileMenu();" class="w-full flex items-center gap-3 text-left text-emerald-400 px-3 py-3 hover:bg-blue-900 rounded-lg transition-colors font-medium">
-                    <i class="fa-solid fa-shield-halved w-5"></i> Masuk Panel Admin
-                </button>
-                <button onclick="switchView('seller'); toggleMobileMenu();" class="w-full flex items-center gap-3 text-left text-yellow-400 px-3 py-3 hover:bg-blue-900 rounded-lg transition-colors font-bold">
-                    <i class="fa-solid fa-store w-5"></i> Buka Toko / Mulai Berjualan
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- TAMPILAN UTAMA (BERANDA)                   -->
-    <!-- ========================================== -->
-    <main id="home-view" class="min-h-screen block animate-fade-in">
+    <!-- Hero Section -->
+    <section id="beranda" class="relative pt-20 pb-32 min-h-[90vh] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="hero-slider-container">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578589759494-b2586dcbe196?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="hero-slide" style="background-image: url('https://www.ksasemesta.com/images/800x800/20997001/WhatsAppImage2025-10-14at11.20.392-yKSVNn5W93-j9YOtNVifjA.jpeg');"></div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1537552528761-0df08ce458a2?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c10?q=80&w=2070&auto=format&fit=crop');"></div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-800/60"></div>
+        </div>
         
-        <!-- Hero Banner / Slider Iklan Berjalan -->
-        <section class="container mx-auto px-4 py-6 md:py-8">
-            <div id="hero-slider" class="relative w-full rounded-2xl overflow-hidden shadow-2xl group bg-blue-950" onmouseenter="pauseSlider()" onmouseleave="resumeSlider()">
-                
-                <!-- Slide Container -->
-                <div id="slide-container" class="flex transition-transform duration-700 ease-in-out h-[200px] sm:h-[350px] md:h-[450px]">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand/20 text-brand-light font-semibold text-sm tracking-wider mb-4 border border-brand/30">PT KALIMAJA SURYA ALAM</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                Solusi Terpadu <br><span class="text-accent">Pompa & Alat Berat</span>
+            </h1>
+            <p class="mt-4 text-lg text-gray-200 max-w-2xl mb-10 leading-relaxed">
+                Kinerja maksimal dimulai dari peralatan yang tangguh. Kami menyediakan pompa air irigasi, alat berat, sistem hidrolik, dan suku cadang industri dengan jaminan kualitas dan tim teknis yang ahli.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#produk" class="bg-brand text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-lg">Lihat Katalog Produk</a>
+                <a href="#kontak" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Keunggulan -->
+    <section class="py-16 bg-white relative z-20 -mt-16 mx-4 sm:mx-6 lg:mx-8 rounded-2xl shadow-xl max-w-7xl xl:mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-10">
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Durabilitas Ekstrem</h3>
+                <p class="text-gray-600 text-sm">Material tangguh untuk penggunaan nonstop di berbagai medan kerja.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Perawatan Mudah</h3>
+                <p class="text-gray-600 text-sm">Jaminan suku cadang lengkap dan teknisi siap ke lokasi Anda.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Performa Tinggi</h3>
+                <p class="text-gray-600 text-sm">Sistem hidrolik dan mesin yang dioptimalkan untuk efisiensi energi.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Produktivitas Maksimal</h3>
+                <p class="text-gray-600 text-sm">Meningkatkan output kinerja proyek dan pertanian secara terukur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="tentang" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Tentang Kami</h4>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">Penyedia Pompa Air, Alat Berat & Sistem Hidrolik Berkualitas</h2>
+                    <p class="text-gray-600 text-lg mb-6 text-justify leading-relaxed">
+                        Kami hadir sebagai mitra terpercaya dalam penyediaan pompa air irigasi, alat berat, sistem hidrolik, dan suku cadang industri untuk mendukung produktivitas proyek dan pertanian Anda. PT Kalimaja Surya Alam berkomitmen menghadirkan solusi yang tangguh dan tepat guna.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8 text-justify leading-relaxed">
+                        Dengan dukungan teknis profesional dan suku cadang terlengkap, kami selalu siap memastikan kelancaran operasional dan kemajuan bisnis Anda di seluruh Indonesia.
+                    </p>
+                    <a href="#kontak" class="inline-flex items-center text-brand font-bold text-lg hover:gap-4 transition-all">
+                        Mari Berkolaborasi Bersama Kami <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="lg:w-1/2 relative group">
+                    <!-- Alat Admin untuk Upload -->
+                    <div class="absolute top-4 right-4 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-4 py-2 rounded-lg shadow-lg text-sm font-bold border border-white/20 transition-all flex items-center gap-2">
+                            <i class="fas fa-camera"></i> Ganti Foto Profil
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadTentangKami(event)">
+                        </label>
+                    </div>
                     
-                    <!-- SLIDE 1 (Utama) -->
-                    <div class="min-w-full h-full relative flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1580982327559-c1202864be05?auto=format&fit=crop&q=80&w=1200&h=500" alt="Industrial Tools" class="w-full h-full object-cover absolute inset-0 z-0 opacity-40 mix-blend-overlay" />
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-900/80 to-transparent z-10"></div>
-                        <div class="relative z-20 flex flex-col justify-center h-full px-6 md:px-16 w-full md:w-3/4 lg:w-2/3">
-                            <span class="bg-yellow-500 text-blue-900 text-[10px] md:text-xs font-bold px-3 py-1 rounded-full w-max mb-3 md:mb-4 shadow-sm">PROMO UNGGULAN</span>
-                            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-4 leading-tight text-white drop-shadow-md">
-                                Solusi Lengkap <span class="text-yellow-400">Industri & Pertanian</span>
-                            </h1>
-                            <p class="text-blue-100 mb-4 md:mb-8 text-xs sm:text-sm md:text-lg hidden sm:block max-w-xl">
-                                Beli langsung dari distributor dan pabrik terpercaya. Harga grosir, transaksi aman via Escrow, pengiriman nasional.
-                            </p>
-                            <button class="bg-yellow-500 text-blue-950 font-bold py-2 px-5 md:py-3 md:px-8 rounded-lg shadow hover:bg-yellow-400 hover:-translate-y-0.5 transition-all w-max text-sm md:text-base active:scale-95">
-                                Belanja Sekarang <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </button>
-                        </div>
+                    <!-- Loading Overlay -->
+                    <div id="loading-tentang" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white rounded-2xl">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
+                        <span id="progress-tentang" class="text-xs font-bold">0%</span>
                     </div>
 
-                    <!-- SLIDE 2 (Promo Alat Berat) -->
-                    <div class="min-w-full h-full relative flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=1200&h=500" alt="Alat Berat" class="w-full h-full object-cover absolute inset-0 z-0 opacity-40 mix-blend-overlay" />
-                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800/90 to-transparent z-10"></div>
-                        <div class="relative z-20 flex flex-col justify-center h-full px-6 md:px-16 w-full md:w-3/4 lg:w-2/3 text-white">
-                            <span class="bg-red-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full w-max mb-3 md:mb-4 shadow-sm">DISKON AKHIR TAHUN</span>
-                            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-4 leading-tight drop-shadow-md">
-                                Banting Harga <span class="text-red-400">Alat Berat</span>
-                            </h1>
-                            <p class="text-slate-300 mb-4 md:mb-8 text-xs sm:text-sm md:text-lg hidden sm:block max-w-xl">
-                                Dapatkan potongan hingga Rp 50 Juta untuk pembelian alat berat konstruksi bulan ini. S&K Berlaku.
-                            </p>
-                            <button class="bg-white text-slate-900 font-bold py-2 px-5 md:py-3 md:px-8 rounded-lg shadow hover:bg-slate-100 hover:-translate-y-0.5 transition-all w-max text-sm md:text-base active:scale-95">
-                                Cek Katalog Ekskavator
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 3 (Promo Mesin Pertanian) -->
-                    <div class="min-w-full h-full relative flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=1200&h=500" alt="Traktor" class="w-full h-full object-cover absolute inset-0 z-0 opacity-40 mix-blend-overlay" />
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-900 via-green-800/90 to-transparent z-10"></div>
-                        <div class="relative z-20 flex flex-col justify-center h-full px-6 md:px-16 w-full md:w-3/4 lg:w-2/3 text-white">
-                            <span class="bg-green-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full w-max mb-3 md:mb-4 shadow-sm">PANEN RAYA</span>
-                            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-4 leading-tight drop-shadow-md">
-                                Upgrade <span class="text-yellow-400">Mesin Traktor</span> Anda
-                            </h1>
-                            <p class="text-green-100 mb-4 md:mb-8 text-xs sm:text-sm md:text-lg hidden sm:block max-w-xl">
-                                Tingkatkan produktivitas hasil tani dengan mesin modern bergaransi resmi. Gratis ongkir Jawa-Bali!
-                            </p>
-                            <button class="bg-yellow-500 text-green-950 font-bold py-2 px-5 md:py-3 md:px-8 rounded-lg shadow hover:bg-yellow-400 hover:-translate-y-0.5 transition-all w-max text-sm md:text-base active:scale-95">
-                                Borong Sekarang
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Navigasi Panah -->
-                <button onclick="prevSlide()" class="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center backdrop-blur-sm transition-all z-30 opacity-0 group-hover:opacity-100 active:scale-90">
-                    <i class="fa-solid fa-chevron-left text-sm md:text-lg"></i>
-                </button>
-                <button onclick="nextSlide()" class="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center backdrop-blur-sm transition-all z-30 opacity-0 group-hover:opacity-100 active:scale-90">
-                    <i class="fa-solid fa-chevron-right text-sm md:text-lg"></i>
-                </button>
-
-                <!-- Titik Indikator -->
-                <div id="slide-indicators" class="absolute bottom-3 md:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3 z-30">
-                    <!-- Generate otomatis via JS -->
+                    <img id="img-tentang" src="https://images.unsplash.com/photo-1541888087525-410fb55eb1e4?q=80&w=1024&auto=format&fit=crop" alt="Kegiatan Kalimaja" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ========================================== -->
-        <!-- ZONA KHUSUS PRODUK TKDN                    -->
-        <!-- ========================================== -->
-        <section class="container mx-auto px-4 py-4 mb-4">
-            <div class="bg-gradient-to-br from-white via-red-50/50 to-red-100/50 border border-red-100 rounded-3xl p-6 md:p-8 shadow-sm relative overflow-hidden">
-                <div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-red-100 to-transparent opacity-60 pointer-events-none"></div>
-                <div class="absolute -right-8 -top-10 text-red-600 opacity-5 rotate-12 pointer-events-none">
-                    <i class="fa-solid fa-certificate text-[250px]"></i>
-                </div>
-
-                <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2.5">
-                            <span class="bg-red-600 text-white text-[10px] md:text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">ZONA BANGGA BUATAN INDONESIA</span>
-                        </div>
-                        <h2 class="text-xl md:text-3xl font-black text-gray-800 tracking-tight flex items-center gap-2">
-                            Katalog Produk Ber-TKDN
-                        </h2>
-                        <p class="text-xs md:text-sm text-gray-600 mt-1.5 max-w-2xl leading-relaxed">
-                            Pusat pengadaan alat teknik bersertifikat Tingkat Komponen Dalam Negeri (TKDN) resmi untuk kebutuhan proyek Pemerintah, BUMN, dan Swasta.
-                        </p>
-                    </div>
-                    <button class="bg-white border-2 border-red-200 text-red-600 font-bold py-2.5 px-6 rounded-xl shadow-sm hover:bg-red-50 hover:border-red-300 transition-colors text-sm w-full md:w-auto active:scale-95 flex-shrink-0 flex items-center justify-center">
-                        Lihat Semua TKDN <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-
-                <!-- Grid Produk TKDN -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 relative z-10">
-                    <!-- Produk TKDN 1 -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-red-100 overflow-hidden hover:shadow-xl hover:-translate-y-1.5 hover:border-red-300 transition-all duration-300 group cursor-pointer flex flex-col">
-                        <div class="h-36 md:h-48 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1585675100414-22b9f9ffbd19?auto=format&fit=crop&q=80&w=400&h=300" alt="Pompa Air" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                            <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] md:text-xs font-black px-3 py-1.5 rounded-br-lg shadow-md flex items-center gap-1">
-                                <i class="fa-solid fa-check-circle"></i> TKDN 45.5%
-                            </div>
-                        </div>
-                        <div class="p-4 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-sm font-bold text-gray-800 line-clamp-2 mb-1.5 group-hover:text-red-600 transition-colors">Pompa Sentrifugal Industri 30kW</h3>
-                                <div class="text-xs text-gray-500 mb-2 font-mono bg-gray-100 px-2 py-0.5 rounded w-max">No: 1234/SJ-IND.8/TKDN/2025</div>
-                            </div>
-                            <div>
-                                <div class="text-base md:text-lg font-black text-gray-900 mb-2">Rp 24.500.000</div>
-                                <div class="flex items-center text-[10px] md:text-xs text-gray-500 border-t pt-2 mt-1">
-                                    <i class="fa-solid fa-industry mr-1.5 text-gray-400"></i> PT. Bintang Pompa Nusantara
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Produk TKDN 2 -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-red-100 overflow-hidden hover:shadow-xl hover:-translate-y-1.5 hover:border-red-300 transition-all duration-300 group cursor-pointer flex flex-col">
-                        <div class="h-36 md:h-48 overflow-hidden relative flex items-center justify-center bg-gray-50">
-                            <i class="fa-solid fa-helmet-safety text-5xl text-gray-300 group-hover:scale-110 transition-transform duration-500"></i>
-                            <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] md:text-xs font-black px-3 py-1.5 rounded-br-lg shadow-md flex items-center gap-1">
-                                <i class="fa-solid fa-check-circle"></i> TKDN 80.0%
-                            </div>
-                        </div>
-                        <div class="p-4 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-sm font-bold text-gray-800 line-clamp-2 mb-1.5 group-hover:text-red-600 transition-colors">Helm Safety Proyek SNI Inner Fastrack</h3>
-                            </div>
-                            <div>
-                                <div class="text-base md:text-lg font-black text-gray-900 mb-2">Rp 45.000</div>
-                                <div class="flex items-center text-[10px] md:text-xs text-gray-500 border-t pt-2 mt-1">
-                                    <i class="fa-solid fa-industry mr-1.5 text-gray-400"></i> PT. Plastik Indo Sejahtera
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Products -->
-        <section class="container mx-auto px-4 py-8 mb-12">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl md:text-2xl font-black text-gray-800 tracking-tight">Rekomendasi Untuk Anda</h2>
-                <button class="text-blue-600 font-bold hover:underline text-sm md:text-base hidden sm:block">Lihat Semua</button>
+    <!-- Produk Katalog -->
+    <section id="produk" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Apa Yang Kami Tawarkan</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">Keberhasilan operasional Anda adalah prioritas kami. Pilih unit dan perangkat terbaik untuk mendukung pekerjaan Anda.</p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                <!-- Product 1 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col">
-                    <div class="h-40 md:h-52 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=400&h=300" alt="Traktor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 bg-blue-900 text-yellow-400 text-[10px] md:text-xs font-black px-2.5 py-1 rounded shadow">B2B & B2C</div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative flex flex-col">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://www.ksasemesta.com/images/800x800/20997001/WhatsAppImage2025-10-14at11.20.392-yKSVNn5W93-j9YOtNVifjA.jpeg" alt="Pompa Irigasi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
-                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-sm md:text-base font-bold text-gray-800 line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors">Traktor Tangan Quick G1000 Mesin Diesel</h3>
-                            <div class="text-base md:text-xl font-black text-orange-600 mb-3">Rp 15.500.000</div>
-                        </div>
-                        <div>
-                            <div class="flex items-center text-xs text-gray-500 mb-3">
-                                <i class="fa-solid fa-building mr-1.5 text-gray-400"></i> CV. Agro Mandiri
-                            </div>
-                            <div class="flex items-center justify-between text-xs text-gray-500 border-t pt-3">
-                                <span class="flex items-center text-yellow-500 font-bold"><i class="fa-solid fa-star mr-1"></i> 4.8</span>
-                                <span>Terjual 120+</span>
-                            </div>
-                        </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Pompa Air Irigasi</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable flex-grow" contenteditable="false">Daya hisap dan dorong kuat berkapasitas besar untuk pengairan sawah, perkebunan, dan kebutuhan debit air industri.</p>
+                        <a href="javascript:void(0)" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
                     </div>
                 </div>
-
-                <!-- Product 2 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex flex-col">
-                    <div class="h-40 md:h-52 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=400&h=300" alt="Mesin Las" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                        <div class="absolute top-3 left-3 bg-white text-blue-800 text-[10px] md:text-xs font-black px-2.5 py-1 rounded shadow border border-gray-200">Eceran</div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative flex flex-col">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1578589759494-b2586dcbe196?q=80&w=800&auto=format&fit=crop" alt="Alat Berat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
-                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-sm md:text-base font-bold text-gray-800 line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors">Mesin Las Inverter 900W Travo Las Portable</h3>
-                            <div class="text-base md:text-xl font-black text-orange-600 mb-3">Rp 850.000</div>
-                        </div>
-                        <div>
-                            <div class="flex items-center text-xs text-gray-500 mb-3">
-                                <i class="fa-solid fa-building mr-1.5 text-gray-400"></i> Teknik Jaya Sentosa
-                            </div>
-                            <div class="flex items-center justify-between text-xs text-gray-500 border-t pt-3">
-                                <span class="flex items-center text-yellow-500 font-bold"><i class="fa-solid fa-star mr-1"></i> 4.5</span>
-                                <span>Terjual 450</span>
-                            </div>
-                        </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Alat Berat</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable flex-grow" contenteditable="false">Ekskavator, loader, dan alat berat tangguh lainnya untuk segala medan berat dan pekerjaan konstruksi skala besar.</p>
+                        <a href="javascript:void(0)" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative flex flex-col">
+                    <div class="h-56 overflow-hidden flex items-center justify-center bg-gray-100 p-4">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop" alt="Hydraulic System" class="w-full h-full object-cover group-hover:scale-110 transition-all">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Hydraulic System</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable flex-grow" contenteditable="false">Sistem dan komponen hidrolik berpresisi tinggi untuk memaksimalkan tenaga, efisiensi, dan kendali mesin Anda.</p>
+                        <a href="javascript:void(0)" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative flex flex-col">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1537552528761-0df08ce458a2?q=80&w=800&auto=format&fit=crop" alt="Spare Part Industri" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Spare Part Industri</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable flex-grow" contenteditable="false">Penyediaan suku cadang orisinal untuk menjamin keawetan dan performa mesin industri serta alat berat Anda.</p>
+                        <a href="javascript:void(0)" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- ========================================== -->
-    <!-- TAMPILAN DASHBOARD PEMBELI (CUSTOMER)      -->
-    <!-- ========================================== -->
-    <main id="buyer-view" class="min-h-screen bg-gray-50 flex flex-col md:flex-row hidden animate-fade-in">
-        
-        <!-- Sidebar Pembeli -->
-        <div class="w-full md:w-64 bg-white shadow-md md:min-h-screen flex flex-col flex-shrink-0 z-20 sticky top-0 md:top-auto">
-            <div class="p-5 border-b flex items-center gap-4 bg-white">
-                <!-- Preview Foto Profil Dinamis -->
-                <div class="relative group cursor-pointer" onclick="document.getElementById('buyer-photo-upload').click()">
-                    <img id="buyer-profile-img" src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0284c7&color=fff" class="w-12 h-12 rounded-full border-2 border-sky-100 object-cover" alt="User">
-                    <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-camera text-white text-xs"></i>
+    <!-- Layanan -->
+    <section id="layanan" class="py-24 bg-gray-50 border-y">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-16">Layanan Terbaik Dari Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-brand rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Konsultasi & Instalasi</h3>
+                    <p class="text-gray-600 text-sm">Konsultasi teknis dan pemasangan unit agar sistem hidrolik & alat berat Anda berjalan optimal.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-accent rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-wrench"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Repair & Service</h3>
+                    <p class="text-gray-600 text-sm">Teknisi ahli yang siap memberikan perawatan dan perbaikan komponen secara cepat.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-gray-800 rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-cogs"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Suku Cadang Asli</h3>
+                    <p class="text-gray-600 text-sm">Penyediaan suku cadang industri dan alat berat yang lengkap untuk kelancaran operasional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registrasi & Cek Garansi Section -->
+    <section id="garansi" class="py-24 bg-brand/5 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Layanan Purna Jual</h4>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Portal Garansi Kalimaja</h2>
+            </div>
+
+            <!-- PORTAL CEK STATUS (Tanpa Akun) -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-10 border border-brand/20 max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent rounded-full opacity-10 blur-2xl"></div>
+                <div class="md:w-5/12 z-10">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"><i class="fas fa-search text-brand"></i> Cek Status</h3>
+                    <p class="text-gray-600 text-sm">Masukkan <strong class="text-gray-900">Kode Akses</strong> yang Anda terima saat pendaftaran untuk melihat Kartu Garansi Digital Anda.</p>
+                </div>
+                <div class="md:w-7/12 w-full z-10">
+                    <form onsubmit="cekGaransi(event)" class="flex gap-2">
+                        <input type="text" id="c_kode" required placeholder="Ketik Kode (Misal: KSA-ABC12)" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow font-mono uppercase text-sm font-bold placeholder:font-sans placeholder:font-normal">
+                        <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-800 transition-all shadow-md"><i class="fas fa-chevron-right"></i></button>
+                    </form>
+                    <!-- Hasil Cek Tampil Di Sini -->
+                    <div id="cek-result" class="w-full mt-2"></div>
+                </div>
+            </div>
+
+            <!-- FORM REGISTRASI GARANSI BARU -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-brand/20 max-w-4xl mx-auto">
+                <h3 class="text-xl font-bold text-gray-900 mb-6 border-b pb-4"><i class="fas fa-plus-circle text-accent mr-2"></i> Pendaftaran Unit Baru</h3>
+                <form onsubmit="submitGaransi(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Produk</label>
+                        <select id="g_jenis" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none bg-gray-50 text-gray-800 cursor-pointer">
+                            <option value="Pompa Air Irigasi" selected>Pompa Air Irigasi</option>
+                            <option value="Alat Berat">Alat Berat</option>
+                            <option value="Hydraulic System">Hydraulic System</option>
+                            <option value="Spare Part Industri">Spare Part Industri</option>
+                        </select>
                     </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Spesifikasi / Tipe Produk</label>
+                        <input type="text" id="g_spek" required placeholder="Contoh: Pompa Air Diesel 3 Inch / Excavator PC200" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pemilik / Perusahaan / Instansi</label>
+                        <input type="text" id="g_cpcl" required placeholder="Detail Nama Perusahaan / Individu Lengkap" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Pembelian / Pendaftaran</label>
+                        <input type="date" id="g_tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow text-gray-700 cursor-pointer">
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit" id="g_submit_btn" class="w-full bg-brand text-white font-bold py-4 rounded-lg hover:bg-brand-dark transition-all shadow-lg text-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-shield-check"></i> Daftarkan Garansi
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tabel Database Garansi (Hanya Untuk Admin) -->
+            <div id="admin-garansi-view" class="mt-16 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 hidden">
+                <div class="p-6 bg-gray-900 text-white flex flex-col md:flex-row justify-between items-center gap-4">
+                    <h3 class="font-bold text-xl flex items-center gap-3"><i class="fas fa-server text-brand"></i> Database Status Garansi (Khusus Admin)</h3>
+                    <span class="text-sm bg-brand/20 text-brand-light px-4 py-1.5 rounded-full font-semibold border border-brand/50"><i class="fas fa-circle text-[8px] animate-pulse mr-1"></i> Live Update (Server)</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 border-b-2 border-gray-200 whitespace-nowrap">
+                                <th class="px-6 py-4 text-sm font-bold">No</th>
+                                <th class="px-6 py-4 text-sm font-bold">Produk</th>
+                                <th class="px-6 py-4 text-sm font-bold">Spesifikasi / Tipe</th>
+                                <th class="px-6 py-4 text-sm font-bold">Pemilik / Perusahaan</th>
+                                <th class="px-6 py-4 text-sm font-bold">Tanggal</th>
+                                <th class="px-6 py-4 text-sm font-bold text-blue-700">Kode Akses</th>
+                                <th class="px-6 py-4 text-sm font-bold text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="garansi-table-body">
+                            <tr><td colspan="7" class="px-6 py-8 text-center text-gray-500 font-medium">Menghubungkan ke Database...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Galeri Kegiatan Dinamis (CMS) -->
+    <section id="galeri" class="py-24 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Dokumentasi Kalimaja</h4>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">Galeri Kegiatan Perusahaan</h2>
+                </div>
+                <div class="admin-tools hidden">
+                    <button onclick="addGalleryItem()" class="bg-accent hover:bg-accent-dark text-gray-900 px-6 py-3 rounded-full font-bold flex items-center gap-2 shadow-xl">
+                        <i class="fas fa-plus-circle"></i> Tambah Kotak Foto
+                    </button>
+                </div>
+            </div>
+            
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="col-span-full py-10 text-center text-gray-500"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat Galeri...</div>
+            </div>
+            <p id="admin-notice" class="mt-8 text-center text-gray-500 italic text-sm">Gunakan password admin di bagian bawah untuk akses edit.</p>
+        </div>
+    </section>
+
+    <!-- Mitra Dinamis (CMS) -->
+    <section class="py-16 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-end mb-8 gap-4">
+                <h3 class="text-lg font-bold text-gray-900 uppercase tracking-widest">Mitra Kerjasama</h3>
+                <div class="admin-tools hidden">
+                    <button onclick="addPartnerItem()" class="bg-brand hover:bg-brand-dark text-white px-4 py-1.5 rounded-full text-[10px] font-bold shadow-md">
+                        <i class="fas fa-plus"></i> Tambah Kotak Mitra
+                    </button>
+                </div>
+            </div>
+            
+            <div id="partner-grid" class="flex flex-wrap justify-center items-center gap-12 opacity-80 hover:opacity-100 transition-all duration-500">
+                <div class="w-full py-4 text-center text-gray-400"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat Mitra...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row">
+                <div class="bg-gray-900 text-white lg:w-5/12 p-10 lg:p-14 relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand rounded-full opacity-20 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-accent"></div>
+                    <h3 class="text-3xl font-bold mb-8 relative z-10">Hubungi Kami</h3>
+                    <p class="text-gray-300 mb-10 text-lg relative z-10 leading-relaxed">Dapatkan konsultasi khusus dan penawaran harga terbaik yang disesuaikan dengan kebutuhan proyek industri Anda.</p>
+                    <div class="space-y-8 relative z-10">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4 class="font-semibold text-lg mb-1">Alamat Kantor</h4><p class="text-gray-400 leading-relaxed text-sm">Jl. Mekar Wangi, Dangdang Cisauk<br>Kabupaten Tangerang, 15324</p></div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4"><i class="fas fa-phone-alt"></i></div>
+                            <div><h4 class="font-semibold text-lg mb-1">Telepon & WA</h4><p class="text-gray-400 text-sm">+62 851 5097 3789</p></div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4"><i class="fas fa-envelope"></i></div>
+                            <div><h4 class="font-semibold text-lg mb-1">Email</h4><p class="text-gray-400 text-sm">kalimajasuryaalam@gmail.com</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-7/12 p-10 lg:p-14 bg-white">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan Langsung</h3>
+                    <form onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim.');" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label><input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none" placeholder="Nama Anda"></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon</label><input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none" placeholder="08xxxxxxx"></div>
+                        </div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2">Pesan Anda</label><textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none resize-none" placeholder="Ceritakan kebutuhan unit dan spare part Anda..."></textarea></div>
+                        <button type="submit" class="w-full bg-brand text-white font-bold py-4 rounded-lg hover:bg-brand-dark transition-all shadow-lg text-lg">Kirim Pesan Sekarang <i class="fas fa-paper-plane ml-2"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">PT Kalimaja Surya Alam</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Solusi Total Pompa Air Irigasi, Alat Berat, Sistem Hidrolik & Suku Cadang. Mewujudkan industri dan pertanian yang efisien serta berdaya saing global melalui perangkat yang andal.</p>
                 </div>
                 <div>
-                    <h2 class="font-bold text-gray-800 text-base leading-tight">Budi Santoso</h2>
-                    <p class="text-xs text-gray-500 mt-0.5">Member Retail</p>
-                </div>
-            </div>
-            
-            <nav class="p-2 md:p-4 space-x-2 md:space-x-0 md:space-y-2 flex overflow-x-auto md:flex-col hide-scrollbar bg-white flex-1">
-                <a href="#" onclick="toggleBuyerMenu('pesanan')" class="buyer-menu-item flex-shrink-0 flex items-center gap-3 text-gray-600 hover:bg-gray-50 hover:text-sky-600 px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors" id="menu-buyer-pesanan">
-                    <i class="fa-solid fa-clipboard-list w-5 text-center"></i> <span class="text-sm md:text-base">Pesanan Saya</span>
-                </a>
-                <a href="#" onclick="toggleBuyerMenu('setting')" class="buyer-menu-item flex-shrink-0 flex items-center gap-3 text-sky-700 bg-sky-50 px-4 py-2.5 md:py-3 rounded-lg font-bold transition-colors" id="menu-buyer-setting">
-                    <i class="fa-solid fa-user-gear w-5 text-center"></i> <span class="text-sm md:text-base">Pengaturan Akun</span>
-                </a>
-            </nav>
-
-            <!-- Modul Buka Toko untuk Pembeli -->
-            <div class="mt-auto p-4 hidden md:block">
-                <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-2xl p-5 text-white text-center shadow-lg relative overflow-hidden group">
-                    <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform"><i class="fa-solid fa-store text-6xl"></i></div>
-                    <i class="fa-solid fa-store text-3xl text-yellow-400 mb-3 relative z-10"></i>
-                    <h3 class="font-black text-sm mb-1.5 relative z-10">Punya Produk Teknik?</h3>
-                    <p class="text-[11px] text-blue-200 mb-4 relative z-10">Jangkau ribuan pabrik & kontraktor di seluruh Indonesia.</p>
-                    <button onclick="switchView('seller')" class="w-full bg-yellow-500 hover:bg-yellow-400 text-blue-950 text-xs font-black py-2.5 rounded-xl transition-all shadow-md active:scale-95 relative z-10">Buka Toko Gratis</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content Pembeli -->
-        <div class="flex-1 p-4 md:p-8 relative max-w-full overflow-hidden">
-            
-            <!-- VIEW: PENGATURAN AKUN PEMBELI -->
-            <div id="buyer-setting-view" class="animate-fade-in max-w-4xl">
-                <div class="mb-6 md:mb-8 flex justify-between items-end">
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-black text-gray-800 tracking-tight">Pengaturan Akun</h1>
-                        <p class="text-sm text-gray-500 mt-1">Sesuaikan profil, alamat pengiriman, dan keamanan akun Anda.</p>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <!-- Foto Profil -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7 flex items-center gap-6">
-                        <div class="relative group cursor-pointer flex-shrink-0" onclick="document.getElementById('buyer-photo-upload').click()">
-                            <img id="buyer-profile-img-large" src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0284c7&color=fff" class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-slate-100 object-cover shadow-sm transition-transform group-hover:scale-105" alt="User">
-                            <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <i class="fa-solid fa-camera text-white text-xl"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 mb-1">Foto Profil</h3>
-                            <p class="text-xs text-gray-500 mb-3">Gunakan foto beresolusi baik (Maks 2MB).</p>
-                            <input type="file" id="buyer-photo-upload" accept="image/png, image/jpeg" class="hidden" onchange="updateBuyerProfile(event)" />
-                            <button onclick="document.getElementById('buyer-photo-upload').click()" class="text-sm bg-sky-50 text-sky-700 font-bold py-2 px-4 rounded-lg border border-sky-200 hover:bg-sky-100 transition-colors">
-                                Pilih Foto Baru
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Biodata -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                        <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-address-card mr-3 text-sky-600"></i> Biodata Diri</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Nama Lengkap</label>
-                                <input type="text" value="Budi Santoso" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-sky-400 outline-none transition-all" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Email Akses</label>
-                                <input type="email" value="budi.santoso@email.com" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-sky-400 outline-none transition-all" disabled />
-                                <p class="text-[10px] text-gray-400 mt-1">Email tidak dapat diubah.</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">No. Handphone (WhatsApp)</label>
-                                <input type="text" value="081234567890" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-sky-400 outline-none transition-all" />
-                            </div>
-                        </div>
-                        <div class="mt-5 flex justify-end">
-                            <button id="btn-save-biodata" onclick="simulateSave(this)" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 px-6 rounded-xl transition-colors text-sm active:scale-95 flex items-center gap-2">
-                                <i class="fa-solid fa-save"></i> Simpan Biodata
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Alamat Pengiriman Utama -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                        <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center justify-between">
-                            <span class="flex items-center"><i class="fa-solid fa-location-dot mr-3 text-sky-600"></i> Alamat Pengiriman Utama</span>
-                            <button class="text-sky-600 text-xs font-bold hover:underline">+ Tambah Alamat Baru</button>
-                        </h2>
-                        <div class="bg-sky-50/50 border border-sky-100 rounded-xl p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="bg-sky-100 text-sky-700 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Rumah / Utama</span>
-                                <button class="text-gray-400 hover:text-sky-600 text-sm"><i class="fa-solid fa-pen"></i> Ubah</button>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Budi Santoso (081234567890)</h3>
-                            <p class="text-sm text-gray-600 mt-1 leading-relaxed">
-                                Jl. Kebon Jeruk Raya No. 12, Kel. Kebon Jeruk, Kec. Kebon Jeruk, Jakarta Barat, DKI Jakarta, 11530.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Keamanan Akun -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                        <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-lock mr-3 text-sky-600"></i> Keamanan Akun</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Kata Sandi Baru</label>
-                                <input type="password" placeholder="Minimal 8 karakter" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-sky-400 outline-none transition-all" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Konfirmasi Kata Sandi Baru</label>
-                                <input type="password" placeholder="Ketik ulang sandi" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-sky-400 outline-none transition-all" />
-                            </div>
-                        </div>
-                        <div class="mt-5 flex justify-end">
-                            <button id="btn-save-password" onclick="simulateSave(this)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-6 rounded-xl transition-colors text-sm border border-gray-300 active:scale-95 flex items-center gap-2">
-                                <i class="fa-solid fa-key"></i> Update Password
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIEW: PESANAN SAYA -->
-            <div id="buyer-pesanan-view" class="hidden animate-fade-in">
-                <h1 class="text-xl md:text-2xl font-black text-gray-800 tracking-tight mb-6">Riwayat Pesanan Saya</h1>
-                
-                <!-- Pesanan Aktif -->
-                <div class="bg-white rounded-2xl shadow-sm border border-sky-200 overflow-hidden mb-6">
-                    <div class="bg-sky-50 p-4 border-b border-sky-100 flex justify-between items-center">
-                        <div>
-                            <span class="text-xs font-bold text-gray-500">24 Mei 2026</span>
-                            <div class="text-sm font-bold text-sky-800 mt-0.5">INV/20260524/XX/123456</div>
-                        </div>
-                        <span class="bg-sky-100 text-sky-700 text-xs font-black px-3 py-1.5 rounded-lg border border-sky-200 flex items-center gap-2">
-                            <i class="fa-solid fa-truck-fast"></i> Sedang Dikirim
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col md:flex-row gap-5 items-start md:items-center">
-                        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=100&h=100" class="w-20 h-20 object-cover rounded-xl border border-gray-200" alt="Produk">
-                        <div class="flex-1">
-                            <h3 class="font-bold text-gray-800">Traktor Tangan Quick G1000 Mesin Diesel</h3>
-                            <p class="text-xs text-gray-500 mt-1">1 x Rp 15.500.000</p>
-                        </div>
-                        <div class="w-full md:w-auto text-right border-t md:border-t-0 pt-4 md:pt-0">
-                            <div class="text-xs text-gray-500 mb-1">Total Belanja</div>
-                            <div class="font-black text-lg text-gray-800 mb-3">Rp 15.500.000</div>
-                            <button class="w-full md:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-lg text-sm transition-colors shadow-sm">
-                                Lacak Paket
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pesanan Selesai -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden opacity-70 hover:opacity-100 transition-opacity">
-                    <div class="bg-gray-50 p-4 border-b border-gray-100 flex justify-between items-center">
-                        <div>
-                            <span class="text-xs font-bold text-gray-500">10 Jan 2026</span>
-                            <div class="text-sm font-bold text-gray-600 mt-0.5">INV/20260110/XX/987654</div>
-                        </div>
-                        <span class="bg-green-100 text-green-700 text-xs font-black px-3 py-1.5 rounded-lg border border-green-200 flex items-center gap-2">
-                            <i class="fa-solid fa-check"></i> Selesai
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col md:flex-row gap-5 items-start md:items-center">
-                        <div class="w-20 h-20 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400">
-                            <i class="fa-solid fa-helmet-safety text-2xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-gray-800">Helm Safety Proyek SNI Inner Fastrack</h3>
-                            <p class="text-xs text-gray-500 mt-1">10 x Rp 45.000</p>
-                        </div>
-                        <div class="w-full md:w-auto text-right border-t md:border-t-0 pt-4 md:pt-0">
-                            <div class="text-xs text-gray-500 mb-1">Total Belanja</div>
-                            <div class="font-black text-lg text-gray-800 mb-3">Rp 450.000</div>
-                            <button class="w-full md:w-auto bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold py-2 px-5 rounded-lg text-sm transition-colors">
-                                Beli Lagi
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
-
-    <!-- ========================================== -->
-    <!-- TAMPILAN DASHBOARD PENJUAL (SELLER)        -->
-    <!-- ========================================== -->
-    <main id="seller-view" class="min-h-screen bg-gray-50 flex flex-col md:flex-row hidden animate-fade-in">
-        
-        <!-- Sidebar Seller -->
-        <div class="w-full md:w-64 bg-white shadow-md md:min-h-screen flex flex-col flex-shrink-0 z-20 sticky top-0 md:top-auto">
-            <div class="p-4 border-b flex items-center justify-between bg-white">
-                <div class="flex items-center gap-3">
-                    <div class="relative group cursor-pointer" onclick="document.getElementById('store-logo-upload').click()">
-                        <img id="seller-store-logo" src="https://ui-avatars.com/api/?name=Toko+Teknik&background=eff6ff&color=1d4ed8" class="w-10 h-10 rounded-lg object-cover" alt="Store">
-                    </div>
-                    <div>
-                        <h2 class="font-bold text-gray-800 text-base leading-tight">Toko Teknik Jaya</h2>
-                        <div class="flex items-center gap-1.5 mt-0.5">
-                            <span class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold">● Aktif</span>
-                            <span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold flex items-center gap-1 border border-red-200" title="Akun Vendor Resmi Pemerintah"><i class="fa-solid fa-certificate"></i> Vendor TKDN</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <nav class="p-2 md:p-4 space-x-2 md:space-x-0 md:space-y-2 flex overflow-x-auto md:flex-col hide-scrollbar bg-white">
-                <a href="#" onclick="toggleSellerMenu('produk')" class="flex-shrink-0 flex items-center gap-2 md:gap-3 text-blue-700 bg-blue-50 px-4 py-2.5 md:py-3 rounded-lg font-bold transition-colors seller-menu-item" id="menu-seller-produk">
-                    <i class="fa-solid fa-box w-5 text-center"></i> <span class="text-sm md:text-base">Produk Saya</span>
-                </a>
-                <a href="#" class="flex-shrink-0 flex items-center gap-2 md:gap-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors seller-menu-item">
-                    <i class="fa-solid fa-cart-shopping w-5 text-center"></i> <span class="text-sm md:text-base">Pesanan Masuk</span>
-                    <span class="ml-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
-                </a>
-                <a href="#" onclick="toggleSellerMenu('saldo')" class="flex-shrink-0 flex items-center gap-2 md:gap-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors seller-menu-item" id="menu-seller-saldo">
-                    <i class="fa-solid fa-wallet w-5 text-center"></i> <span class="text-sm md:text-base">Saldo: Rp 24.5M</span>
-                </a>
-                <div class="h-px bg-gray-100 my-2 hidden md:block"></div>
-                <a href="#" onclick="toggleSellerMenu('setting')" class="flex-shrink-0 flex items-center gap-2 md:gap-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors seller-menu-item" id="menu-seller-setting">
-                    <i class="fa-solid fa-store-slash w-5 text-center"></i> <span class="text-sm md:text-base">Pengaturan Toko</span>
-                </a>
-            </nav>
-        </div>
-
-        <!-- Content Seller -->
-        <div class="flex-1 p-4 md:p-8 relative max-w-full overflow-hidden">
-            
-            <!-- VIEW: DAFTAR PRODUK -->
-            <div id="seller-product-list" class="animate-fade-in">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-black text-gray-800">Manajemen Produk</h1>
-                        <p class="text-sm text-gray-500 mt-1">Kelola etalase, harga grosir, dan stok alat teknik Anda.</p>
-                    </div>
-                    <button onclick="toggleAddProduct(true)" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3 px-5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all">
-                        <i class="fa-solid fa-circle-plus"></i> Tambah Produk Baru
+                    <h4 class="text-lg font-bold text-white mb-6">Tautan Cepat</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#beranda" class="hover:text-brand transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-brand transition-colors">Tentang Kami</a></li>
+                        <li><a href="#produk" class="hover:text-brand transition-colors">Katalog Produk</a></li>
+                        <li><a href="#garansi" class="hover:text-brand transition-colors">Aktivasi Garansi</a></li>
+                        <li><a href="#galeri" class="hover:text-brand transition-colors">Galeri Dokumentasi</a></li>
+                    </ul>
+                    <!-- Tombol Login Admin (Yakin537@) -->
+                    <button id="admin-btn" onclick="toggleAdminMode()" class="mt-8 text-[10px] text-gray-700 hover:text-brand font-bold uppercase tracking-widest transition-all text-left flex items-center gap-2">
+                        <i class="fas fa-user-shield"></i> Akses Admin Perusahaan
                     </button>
                 </div>
-
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="p-4 border-b bg-gray-50/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <h2 class="text-base md:text-lg font-bold text-gray-800">Daftar Produk Aktif</h2>
-                        <div class="relative w-full sm:w-auto">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
-                            <input type="text" placeholder="Cari nama atau SKU..." class="w-full sm:w-64 pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" />
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse min-w-[700px]">
-                            <thead>
-                                <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b">
-                                    <th class="px-6 py-4 font-bold">Info Produk</th>
-                                    <th class="px-6 py-4 font-bold">Harga B2C / B2B</th>
-                                    <th class="px-6 py-4 font-bold text-center">Stok</th>
-                                    <th class="px-6 py-4 font-bold text-center">Status</th>
-                                    <th class="px-6 py-4 font-bold text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm">
-                                <tr class="border-b hover:bg-blue-50/30 transition-colors group">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-12 h-12 bg-gray-100 rounded-lg border overflow-hidden flex-shrink-0">
-                                                <i class="fa-solid fa-gear text-gray-400 text-2xl flex items-center justify-center w-full h-full"></i>
-                                            </div>
-                                            <div>
-                                                <div class="font-bold text-gray-800 mb-0.5">Mesin Bor Duduk 16mm Heavy Duty</div>
-                                                <div class="text-[10px] text-gray-500 font-mono bg-gray-100 px-1.5 py-0.5 rounded w-max">SKU: BD-16MM-01</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="font-bold text-gray-800">Rp 1.200.000</div>
-                                        <div class="text-xs text-yellow-600 font-medium">≥10: Rp 1.050.000</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <span class="font-medium text-gray-800">15</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-md text-xs font-bold border border-emerald-200">Aktif</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <div class="flex items-center justify-end gap-3">
-                                            <button class="text-gray-400 hover:text-blue-600 transition-colors p-1"><i class="fa-solid fa-pen-to-square text-lg"></i></button>
-                                            <button class="text-gray-400 hover:text-red-600 transition-colors p-1"><i class="fa-solid fa-trash text-lg"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-6">Ikuti Kami</h4>
+                    <div class="flex space-x-5 text-2xl">
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-
-            <!-- VIEW: TAMBAH PRODUK -->
-            <div id="seller-add-product" class="hidden pb-24 md:pb-20 animate-fade-in">
-                <div class="flex items-center gap-3 mb-6">
-                    <button onclick="toggleAddProduct(false)" class="text-gray-400 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-full transition-colors active:scale-90">
-                        <i class="fa-solid fa-arrow-left text-xl"></i>
-                    </button>
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-black text-gray-800">Upload Produk Baru</h1>
-                        <p class="text-gray-500 text-xs md:text-sm">Lengkapi detail spesifikasi khusus untuk pembeli B2B.</p>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <!-- SECTION 1: Informasi Dasar -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                        <h2 class="text-base md:text-lg font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-circle-info mr-3 text-blue-600"></i> Informasi Dasar Produk</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Nama Produk <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Contoh: Mesin Pompa Air Sentrifugal 3 Inch Stainless Steel" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Kategori Induk B2B <span class="text-red-500">*</span></label>
-                                <select class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all cursor-pointer bg-white">
-                                    <option>Pilih Kategori Produk...</option>
-                                    <optgroup label="🏭 Komponen Pabrikasi & Custom (Fabrication)">
-                                        <option>Komponen CNC Machining & Presisi</option>
-                                        <option>Pabrikasi Plat Logam (Sheet Metal Bending/Cutting)</option>
-                                        <option>Pengecoran & Penempaan Logam (Casting & Forging)</option>
-                                        <option>Cetakan Logam & Plastik (Moulds & Dies)</option>
-                                    </optgroup>
-                                    <optgroup label="🦾 Otomasi, Penggerak & Komponen Manufaktur">
-                                        <option>Bearing, Gearbox & Transmisi Daya Mekanik</option>
-                                        <option>Sistem Pneumatik & Hidrolik Industri</option>
-                                        <option>Motor Servo, PLC & Komponen Robotika</option>
-                                        <option>Bahan Baku Logam & Polimer (Raw Materials)</option>
-                                    </optgroup>
-                                    <optgroup label="🚜 Mesin & Peralatan Pertanian">
-                                        <option>Traktor & Kultivator</option>
-                                        <option>Peralatan Panen & Pascapanen</option>
-                                        <option>Mesin Pengolahan Pakan & Tanah</option>
-                                        <option>Alat Perhutanan & Pemotong Kayu</option>
-                                    </optgroup>
-                                    <optgroup label="⚙️ Mesin & Peralatan Industri">
-                                        <option>Mesin Manufaktur & Perakitan Pabrik</option>
-                                        <option>Mesin Pengemasan (Packaging) & Pelabelan</option>
-                                        <option>Mesin Pengolahan Makanan & Minuman</option>
-                                        <option>Mesin Las, Bubut, & Potong Industri</option>
-                                    </optgroup>
-                                    <optgroup label="🔧 Perkakas (Tools)">
-                                        <option>Perkakas Listrik (Power Tools)</option>
-                                        <option>Perkakas Tangan (Hand Tools)</option>
-                                        <option>Perkakas Pneumatik & Udara</option>
-                                        <option>Mata Bor & Aksesoris Perkakas</option>
-                                    </optgroup>
-                                    <optgroup label="🚰 Pompa, Katup & Kompresor">
-                                        <option>Pompa Air & Pompa Industri</option>
-                                        <option>Kompresor Udara (Air Compressor)</option>
-                                        <option>Katup (Valve), Pipa & Fitting</option>
-                                    </optgroup>
-                                    <optgroup label="⚡ Kelistrikan & Genset">
-                                        <option>Genset & Pembangkit Listrik</option>
-                                        <option>Motor Listrik & Transformator</option>
-                                        <option>Kabel & Komponen Kelistrikan</option>
-                                        <option>Panel Surya & Energi Terbarukan</option>
-                                    </optgroup>
-                                    <optgroup label="🏗️ Konstruksi & Alat Berat">
-                                        <option>Excavator, Loader & Buldozer</option>
-                                        <option>Dump Truck & Alat Berat Tambang</option>
-                                        <option>Peralatan Beton & Aspal</option>
-                                        <option>Alat Angkat (Crane, Hoist & Winch)</option>
-                                    </optgroup>
-                                    <optgroup label="📦 Material Handling & Logistik">
-                                        <option>Forklift & Pallet Jack</option>
-                                        <option>Sistem Konveyor (Conveyor)</option>
-                                        <option>Rak Gudang & Penyimpanan</option>
-                                    </optgroup>
-                                    <optgroup label="🛡️ Keamanan & K3 (Safety)">
-                                        <option>Alat Pelindung Diri (Helm, Kacamata, Sepatu)</option>
-                                        <option>Pakaian Kerja & Rompi Safety</option>
-                                        <option>Peralatan Pemadam Kebakaran</option>
-                                    </optgroup>
-                                    <optgroup label="🔬 Alat Ukur & Uji">
-                                        <option>Alat Ukur Digital & Analog</option>
-                                        <option>Timbangan Industri</option>
-                                        <option>Peralatan Uji Laboratorium Teknik</option>
-                                    </optgroup>
-                                    <optgroup label="❄️ HVAC & Pendingin Ruangan">
-                                        <option>AC Sentral & Chiller Industri</option>
-                                        <option>Kipas Exhaust, Blower & Ventilasi</option>
-                                        <option>Suku Cadang Pendingin (Kompresor, Freon)</option>
-                                    </optgroup>
-                                    <optgroup label="💧 Pengolahan Air (Water Treatment)">
-                                        <option>Mesin Reverse Osmosis (RO) Industri</option>
-                                        <option>Filter Air & Bahan Kimia Pengolahan</option>
-                                        <option>Pompa Dosing & IPAL</option>
-                                    </optgroup>
-                                    <optgroup label="💻 Software & Aplikasi Industri">
-                                        <option>Sistem ERP & Manajemen Pabrik</option>
-                                        <option>Software Desain & CAD/CAM</option>
-                                        <option>IoT, Sensor & Sistem Otomasi</option>
-                                    </optgroup>
-                                    <optgroup label="🗜️ Hydrolik & Mesin Hydrolik">
-                                        <option>Silinder & Pompa Hydrolik</option>
-                                        <option>Selang (Hose) & Fitting Hydrolik</option>
-                                        <option>Mesin Press Hydrolik</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Merek (Brand) <span class="text-red-500">*</span></label>
-                                <input type="text" placeholder="Contoh: Honda, Makita, Kustom Pabrik..." class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SECTION 3: Sertifikasi & Dokumen Resmi -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-red-200 p-5 md:p-7 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-1.5 h-full bg-red-600"></div>
-                        <div class="absolute right-0 top-0 opacity-5 text-red-600 pointer-events-none -mt-4 -mr-4">
-                            <i class="fa-solid fa-file-shield text-9xl"></i>
-                        </div>
-                        
-                        <h2 class="text-base md:text-lg font-bold text-gray-800 mb-1 flex items-center relative z-10"><i class="fa-solid fa-file-shield mr-3 text-red-600"></i> Legalitas & Standarisasi (Wajib bagi Vendor TKDN)</h2>
-                        <p class="text-xs text-gray-500 mb-5 pb-3 border-b border-gray-100 relative z-10">Lengkapi dokumen untuk menampilkan produk Anda di Zona Bangga Buatan Indonesia.</p>
-
-                        <div class="space-y-6 relative z-10">
-                            <!-- Input Utama TKDN -->
-                            <div class="bg-red-50/50 p-4 rounded-xl border border-red-100">
-                                <h3 class="font-bold text-red-800 mb-3 text-sm flex items-center gap-2"><i class="fa-solid fa-certificate"></i> Sertifikat TKDN</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Nilai Sah TKDN (%) <span class="text-red-500">*</span></label>
-                                        <div class="flex shadow-sm rounded-lg overflow-hidden border border-gray-300 focus-within:ring-2 focus-within:ring-red-400 bg-white">
-                                            <input type="number" step="0.01" placeholder="45.50" class="w-full px-3 py-2.5 text-sm outline-none font-medium" />
-                                            <span class="bg-gray-50 px-3 py-2 text-gray-500 text-sm font-bold border-l border-gray-300 flex items-center">%</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Nomor Sertifikat <span class="text-red-500">*</span></label>
-                                        <input type="text" placeholder="No. Kemenperin..." class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm outline-none shadow-sm focus:ring-2 focus:ring-red-400 bg-white" />
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-gray-600 mb-1.5 uppercase tracking-wider">Sertifikat (PDF) <span class="text-red-500">*</span></label>
-                                        <div class="border border-dashed border-red-300 bg-white rounded-lg p-2 flex items-center justify-center cursor-pointer hover:bg-red-50 transition-colors h-[42px]">
-                                            <span class="text-xs font-bold text-red-600 flex items-center gap-2"><i class="fa-solid fa-upload"></i> Upload PDF</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Input SNI & Test Report -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div class="p-4 rounded-xl border border-gray-200 bg-gray-50 hover:border-blue-300 transition-colors">
-                                    <h3 class="font-bold text-gray-800 mb-3 text-sm flex items-center gap-2"><i class="fa-solid fa-tag text-blue-600"></i> Sertifikasi SNI</h3>
-                                    <div class="space-y-3">
-                                        <div>
-                                            <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Nomor SNI</label>
-                                            <input type="text" placeholder="Contoh: SNI 04-6253-2003" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none bg-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400" />
-                                        </div>
-                                        <div>
-                                            <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Upload Sertifikat SNI (PDF)</label>
-                                            <div class="border border-dashed border-gray-300 bg-white rounded-lg py-2 flex items-center justify-center cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition-colors">
-                                                <span class="text-xs font-medium flex items-center gap-2"><i class="fa-solid fa-file-pdf"></i> Upload Dokumen</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-4 rounded-xl border border-gray-200 bg-gray-50 hover:border-purple-300 transition-colors">
-                                    <h3 class="font-bold text-gray-800 mb-3 text-sm flex items-center gap-2"><i class="fa-solid fa-flask text-purple-600"></i> Laporan Uji (Test Report)</h3>
-                                    <div class="space-y-3">
-                                        <div>
-                                            <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Lembaga Penguji</label>
-                                            <input type="text" placeholder="Contoh: Sucofindo, B4T" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none bg-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400" />
-                                        </div>
-                                        <div>
-                                            <label class="block text-[10px] font-bold text-gray-500 mb-1 uppercase tracking-wider">Upload Laporan (PDF)</label>
-                                            <div class="border border-dashed border-gray-300 bg-white rounded-lg py-2 flex items-center justify-center cursor-pointer hover:bg-purple-50 hover:text-purple-600 transition-colors">
-                                                <span class="text-xs font-medium flex items-center gap-2"><i class="fa-solid fa-file-contract"></i> Upload Laporan</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="fixed bottom-0 left-0 right-0 md:left-64 bg-white/90 backdrop-blur-md border-t border-gray-200 p-3 md:p-4 shadow-[0_-10px_30px_-10px_rgba(0,0,0,0.1)] z-40 flex justify-between md:justify-end gap-3 hidden" id="save-product-bar">
-                    <button onclick="toggleAddProduct(false)" class="w-1/3 md:w-auto px-4 md:px-6 py-3 border border-gray-300 rounded-xl text-gray-700 font-bold hover:bg-gray-50 transition-colors active:scale-95">
-                        Batal
-                    </button>
-                    <button class="w-2/3 md:w-auto px-4 md:px-8 py-3 bg-blue-900 text-yellow-400 rounded-xl font-black hover:bg-blue-800 shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 text-sm md:text-base">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Tampilkan Produk
-                    </button>
-                </div>
-            </div>
-
-            <!-- VIEW: SALDO & PENARIKAN ESCROW -->
-            <div id="seller-saldo-view" class="hidden pb-20 animate-fade-in">
-                <div class="mb-6 md:mb-8">
-                    <h1 class="text-xl md:text-2xl font-black text-gray-800 tracking-tight">Keuangan & Penarikan Dana</h1>
-                    <p class="text-sm text-gray-500 mt-1">Uang dari pembeli masuk ke Rekening Bersama (Escrow) dan cair setelah barang diterima.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <!-- Kotak Saldo -->
-                    <div class="md:col-span-2 bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
-                        <i class="fa-solid fa-building-columns absolute -right-4 -bottom-4 text-[120px] opacity-10"></i>
-                        <h3 class="text-blue-200 font-medium mb-1">Total Saldo Aktif</h3>
-                        <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-6 drop-shadow-md">Rp 24.500.000</div>
-                        <div class="flex items-center gap-4">
-                            <button class="bg-yellow-500 hover:bg-yellow-400 text-blue-900 font-black py-2.5 px-6 rounded-xl transition-colors active:scale-95 flex items-center gap-2">
-                                <i class="fa-solid fa-money-bill-transfer"></i> Tarik Dana
-                            </button>
-                            <button class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium py-2.5 px-6 rounded-xl transition-colors active:scale-95">
-                                Riwayat
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Rekening Bank -->
-                    <div class="bg-white rounded-2xl border border-gray-200 p-6 flex flex-col justify-center shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-building-columns text-blue-600 mr-2"></i>Rekening Pencairan</h3>
-                            <button class="text-blue-600 text-xs font-bold hover:underline">Ubah</button>
-                        </div>
-                        <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                            <div class="font-black text-gray-800 text-lg tracking-widest mb-1">BCA</div>
-                            <div class="text-gray-500 font-mono text-sm">8123 4567 890</div>
-                            <div class="text-xs font-bold text-gray-700 mt-2 uppercase">A.N. PT. TEKNIK JAYA SENTOSA</div>
-                        </div>
-                        <p class="text-[10px] text-gray-400 mt-3 text-center">Dana ditarik melalui gerbang pembayaran Xendit/Midtrans secara otomatis.</p>
-                    </div>
-                </div>
-
-                <!-- Histori Escrow -->
-                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-lock text-orange-500"></i> Dana Tertahan (Menunggu Barang Diterima Pembeli)</h3>
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="p-4 border-b border-gray-100 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                        <div>
-                            <div class="font-bold text-gray-800">INV/20260508/X/12345</div>
-                            <div class="text-xs text-gray-500 mt-1">Pompa Sentrifugal Industri x 1</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="font-black text-gray-800 mb-1.5">+ Rp 14.500.000</div>
-                            <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-[10px] font-bold border border-orange-200"><i class="fa-solid fa-truck"></i> Sedang Dikirim</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIEW: PENGATURAN TOKO (SELLER SETTINGS) -->
-            <div id="seller-setting-view" class="hidden pb-20 animate-fade-in max-w-5xl">
-                <div class="mb-6 md:mb-8">
-                    <h1 class="text-xl md:text-2xl font-black text-gray-800 tracking-tight">Pengaturan Toko</h1>
-                    <p class="text-sm text-gray-500 mt-1">Atur profil bisnis Anda dan opsi layanan ekspedisi.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Left Col: Profil Toko -->
-                    <div class="lg:col-span-2 space-y-6">
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                            <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-store mr-3 text-blue-600"></i> Profil Toko</h2>
-                            <div class="flex flex-col sm:flex-row gap-6 mb-6">
-                                <div class="flex-shrink-0 relative group cursor-pointer" onclick="document.getElementById('store-logo-upload-input').click()">
-                                    <img id="seller-store-logo-large" src="https://ui-avatars.com/api/?name=Toko+Teknik&background=eff6ff&color=1d4ed8" class="w-24 h-24 rounded-2xl object-cover border-2 border-slate-100 shadow-sm transition-transform group-hover:scale-105" alt="Store">
-                                    <div class="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <i class="fa-solid fa-camera text-white text-xl"></i>
-                                    </div>
-                                    <input type="file" id="store-logo-upload-input" accept="image/png, image/jpeg" class="hidden" onchange="updateStoreLogo(event)" />
-                                </div>
-                                <div class="flex-1 space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-bold text-gray-700 mb-1.5">Nama Toko</label>
-                                        <input type="text" value="Toko Teknik Jaya" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-400 outline-none transition-all" />
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-bold text-gray-700 mb-1.5">Slogan / Tagline</label>
-                                        <input type="text" value="Pusat Alat Teknik Termurah se-Nusantara" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-400 outline-none transition-all" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Deskripsi Toko</label>
-                                <textarea rows="4" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-400 outline-none transition-all">Distributor resmi alat-alat permesinan, konstruksi, dan pabrikasi. Menerima pesanan partai besar (B2B) dan pengadaan proyek pemerintah (memiliki sertifikat TKDN & NIB valid).</textarea>
-                            </div>
-                            <div class="mt-5 flex justify-end">
-                                <button onclick="simulateSave(this)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl transition-colors text-sm active:scale-95 flex items-center gap-2">
-                                    <i class="fa-solid fa-save"></i> Simpan Profil
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Lokasi Penjemputan / Gudang -->
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                            <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-map-location-dot mr-3 text-blue-600"></i> Lokasi Gudang (Pickup)</h2>
-                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4">
-                                <h3 class="font-bold text-gray-800 mb-1">Gudang Utama Jakarta</h3>
-                                <p class="text-sm text-gray-600">Kawasan Industri Pulogadung Jl. Rawa Gelam No. 8, Cakung, Kota Jakarta Timur, DKI Jakarta 13920.</p>
-                            </div>
-                            <button class="text-blue-600 text-sm font-bold hover:underline border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg">Ubah Titik Maps</button>
-                        </div>
-                    </div>
-
-                    <!-- Right Col: Pengaturan Kurir & Notif -->
-                    <div class="space-y-6">
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 md:p-7">
-                            <h2 class="text-base font-bold text-gray-800 mb-5 pb-3 border-b border-gray-100 flex items-center"><i class="fa-solid fa-truck mr-3 text-blue-600"></i> Layanan Pengiriman</h2>
-                            
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-800 text-sm">Layanan Kargo (B2B)</h4>
-                                        <p class="text-[10px] text-gray-500">JTR, Indah Cargo, Dakota</p>
-                                    </div>
-                                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                        <input type="checkbox" checked name="toggle_kargo" id="toggle_kargo" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out"/>
-                                        <label for="toggle_kargo" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-800 text-sm">Reguler</h4>
-                                        <p class="text-[10px] text-gray-500">JNE, J&T, Sicepat</p>
-                                    </div>
-                                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                        <input type="checkbox" checked name="toggle_reguler" id="toggle_reguler" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out"/>
-                                        <label for="toggle_reguler" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-bold text-gray-800 text-sm">Instan / Kurir Motor</h4>
-                                        <p class="text-[10px] text-gray-500">Gojek, Grab</p>
-                                    </div>
-                                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                        <input type="checkbox" name="toggle_instan" id="toggle_instan" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out"/>
-                                        <label for="toggle_instan" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- ========================================== -->
-    <!-- TAMPILAN DASHBOARD ADMIN                   -->
-    <!-- ========================================== -->
-    <main id="admin-view" class="min-h-screen bg-slate-50 flex flex-col md:flex-row hidden animate-fade-in">
-        <!-- Sidebar Admin -->
-        <div class="w-full md:w-64 bg-slate-900 text-slate-300 shadow-2xl md:min-h-screen flex flex-col flex-shrink-0 z-20 sticky top-0 md:top-auto">
-            <div class="p-4 md:p-5 border-b border-slate-800 bg-slate-900 flex flex-row md:flex-col justify-between items-center md:items-start gap-4">
-                <div class="flex items-center gap-3 text-white w-1/2 md:w-full">
-                    <div class="bg-emerald-500 p-2 md:p-2.5 rounded-lg text-white shadow-lg"><i class="fa-solid fa-shield-halved text-lg md:text-xl"></i></div>
-                    <div>
-                        <h2 class="font-black text-sm md:text-lg leading-tight">Admin Pusat</h2>
-                        <span class="text-[10px] text-slate-400">Panel Kendali Utama</span>
-                    </div>
-                </div>
-                <select id="role-selector" onchange="toggleAdminRole()" class="w-1/2 md:w-full text-xs bg-slate-800 text-white border border-slate-700 rounded-lg px-2 py-2 md:py-2.5 outline-none cursor-pointer focus:border-emerald-500 transition-colors">
-                    <option value="super">👑 Super Admin</option>
-                    <option value="regular">👤 Admin Biasa</option>
-                </select>
-            </div>
-            
-            <nav class="p-2 md:px-3 md:py-0 space-x-2 md:space-x-0 md:space-y-1.5 flex overflow-x-auto md:flex-col hide-scrollbar bg-slate-900 flex-1">
-                <a href="#" onclick="toggleAdminMenu('desain')" class="admin-menu-item flex-shrink-0 flex items-center gap-3 text-white bg-blue-600 px-4 py-2.5 md:py-3 rounded-xl font-bold shadow-lg shadow-blue-900/40" id="menu-admin-desain">
-                    <i class="fa-solid fa-desktop w-5 text-center"></i> <span class="text-sm md:text-base">Tampilan Web</span>
-                </a>
-                
-                <div class="hidden md:block super-admin-only transition-opacity duration-300 w-full">
-                    <div class="px-2 py-4 text-[10px] font-black text-slate-600 uppercase tracking-widest border-t border-slate-800 mt-2">Zona Super Admin</div>
-                </div>
-                
-                <a href="#" onclick="toggleAdminMenu('pajak')" class="super-admin-only admin-menu-item flex-shrink-0 flex items-center gap-3 text-emerald-400 hover:bg-slate-800 hover:text-emerald-300 px-4 py-2.5 md:py-3 rounded-xl font-medium transition-colors border border-transparent hover:border-slate-700" id="menu-admin-pajak">
-                    <i class="fa-solid fa-money-bill-transfer w-5 text-center"></i> <span class="text-sm md:text-base">Pembayaran & Komisi</span>
-                </a>
-            </nav>
-            
-            <div class="p-4 border-t border-slate-800 hidden md:block">
-                <button onclick="switchView('home')" class="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-red-500/20 hover:text-red-400 px-4 py-3 rounded-xl font-bold transition-all">
-                    <i class="fa-solid fa-power-off"></i> Keluar Panel
-                </button>
-            </div>
-        </div>
-
-        <!-- Main Content Admin -->
-        <div class="flex-1 p-4 md:p-8 relative max-w-full overflow-hidden">
-            
-            <!-- VIEW: DESAIN WEB -->
-            <div id="admin-desain-view" class="animate-fade-in">
-                <div class="mb-6 md:mb-8">
-                    <h1 class="text-xl md:text-3xl font-black text-slate-800 tracking-tight">Desain Tampilan Web</h1>
-                    <p class="text-sm text-slate-500 mt-1">Atur identitas merek dan materi promosi di halaman beranda.</p>
-                </div>
-
-                <!-- Form Upload Logo -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-7 mb-6 md:mb-8">
-                    <h2 class="text-base md:text-lg font-bold text-slate-800 mb-5 pb-3 border-b border-slate-100 flex items-center"><i class="fa-solid fa-circle-user mr-3 text-blue-600"></i> Logo Perusahaan</h2>
-                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-center sm:text-left">
-                        <div class="relative group cursor-pointer flex-shrink-0" onclick="document.getElementById('logo-upload-input').click()">
-                            <img id="admin-logo-preview" src="https://ui-avatars.com/api/?name=Kalimaja&background=eab308&color=1e3a8a&rounded=true&bold=true" alt="Preview Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-slate-100 shadow-md transition-transform group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <i class="fa-solid fa-camera text-white text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-center w-full sm:w-auto">
-                            <p class="text-xs md:text-sm text-slate-500 mb-4 bg-slate-50 p-3 rounded-lg border border-slate-100">Gunakan gambar kotak beresolusi tinggi (Rasio 1:1). Sistem otomatis memotongnya menjadi bulat sempurna.</p>
-                            <input type="file" id="logo-upload-input" accept="image/png, image/jpeg" class="hidden" onchange="updateSiteLogo(event)" />
-                            <button onclick="document.getElementById('logo-upload-input').click()" class="bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold py-2.5 px-5 rounded-xl border border-blue-200 transition-colors flex items-center justify-center gap-2 active:scale-95 w-full sm:w-max">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload File Gambar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pengaturan Kecepatan Slider -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-7 mb-6 md:mb-8">
-                    <h2 class="text-base md:text-lg font-bold text-slate-800 mb-5 pb-3 border-b border-slate-100 flex items-center"><i class="fa-solid fa-stopwatch mr-3 text-blue-600"></i> Kecepatan Slider Iklan Beranda</h2>
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <div>
-                            <h3 class="font-bold text-slate-700">Durasi Transisi Iklan</h3>
-                            <p class="text-xs text-slate-500">Pilih berapa detik sebuah iklan akan tayang sebelum otomatis bergeser.</p>
-                        </div>
-                        <div class="flex items-center gap-3 w-full sm:w-auto">
-                            <select id="admin-slider-delay" class="w-full sm:w-auto border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer bg-white">
-                                <option value="3000">Cepat (3 Detik)</option>
-                                <option value="5000" selected>Normal (5 Detik)</option>
-                                <option value="8000">Lambat (8 Detik)</option>
-                            </select>
-                            <button onclick="saveSliderSettings()" id="btn-save-slider" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all active:scale-95 shadow-md flex-shrink-0 flex items-center gap-2">
-                                <i class="fa-solid fa-save"></i> Simpan
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VIEW: SISTEM PEMBAYARAN & ESCROW -->
-            <div id="admin-pajak-view" class="hidden pb-20 animate-fade-in">
-                <div class="mb-6 md:mb-8">
-                    <h1 class="text-xl md:text-3xl font-black text-slate-800 tracking-tight">Gateway Pembayaran & Rekber</h1>
-                    <p class="text-sm text-slate-500 mt-1">Pantau lalu lintas Virtual Account dari pembeli ke rekening penampung Kalimaja.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                            <i class="fa-solid fa-shield-halved text-8xl"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 mb-4 flex items-center"><i class="fa-solid fa-link text-emerald-500 mr-2"></i>Status Koneksi Midtrans/Xendit</h3>
-                        <div class="flex items-center gap-3 mb-5 bg-emerald-50 border border-emerald-100 p-3 rounded-xl w-max">
-                            <span class="relative flex h-3 w-3">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                            </span>
-                            <span class="text-emerald-700 font-bold text-sm tracking-wide">API Terhubung & Aktif (Live)</span>
-                        </div>
-                        <div class="space-y-3 text-sm text-slate-600">
-                            <div class="flex justify-between border-b border-slate-100 pb-2">
-                                <span>Metode Aktif:</span>
-                                <span class="font-bold text-slate-800">VA BCA, Mandiri, BNI, QRIS</span>
-                            </div>
-                            <div class="flex justify-between bg-blue-50 p-2 rounded-lg border border-blue-100">
-                                <span>Komisi Marketplace (Take Rate):</span>
-                                <span class="font-black text-blue-700">3.5% / Transaksi</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-emerald-800 to-emerald-950 rounded-2xl shadow-lg border border-emerald-700 p-6 md:p-8 text-emerald-50 flex flex-col justify-center relative overflow-hidden">
-                        <i class="fa-solid fa-vault absolute -right-6 -bottom-6 text-[140px] text-white opacity-10"></i>
-                        <h3 class="font-bold text-emerald-300 mb-2 relative z-10">Total Dana Rekening Bersama (Escrow)</h3>
-                        <div class="text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md relative z-10">Rp 1.450.800.000</div>
-                        <p class="text-xs text-emerald-200/80 leading-relaxed relative z-10">
-                            Dana ini ditahan di rekening penampung Kalimaja. Otomatis diteruskan ke Penjual ketika barang sampai.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- MODAL MASUK / DAFTAR AKUN (OVERLAY) -->
-    <div id="login-modal" class="fixed inset-0 bg-blue-950/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <div id="login-modal-box" class="bg-white rounded-3xl w-full max-w-md mx-4 overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
-                <div class="flex items-center gap-2">
-                    <div class="bg-yellow-500 text-blue-900 p-1.5 rounded-lg font-black text-sm leading-none">K</div>
-                    <span class="font-bold text-gray-800 tracking-tight text-lg">Kalimaja<span class="text-yellow-500">.web.id</span></span>
-                </div>
-                <button onclick="closeLoginModal()" class="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-xl hover:bg-red-50 active:scale-95">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-            </div>
-            <div class="p-6 md:p-8 bg-gray-50/50">
-                <div class="flex border-b border-gray-200 mb-6 relative">
-                    <button id="tab-btn-masuk" onclick="toggleLoginTab('masuk')" class="flex-1 py-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition-colors z-10">Masuk</button>
-                    <button id="tab-btn-daftar" onclick="toggleLoginTab('daftar')" class="flex-1 py-3 text-sm font-bold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-colors z-10">Daftar Baru</button>
-                </div>
-                <div id="auth-message" class="hidden text-center text-xs font-bold mb-4 p-3 rounded-lg"></div>
-
-                <!-- Form Masuk -->
-                <div id="form-masuk" class="space-y-4 animate-fade-in">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1.5">Email Aktif</label>
-                        <input type="email" id="login-email" placeholder="Masukkan email" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none text-sm bg-white transition-all" />
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1.5 flex justify-between">
-                            <span>Kata Sandi</span>
-                        </label>
-                        <div class="relative">
-                            <input type="password" id="login-password" placeholder="Masukkan kata sandi" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none text-sm bg-white transition-all" />
-                        </div>
-                    </div>
-                    <button id="btn-submit-login" class="w-full bg-blue-900 text-yellow-400 font-black py-3.5 rounded-xl shadow-lg shadow-blue-900/20 hover:bg-blue-800 active:scale-95 transition-all mt-4">
-                        Masuk
-                    </button>
-                </div>
-
-                <!-- Form Daftar -->
-                <div id="form-daftar" class="space-y-4 hidden animate-fade-in">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1.5">Nama Lengkap Sesuai KTP</label>
-                        <input type="text" id="reg-name" placeholder="Contoh: Budi Santoso" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 outline-none text-sm bg-white transition-all" />
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1.5">Email Aktif</label>
-                        <input type="email" id="reg-email" placeholder="Untuk verifikasi & notifikasi" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 outline-none text-sm bg-white transition-all" />
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1.5">Kata Sandi Baru</label>
-                        <input type="password" id="reg-password" placeholder="Minimal 6 karakter" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-yellow-400 outline-none text-sm bg-white transition-all" />
-                    </div>
-                    <button id="btn-submit-register" class="w-full bg-yellow-500 text-blue-950 font-black py-3.5 rounded-xl shadow-lg shadow-yellow-500/20 hover:bg-yellow-400 active:scale-95 transition-all mt-4">
-                        Daftar Akun Sekarang
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER UTAMA (Hanya di Beranda) -->
-    <footer id="main-footer" class="bg-blue-950 text-blue-200 py-12 md:py-16 text-center border-t border-blue-900 block">
-        <div class="container mx-auto px-6">
-            <h2 class="text-2xl md:text-3xl font-black text-white mb-4">Kalimaja<span class="text-yellow-400">.web.id</span></h2>
-            <p class="mb-8 max-w-xl mx-auto text-sm md:text-base leading-relaxed text-blue-300">Satu-satunya platform B2B dan B2C terpercaya yang menghubungkan ratusan pabrik, distributor, dan konsumen teknik di seluruh Indonesia.</p>
-            <p class="text-xs font-medium text-blue-400">&copy; 2026 PT Kalimaja Teknologi Nusantara.</p>
+            <div class="text-center text-xs text-gray-600 border-t border-gray-800 pt-8">&copy; 2026 PT Kalimaja Surya Alam. Seluruh Hak Cipta Dilindungi.</div>
         </div>
     </footer>
 
-    <!-- SCRIPT FIREBASE -->
+    <!-- SCRIPT TAMPILAN & FIREBASE (Terintegrasi) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
+        // Konfigurasi Asli Milik KSA Pertanian
         const firebaseConfig = {
-            apiKey: "AIzaSyCGs467Wb2uZfdFReMi2gjoa-77HXiEpdQ",
-            authDomain: "market-place-kalimaja.firebaseapp.com",
-            projectId: "market-place-kalimaja",
-            storageBucket: "market-place-kalimaja.firebasestorage.app",
-            messagingSenderId: "58576818321",
-            appId: "1:58576818321:web:b4eb5d25413a8b14776f30",
-            measurementId: "G-JJ2C1PNKL1"
+            apiKey: "AIzaSyCh_wy9P3BHrgc3VkN-YKkLLjhSHw5LwdY",
+            authDomain: "ksa-pertanian.firebaseapp.com",
+            projectId: "ksa-pertanian",
+            storageBucket: "ksa-pertanian.firebasestorage.app",
+            messagingSenderId: "429518744969",
+            appId: "1:429518744969:web:0beaf1bce674dc8a41c558",
+            measurementId: "G-5RE09M7P1X"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        console.log("🔥 Firebase Auth & App berhasil dihubungkan!");
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        const btnRegister = document.getElementById('btn-submit-register');
-        const btnLogin = document.getElementById('btn-submit-login');
-        const authMessage = document.getElementById('auth-message');
+        // Mode Admin Global
+        window.isAdmin = false;
 
-        function showMessage(msg, isError) {
-            authMessage.textContent = msg;
-            authMessage.className = `text-center text-xs font-bold mb-4 p-3 rounded-lg ${isError ? 'bg-red-100 text-red-600 border border-red-200' : 'bg-green-100 text-green-700 border border-green-200'}`;
-            authMessage.classList.remove('hidden');
-        }
+        let currentGaransiData = [];
+        let currentGalleryData = [];
+        let currentPartnerData = [];
+        let isFetched = false;
 
-        if (btnRegister) {
-            btnRegister.addEventListener('click', async () => {
-                const name = document.getElementById('reg-name').value;
-                const email = document.getElementById('reg-email').value;
-                const password = document.getElementById('reg-password').value;
-
-                if(!name || !email || !password) { showMessage("Lengkapi form!", true); return; }
-                btnRegister.textContent = "Memproses..."; btnRegister.disabled = true;
-
-                try {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                    showMessage("Pendaftaran Berhasil! Mengalihkan ke Dashboard Pembeli...", false);
-                    setTimeout(() => { window.closeLoginModal(); window.switchView('buyer'); }, 1500);
-                } catch (error) {
-                    showMessage("Gagal mendaftar: " + error.code, true);
-                } finally {
-                    btnRegister.textContent = "Daftar Akun Sekarang"; btnRegister.disabled = false;
-                }
-            });
-        }
-
-        if (btnLogin) {
-            btnLogin.addEventListener('click', async () => {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-
-                if(!email || !password) { showMessage("Isi Email dan Sandi!", true); return; }
-                btnLogin.textContent = "Memeriksa..."; btnLogin.disabled = true;
-
-                try {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    showMessage("Berhasil Masuk! Mengalihkan...", false);
-                    setTimeout(() => { window.closeLoginModal(); window.switchView('buyer'); }, 1500);
-                } catch (error) {
-                    showMessage("Gagal masuk. Periksa Email/Sandi.", true);
-                } finally {
-                    btnLogin.textContent = "Masuk"; btnLogin.disabled = false;
-                }
-            });
-        }
-        
-        window.closeLoginModal = closeLoginModal;
-        window.switchView = switchView;
-    </script>
-
-    <!-- SCRIPT LOGIKA UI UTAMA -->
-    <script>
-        // ==========================================
-        // 1. SISTEM NAVIGASI & ANTI REFRESH
-        // ==========================================
-        function switchView(viewName) {
-            // Simpan state di browser
-            localStorage.setItem('kalimaja_current_view', viewName);
-
-            const homeView = document.getElementById('home-view');
-            const sellerView = document.getElementById('seller-view');
-            const adminView = document.getElementById('admin-view');
-            const buyerView = document.getElementById('buyer-view');
-            const mainFooter = document.getElementById('main-footer');
-
-            // Hide semua view
-            homeView.classList.add('hidden');
-            sellerView.classList.add('hidden');
-            if(adminView) adminView.classList.add('hidden');
-            if(buyerView) buyerView.classList.add('hidden');
-            mainFooter.classList.add('hidden');
-
-            // Tampilkan view yang dipilih
-            if (viewName === 'home') {
-                homeView.classList.remove('hidden');
-                mainFooter.classList.remove('hidden');
-                initSlider(); 
-            } else if (viewName === 'seller') {
-                sellerView.classList.remove('hidden');
-                toggleAddProduct(false); 
-                const lastMenu = localStorage.getItem('kalimaja_seller_menu') || 'produk';
-                toggleSellerMenu(lastMenu); 
-            } else if (viewName === 'admin') {
-                if(adminView) adminView.classList.remove('hidden');
-                toggleAdminRole(); 
-                const lastMenu = localStorage.getItem('kalimaja_admin_menu') || 'desain';
-                toggleAdminMenu(lastMenu); 
-            } else if (viewName === 'buyer') {
-                if(buyerView) buyerView.classList.remove('hidden');
-                const lastMenu = localStorage.getItem('kalimaja_buyer_menu') || 'setting';
-                toggleBuyerMenu(lastMenu);
-            }
-            window.scrollTo(0, 0); 
-        }
-
-        // ==========================================
-        // 2. TOGGLE MENU DASHBOARD
-        // ==========================================
-        function toggleBuyerMenu(menu) {
-            localStorage.setItem('kalimaja_buyer_menu', menu);
-            const settingView = document.getElementById('buyer-setting-view');
-            const pesananView = document.getElementById('buyer-pesanan-view');
+        // FUNGSI NOTIFIKASI CLOUD (Memastikan Admin tahu data sudah aman di Server)
+        window.showCloudToast = function(message) {
+            const toast = document.getElementById('cloud-toast');
+            const msgSpan = document.getElementById('toast-msg');
+            msgSpan.innerText = message;
             
-            document.querySelectorAll('.buyer-menu-item').forEach(el => {
-                el.classList.remove('text-sky-700', 'bg-sky-50', 'font-bold');
-                el.classList.add('text-gray-600', 'font-medium');
-            });
-
-            if(settingView) settingView.classList.add('hidden');
-            if(pesananView) pesananView.classList.add('hidden');
-
-            if (menu === 'setting') {
-                if(settingView) settingView.classList.remove('hidden');
-                document.getElementById('menu-buyer-setting').classList.add('text-sky-700', 'bg-sky-50', 'font-bold');
-            } else if (menu === 'pesanan') {
-                if(pesananView) pesananView.classList.remove('hidden');
-                document.getElementById('menu-buyer-pesanan').classList.add('text-sky-700', 'bg-sky-50', 'font-bold');
-            }
-        }
-
-        function toggleSellerMenu(menu) {
-            localStorage.setItem('kalimaja_seller_menu', menu);
-            const productView = document.getElementById('seller-product-list');
-            const addProductForm = document.getElementById('seller-add-product');
-            const saldoView = document.getElementById('seller-saldo-view');
-            const settingView = document.getElementById('seller-setting-view');
-            const saveBar = document.getElementById('save-product-bar');
+            // Tampilkan (Geser ke bawah)
+            toast.classList.remove('-translate-y-32');
+            toast.classList.add('translate-y-0');
             
-            document.querySelectorAll('.seller-menu-item').forEach(el => {
-                el.classList.remove('text-blue-700', 'bg-blue-50', 'font-bold');
-                el.classList.add('text-gray-600', 'font-medium');
-            });
-
-            productView.classList.add('hidden');
-            addProductForm.classList.add('hidden');
-            if(saldoView) saldoView.classList.add('hidden');
-            if(settingView) settingView.classList.add('hidden');
-            if(saveBar) saveBar.classList.add('hidden');
-
-            if (menu === 'produk') {
-                productView.classList.remove('hidden');
-                document.getElementById('menu-seller-produk').classList.add('text-blue-700', 'bg-blue-50', 'font-bold');
-            } else if (menu === 'saldo') {
-                if(saldoView) saldoView.classList.remove('hidden');
-                document.getElementById('menu-seller-saldo').classList.add('text-blue-700', 'bg-blue-50', 'font-bold');
-            } else if (menu === 'setting') {
-                if(settingView) settingView.classList.remove('hidden');
-                document.getElementById('menu-seller-setting').classList.add('text-blue-700', 'bg-blue-50', 'font-bold');
-            }
-        }
-
-        function toggleAdminMenu(menu) {
-            localStorage.setItem('kalimaja_admin_menu', menu);
-            const desainView = document.getElementById('admin-desain-view');
-            const pajakView = document.getElementById('admin-pajak-view');
-            
-            document.querySelectorAll('.admin-menu-item').forEach(el => {
-                el.classList.remove('text-white', 'bg-blue-600', 'shadow-lg', 'font-bold');
-                el.classList.add('text-slate-400', 'font-medium');
-                if(el.classList.contains('super-admin-only')) {
-                    el.classList.remove('text-slate-400');
-                    el.classList.add('text-emerald-400');
-                }
-            });
-
-            desainView.classList.add('hidden');
-            if(pajakView) pajakView.classList.add('hidden');
-
-            if (menu === 'desain') {
-                desainView.classList.remove('hidden');
-                document.getElementById('menu-admin-desain').classList.add('text-white', 'bg-blue-600', 'shadow-lg', 'font-bold');
-            } else if (menu === 'pajak') {
-                if(pajakView) pajakView.classList.remove('hidden');
-                const menuPajak = document.getElementById('menu-admin-pajak');
-                menuPajak.classList.add('text-white', 'bg-blue-600', 'shadow-lg', 'font-bold');
-                menuPajak.classList.remove('text-emerald-400');
-            }
-        }
-
-        // ==========================================
-        // 3. FITUR INTERAKTIF KECIL LAINNYA
-        // ==========================================
-        let isMobileMenuOpen = false;
-        function toggleMobileMenu() {
-            isMobileMenuOpen = !isMobileMenuOpen;
-            const icon = document.getElementById('mobile-menu-icon');
-            const dropdown = document.getElementById('mobile-menu-dropdown');
-            if (isMobileMenuOpen) {
-                icon.classList.remove('fa-bars'); icon.classList.add('fa-xmark');
-                dropdown.classList.remove('hidden');
-            } else {
-                icon.classList.remove('fa-xmark'); icon.classList.add('fa-bars');
-                dropdown.classList.add('hidden');
-            }
-        }
-
-        function toggleCategoryMenu() {
-            const dropdown = document.getElementById('category-dropdown');
-            if (dropdown.classList.contains('hidden')) {
-                dropdown.classList.remove('hidden');
-                setTimeout(() => { dropdown.classList.remove('opacity-0', 'scale-95'); }, 10);
-            } else {
-                dropdown.classList.add('opacity-0', 'scale-95');
-                setTimeout(() => { dropdown.classList.add('hidden'); }, 300); 
-            }
-        }
-
-        function toggleAddProduct(showForm) {
-            const productList = document.getElementById('seller-product-list');
-            const addProductForm = document.getElementById('seller-add-product');
-            const saveBar = document.getElementById('save-product-bar');
-
-            if (showForm) {
-                productList.classList.add('hidden');
-                addProductForm.classList.remove('hidden');
-                if(saveBar) saveBar.classList.remove('hidden', 'md:flex'); 
-                window.scrollTo(0, 0);
-            } else {
-                addProductForm.classList.add('hidden');
-                productList.classList.remove('hidden');
-                if(saveBar) saveBar.classList.add('hidden'); 
-            }
-        }
-
-        function toggleAdminRole() {
-            const role = document.getElementById('role-selector').value;
-            const superElements = document.querySelectorAll('.super-admin-only');
-            superElements.forEach(el => {
-                if (role === 'super') {
-                    el.classList.remove('opacity-40', 'pointer-events-none', 'grayscale');
-                } else {
-                    el.classList.add('opacity-40', 'pointer-events-none', 'grayscale');
-                }
-            });
-        }
-
-        // UPLOAD GAMBAR PROFIL
-        function updateSiteLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const newImageSrc = e.target.result;
-                    document.getElementById('main-site-logo').src = newImageSrc;
-                    document.getElementById('admin-logo-preview').src = newImageSrc;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function updateBuyerProfile(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('buyer-profile-img').src = e.target.result;
-                    document.getElementById('buyer-profile-img-large').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function updateStoreLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('seller-store-logo').src = e.target.result;
-                    document.getElementById('seller-store-logo-large').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // EFEK SIMPAN BUTTON ANIMASI
-        function simulateSave(btn) {
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Menyimpan...';
-            btn.disabled = true;
-            btn.classList.add('opacity-80');
+            // Sembunyikan setelah 3 detik
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Tersimpan';
-                btn.classList.remove('opacity-80');
-                if(btn.classList.contains('bg-sky-600')) {
-                    btn.classList.replace('bg-sky-600', 'bg-emerald-500');
-                    btn.classList.replace('hover:bg-sky-700', 'hover:bg-emerald-600');
-                } else if(btn.classList.contains('bg-blue-600')) {
-                    btn.classList.replace('bg-blue-600', 'bg-emerald-500');
-                    btn.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
-                }
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
-                    if(btn.classList.contains('bg-emerald-500')) {
-                        btn.classList.replace('bg-emerald-500', 'bg-sky-600');
-                        btn.classList.replace('hover:bg-emerald-600', 'hover:bg-sky-700');
-                    }
-                }, 2000);
-            }, 800);
-        }
+                toast.classList.remove('translate-y-0');
+                toast.classList.add('-translate-y-32');
+            }, 3000);
+        };
 
-        // ==========================================
-        // 4. MODAL LOGIN
-        // ==========================================
-        function openLoginModal() {
-            const modal = document.getElementById('login-modal');
-            const modalBox = document.getElementById('login-modal-box');
-            modal.classList.remove('hidden');
-            void modal.offsetWidth;
-            modal.classList.remove('opacity-0');
-            modalBox.classList.remove('scale-95', 'opacity-0');
-            modalBox.classList.add('scale-100', 'opacity-100');
-        }
+        // Hubungkan ke server KSA 
+        const initAuth = async () => {
+            try { await signInAnonymously(auth); } catch (err) { console.error("Info: Login Anonim Gagal.", err); }
+        };
+        initAuth();
 
-        function closeLoginModal() {
-            const modal = document.getElementById('login-modal');
-            const modalBox = document.getElementById('login-modal-box');
-            modal.classList.add('opacity-0');
-            modalBox.classList.remove('scale-100', 'opacity-100');
-            modalBox.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
-        }
-
-        function toggleLoginTab(tab) {
-            const formMasuk = document.getElementById('form-masuk');
-            const formDaftar = document.getElementById('form-daftar');
-            const btnMasuk = document.getElementById('tab-btn-masuk');
-            const btnDaftar = document.getElementById('tab-btn-daftar');
-
-            if (tab === 'masuk') {
-                formMasuk.classList.remove('hidden'); formDaftar.classList.add('hidden');
-                btnMasuk.classList.add('text-blue-600', 'border-blue-600'); btnMasuk.classList.remove('text-gray-500', 'border-transparent');
-                btnDaftar.classList.remove('text-blue-600', 'border-blue-600'); btnDaftar.classList.add('text-gray-500', 'border-transparent');
-            } else {
-                formDaftar.classList.remove('hidden'); formMasuk.classList.add('hidden');
-                btnDaftar.classList.add('text-blue-600', 'border-blue-600'); btnDaftar.classList.remove('text-gray-500', 'border-transparent');
-                btnMasuk.classList.remove('text-blue-600', 'border-blue-600'); btnMasuk.classList.add('text-gray-500', 'border-transparent');
+        // Ambil Data Live
+        fetchDynamicData();
+        onAuthStateChanged(auth, (user) => {
+            if (!isFetched) {
+                isFetched = true;
+                fetchDynamicData(); 
             }
-        }
-
-        // ==========================================
-        // 5. SLIDER IKLAN BERANDA
-        // ==========================================
-        let currentSlide = 0;
-        let slideInterval;
-        let autoSlideDelay = 5000;
-
-        function initSlider() {
-            const slideContainer = document.getElementById('slide-container');
-            if (!slideContainer) return;
-            const totalSlides = slideContainer.children.length;
-            const indicatorContainer = document.getElementById('slide-indicators');
-            indicatorContainer.innerHTML = ''; 
-
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('button');
-                dot.className = `h-2 rounded-full transition-all duration-500 ${i === 0 ? 'bg-yellow-400 w-8 shadow-sm' : 'bg-white/40 hover:bg-white/80 w-2.5'}`;
-                dot.onclick = () => goToSlide(i);
-                indicatorContainer.appendChild(dot);
-            }
-            startAutoSlide();
-        }
-
-        function updateSliderPosition() {
-            const slideContainer = document.getElementById('slide-container');
-            const indicatorContainer = document.getElementById('slide-indicators');
-            const totalSlides = slideContainer.children.length;
-
-            slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = indicatorContainer.children[i];
-                if (i === currentSlide) {
-                    dot.className = 'h-2 rounded-full transition-all duration-500 bg-yellow-400 w-8 shadow-sm';
-                } else {
-                    dot.className = 'h-2 rounded-full transition-all duration-500 bg-white/40 hover:bg-white/80 w-2.5';
-                }
-            }
-        }
-
-        function nextSlide() {
-            const slideContainer = document.getElementById('slide-container');
-            if(!slideContainer) return;
-            currentSlide = (currentSlide + 1) % slideContainer.children.length;
-            updateSliderPosition();
-        }
-
-        function prevSlide() {
-            const slideContainer = document.getElementById('slide-container');
-            if(!slideContainer) return;
-            const totalSlides = slideContainer.children.length;
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSliderPosition();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSliderPosition();
-            pauseSlider(); resumeSlider();
-        }
-
-        function startAutoSlide() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, autoSlideDelay);
-        }
-        function pauseSlider() { clearInterval(slideInterval); }
-        function resumeSlider() { startAutoSlide(); }
-
-        function saveSliderSettings() {
-            const selectEl = document.getElementById('admin-slider-delay');
-            const btnSave = document.getElementById('btn-save-slider');
-            
-            if (selectEl) {
-                autoSlideDelay = parseInt(selectEl.value, 10);
-                startAutoSlide(); 
-                
-                const originalText = btnSave.innerHTML;
-                btnSave.innerHTML = '<i class="fa-solid fa-check"></i> Disimpan';
-                btnSave.classList.replace('bg-blue-600', 'bg-emerald-500');
-                btnSave.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
-                
-                setTimeout(() => {
-                    btnSave.innerHTML = originalText;
-                    btnSave.classList.replace('bg-emerald-500', 'bg-blue-600');
-                    btnSave.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-700');
-                }, 2000);
-            }
-        }
-
-        // ==========================================
-        // 6. INISIALISASI SAAT HALAMAN DIMUAT
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', () => {
-            initSlider();
-            // Cek localStorage, jika belum ada set ke 'home'
-            const savedView = localStorage.getItem('kalimaja_current_view') || 'home';
-            switchView(savedView);
         });
 
+        // ==========================================
+        // SISTEM FETCH DATA LIVESYNC (Cloud -> Lokal)
+        // ==========================================
+        function fetchDynamicData() {
+            // 1. Fetch Garansi
+            onSnapshot(collection(db, 'garansi'), (snapshot) => {
+                const data = [];
+                snapshot.forEach(d => data.push({ id: d.id, ...d.data() }));
+                data.sort((a, b) => b.timestamp - a.timestamp);
+                currentGaransiData = data;
+                renderGaransiTable(data);
+            });
+
+            // 2. Fetch Galeri
+            onSnapshot(collection(db, 'gallery'), (snapshot) => {
+                const data = [];
+                snapshot.forEach(d => data.push({ id: d.id, ...d.data() }));
+                data.sort((a, b) => a.timestamp - b.timestamp);
+                currentGalleryData = data;
+                renderGalleryGrid(data);
+            });
+
+            // 3. Fetch Mitra
+            onSnapshot(collection(db, 'partners'), (snapshot) => {
+                const data = [];
+                snapshot.forEach(d => data.push({ id: d.id, ...d.data() }));
+                data.sort((a, b) => a.timestamp - b.timestamp);
+                currentPartnerData = data;
+                renderPartnerGrid(data);
+            });
+
+            // 4. Fetch Gambar Tentang Kami
+            onSnapshot(doc(db, 'settings', 'tentang_image'), (docSnap) => {
+                if (docSnap.exists() && docSnap.data().imageUrl) {
+                    const imgEl = document.getElementById('img-tentang');
+                    if (imgEl) imgEl.src = docSnap.data().imageUrl;
+                }
+            }, (error) => {
+                console.error("Error Fetch Tentang Kami:", error);
+            });
+        }
+
+        // ==========================================
+        // RENDER UI 
+        // ==========================================
+        window.refreshUI = function() {
+            renderGaransiTable(currentGaransiData);
+            renderGalleryGrid(currentGalleryData);
+            renderPartnerGrid(currentPartnerData);
+        };
+
+        function renderGaransiTable(data) {
+            const tbody = document.getElementById('garansi-table-body');
+            if (!tbody) return;
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="px-6 py-8 text-center text-gray-500 font-medium">Belum ada unit yang didaftarkan.</td></tr>';
+                return;
+            }
+            let html = '';
+            data.forEach((item, index) => {
+                html += `
+                <tr class="border-b border-gray-200 hover:bg-green-50">
+                    <td class="px-6 py-4">${index + 1}</td>
+                    <td class="px-6 py-4 font-bold text-brand uppercase">${item.jenis}</td>
+                    <td class="px-6 py-4">${item.spek}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.cpcl}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.tanggal}</td>
+                    <td class="px-6 py-4 font-mono font-bold text-blue-700">${item.kodeAkses || '-'}</td>
+                    <td class="px-6 py-4 text-center ${window.isAdmin ? '' : 'hidden'}">
+                        <button onclick="deleteDataDoc('garansi', '${item.id}')" class="text-red-600 bg-red-50 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function renderGalleryGrid(data) {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+            if (data.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-10 text-center text-gray-500 italic">Belum ada foto galeri. ${window.isAdmin ? 'Klik Tambah Kotak Foto untuk mulai.' : ''}</div>`;
+                return;
+            }
+            let html = '';
+            data.forEach(item => {
+                const imgUrl = item.imageUrl || 'https://via.placeholder.com/800x800/222/555?text=Klik+Upload';
+                html += `
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md">
+                    <!-- Alat Admin -->
+                    <div class="absolute top-3 right-3 z-30 ${window.isAdmin ? 'flex' : 'hidden'} flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadImageToStorage(event, 'gallery', '${item.id}')">
+                        </label>
+                        <button onclick="deleteDataDoc('gallery', '${item.id}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded shadow text-xs font-bold">Hapus</button>
+                    </div>
+                    
+                    <!-- Loading Overlay -->
+                    <div id="loading-gallery-${item.id}" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
+                        <span id="progress-gallery-${item.id}" class="text-xs font-bold">0%</span>
+                    </div>
+
+                    <img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 class="font-bold text-sm text-white outline-none" ${window.isAdmin ? 'contenteditable="true"' : ''} onblur="updateTitleDoc('gallery', '${item.id}', this.innerText, '${item.title}')">${item.title || 'Judul Kegiatan...'}</h3>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function renderPartnerGrid(data) {
+            const grid = document.getElementById('partner-grid');
+            if (!grid) return;
+            if (data.length === 0) {
+                grid.innerHTML = `<div class="w-full py-4 text-center text-gray-400 italic">Belum ada logo mitra terdaftar.</div>`;
+                return;
+            }
+            let html = '';
+            data.forEach(item => {
+                const imgUrl = item.imageUrl || 'https://via.placeholder.com/150x60/eee/333?text=Logo+Baru';
+                html += `
+                <div class="relative group p-2">
+                    <div class="absolute -top-4 -right-4 z-30 ${window.isAdmin ? 'flex' : 'hidden'} flex-col gap-1">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[8px] font-bold">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadImageToStorage(event, 'partners', '${item.id}')">
+                        </label>
+                        <button onclick="deleteDataDoc('partners', '${item.id}')" class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded shadow text-[8px] font-bold">Del</button>
+                    </div>
+                    
+                    <div id="loading-partners-${item.id}" class="absolute inset-0 bg-white/90 hidden flex-col items-center justify-center z-40">
+                        <i class="fas fa-spinner fa-spin text-brand"></i>
+                    </div>
+
+                    <img src="${imgUrl}" class="h-8 md:h-10 object-contain">
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // ==========================================
+        // FUNGSI ADMIN (Sinkronisasi ke Cloud Server)
+        // ==========================================
+        window.toggleAdminMode = function() {
+            const pass = prompt("Hanya Admin Kalimaja: Masukkan Password Keamanan");
+            if (pass === "Yakin537@") {
+                window.isAdmin = true;
+                alert("Mode Admin Aktif!\nSemua data yang Anda tambahkan/unggah sekarang akan otomatis tersimpan ke Cloud Server (Online Permanen).");
+                
+                document.querySelectorAll('.admin-tools').forEach(el => el.classList.remove('hidden'));
+                const garansiView = document.getElementById('admin-garansi-view');
+                if(garansiView) garansiView.classList.remove('hidden');
+
+                const notice = document.getElementById('admin-notice');
+                if (notice) notice.innerText = "Sistem Live Sync Cloud Server Aktif.";
+                const btn = document.getElementById('admin-btn');
+                if (btn) btn.innerHTML = '<i class="fas fa-check-circle text-green-500"></i> Mode Cloud Server Aktif';
+                
+                window.refreshUI();
+            } else if (pass !== null) {
+                alert("Password Salah! Akses Ditolak.");
+            }
+        };
+
+        window.addGalleryItem = async function() {
+            if(!window.isAdmin) return;
+            try {
+                await addDoc(collection(db, 'gallery'), { imageUrl: '', title: 'Judul Baru (Klik Edit)', timestamp: Date.now() });
+                window.showCloudToast("Kotak Galeri Berhasil Dibuat di Cloud");
+            } catch(e) { alert("Gagal menambah kotak. Cek Rules Firestore Anda."); }
+        };
+
+        window.addPartnerItem = async function() {
+            if(!window.isAdmin) return;
+            try {
+                await addDoc(collection(db, 'partners'), { imageUrl: '', timestamp: Date.now() });
+                window.showCloudToast("Kotak Mitra Berhasil Dibuat di Cloud");
+            } catch(e) { alert("Gagal menambah kotak. Cek Rules Firestore Anda."); }
+        };
+
+        window.deleteDataDoc = async function(colName, docId) {
+            if(!window.isAdmin) return;
+            if(confirm("Yakin menghapus item ini permanen dari Database Server?")) {
+                try {
+                    await deleteDoc(doc(db, colName, docId));
+                    window.showCloudToast("Data Terhapus Permanen dari Server");
+                } catch(e) { alert("Gagal menghapus."); }
+            }
+        };
+
+        window.updateTitleDoc = async function(colName, docId, newTitle, oldTitle) {
+            if(!window.isAdmin) return;
+            if(newTitle.trim() === oldTitle) return; // Jangan request server kalau teks tidak berubah
+            try {
+                await updateDoc(doc(db, colName, docId), { title: newTitle });
+                window.showCloudToast("Teks Berhasil Disimpan ke Cloud");
+            } catch(e) { console.error("Gagal update judul:", e); }
+        };
+
+        // FUNGSI INTI: UPLOAD FILE GAMBAR KE FIREBASE STORAGE (LANGSUNG ONLINE)
+        window.uploadImageToStorage = async function(event, colName, docId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!window.isAdmin) return alert("Akses Ditolak.");
+
+            const loadingDiv = document.getElementById(`loading-${colName}-${docId}`);
+            const progressTxt = document.getElementById(`progress-${colName}-${docId}`);
+            if(loadingDiv) loadingDiv.classList.remove('hidden');
+
+            try {
+                const filename = `${colName}/${Date.now()}_${file.name}`;
+                const sRef = storageRef(storage, filename);
+                const uploadTask = uploadBytesResumable(sRef, file);
+
+                uploadTask.on('state_changed', 
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        if(progressTxt) progressTxt.innerText = Math.round(progress) + '%';
+                    }, 
+                    (error) => {
+                        console.error("Storage Error:", error);
+                        alert("Gagal Unggah Foto! Pastikan Rules Firebase Storage mengizinkan write.");
+                        if(loadingDiv) loadingDiv.classList.add('hidden');
+                    }, 
+                    async () => {
+                        try {
+                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                            // Simpan link gambar ke database Firestore
+                            await updateDoc(doc(db, colName, docId), { imageUrl: downloadURL });
+                            
+                            // Tampilkan Notifikasi Sukses ke Admin
+                            window.showCloudToast("Foto Berhasil Diunggah Permanen ke Cloud!");
+                        } catch (e) {
+                            console.error("Firestore Update Error:", e);
+                            alert("Gagal sinkronisasi link gambar ke database.");
+                        } finally {
+                            if(loadingDiv) loadingDiv.classList.add('hidden');
+                            event.target.value = ''; // Reset input
+                        }
+                    }
+                );
+            } catch (e) {
+                console.error(e);
+                alert("Terjadi kesalahan saat memulai unggah gambar.");
+                if(loadingDiv) loadingDiv.classList.add('hidden');
+                event.target.value = ''; // Reset input
+            }
+        };
+
+        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI
+        window.uploadTentangKami = async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!window.isAdmin) return alert("Akses Ditolak.");
+
+            const loadingDiv = document.getElementById('loading-tentang');
+            const progressTxt = document.getElementById('progress-tentang');
+            
+            if(loadingDiv) loadingDiv.classList.remove('hidden');
+            if(progressTxt) progressTxt.innerText = '0%';
+
+            try {
+                // Menghilangkan karakter aneh pada nama file yang dapat membuat error Firebase
+                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
+                const filename = `settings/tentang_${Date.now()}_${safeFilename}`;
+                const sRef = storageRef(storage, filename);
+                const uploadTask = uploadBytesResumable(sRef, file);
+
+                uploadTask.on('state_changed', 
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        if(progressTxt) progressTxt.innerText = Math.round(progress) + '%';
+                    }, 
+                    (error) => {
+                        console.error("Storage Error:", error);
+                        alert("Gagal Unggah Foto!\nPastikan aturan/Rules Firebase STORAGE Anda adalah: allow read, write: if true;");
+                        if(loadingDiv) loadingDiv.classList.add('hidden');
+                        event.target.value = ''; // Reset Input
+                    }, 
+                    async () => {
+                        try {
+                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                            
+                            // Simpan link gambar ke database Firestore
+                            try {
+                                await updateDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
+                            } catch (updateError) {
+                                // Jika dokumen belum ada di database, gunakan setDoc untuk membuat pertama kali
+                                await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
+                            }
+
+                            // Paksa gambar di layar langsung berubah tanpa harus merefresh halaman
+                            const imgEl = document.getElementById('img-tentang');
+                            if (imgEl) imgEl.src = downloadURL;
+                            
+                            // Tampilkan Notifikasi Sukses ke Admin
+                            window.showCloudToast("Foto 'Tentang Kami' Berhasil Diperbarui!");
+                        } catch (e) {
+                            console.error("Firestore Update Error:", e);
+                            alert("Gambar sukses diunggah, tapi ditolak oleh Database. Cek Rules Firestore Anda.");
+                        } finally {
+                            if(loadingDiv) loadingDiv.classList.add('hidden');
+                            event.target.value = ''; // Reset Input
+                        }
+                    }
+                );
+            } catch (e) {
+                console.error("System Error:", e);
+                alert("Terjadi kesalahan sistem saat memulai unggah gambar.");
+                if(loadingDiv) loadingDiv.classList.add('hidden');
+                event.target.value = ''; // Reset Input
+            }
+        };
+
+        // ==========================================
+        // FUNGSI GARANSI
+        // ==========================================
+        window.submitGaransi = async function(event) {
+            event.preventDefault();
+
+            const btn = document.getElementById('g_submit_btn');
+            const jenis = document.getElementById('g_jenis').value;
+            const spek = document.getElementById('g_spek').value;
+            const cpcl = document.getElementById('g_cpcl').value;
+            const tanggal = document.getElementById('g_tanggal').value;
+
+            const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const accessCode = 'KSA-' + randomStr;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan ke Database...';
+
+            try {
+                await addDoc(collection(db, 'garansi'), {
+                    jenis, spek, cpcl, tanggal, kodeAkses: accessCode, timestamp: Date.now()
+                });
+                
+                alert("SUKSES!\n\nUnit Anda telah resmi terdaftar di sistem Purna Jual Kalimaja.\n\nKODE AKSES ANDA: " + accessCode + "\n\n*PENTING: Harap catat dan simpan KODE AKSES ini baik-baik.");
+                event.target.reset(); 
+            } catch (e) {
+                alert("GAGAL MENYIMPAN. Pastikan Rules Firestore Anda sudah diatur.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-shield-check"></i> Daftarkan Garansi';
+            }
+        };
+
+        window.cekGaransi = function(event) {
+            event.preventDefault();
+            const inputKode = document.getElementById('c_kode').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('cek-result');
+
+            if (currentGaransiData.length === 0) {
+                resultDiv.innerHTML = '<div class="text-sm text-gray-500 mt-3 p-3 bg-gray-50 rounded-lg"><i class="fas fa-spinner fa-spin mr-2"></i> Sistem sedang memuat database...</div>';
+                return;
+            }
+
+            const found = currentGaransiData.find(item => item.kodeAkses && item.kodeAkses.toUpperCase() === inputKode);
+
+            if (found) {
+                resultDiv.innerHTML = `<div class="bg-green-50 p-5 rounded-xl mt-4 text-green-900 border border-green-200 shadow-inner">
+                    <h4 class="font-bold mb-2"><i class="fas fa-check-circle"></i> AKTIF (TERDAFTAR)</h4>
+                    <p class="text-sm">Produk: ${found.jenis} | Spek: ${found.spek}<br>Milik: ${found.cpcl}<br>Terdaftar: ${found.tanggal}</p>
+                </div>`;
+            } else {
+                resultDiv.innerHTML = `<div class="bg-red-50 p-4 rounded-xl mt-4 text-red-700 border border-red-200 text-sm shadow-inner"><i class="fas fa-exclamation-triangle mr-1"></i> Kode tidak valid atau data tidak ditemukan.</div>`;
+            }
+        };
     </script>
 </body>
 </html>
