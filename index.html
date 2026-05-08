@@ -90,10 +90,21 @@
     <header class="fixed w-full top-0 bg-white/90 backdrop-blur-md shadow-sm z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-3">
+                <div class="flex-shrink-0 flex items-center gap-3 relative group">
                     <!-- Logo Perusahaan -->
-                    <img class="h-12 w-12 rounded-full object-cover shadow-sm border-2 border-white" src="https://images.unsplash.com/photo-1541888087525-410fb55eb1e4?q=80&w=200&auto=format&fit=crop" alt="Logo PT Kalimaja">
+                    <img id="logo-img" class="h-12 w-12 rounded-full object-cover shadow-sm border-2 border-white bg-white" src="https://images.unsplash.com/photo-1541888087525-410fb55eb1e4?q=80&w=200&auto=format&fit=crop" alt="Logo PT Kalimaja">
                     <span class="font-bold text-xl tracking-tight text-gray-900 hidden sm:block">Kalimaja Surya Alam</span>
+                    
+                    <!-- Alat Admin untuk Upload Logo -->
+                    <div class="absolute -bottom-8 left-0 z-50 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1 rounded shadow text-[10px] font-bold border border-white/20 whitespace-nowrap">
+                            <i class="fas fa-camera"></i> Ganti Logo <input type="file" accept="image/*" class="hidden" onchange="uploadLogo(event)">
+                        </label>
+                    </div>
+                    <!-- Loading Overlay Logo -->
+                    <div id="loading-logo" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-50 text-white rounded-full w-12 h-12">
+                        <i class="fas fa-spinner fa-spin text-xs text-brand"></i>
+                    </div>
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
@@ -285,7 +296,7 @@
                     <!-- Loading Overlay -->
                     <div id="loading-tentang" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white rounded-2xl">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
-                        <span id="progress-tentang" class="text-xs font-bold">0%</span>
+                        <span id="progress-tentang" class="text-[10px]">Menyimpan...</span>
                     </div>
 
                     <img id="img-tentang" src="https://images.unsplash.com/photo-1541888087525-410fb55eb1e4?q=80&w=1024&auto=format&fit=crop" alt="Kegiatan Kalimaja" class="rounded-2xl shadow-2xl w-full h-auto object-cover">
@@ -698,6 +709,16 @@
                     console.error(`Error Fetch Slide ${i}:`, error);
                 });
             }
+
+            // 6. Fetch Logo Perusahaan
+            onSnapshot(doc(db, 'settings', 'logo_image'), (docSnap) => {
+                if (docSnap.exists() && docSnap.data().imageUrl) {
+                    const imgEl = document.getElementById('logo-img');
+                    if (imgEl) imgEl.src = docSnap.data().imageUrl;
+                }
+            }, (error) => {
+                console.error("Error Fetch Logo:", error);
+            });
         }
 
         // ==========================================
@@ -757,7 +778,7 @@
                     <!-- Loading Overlay -->
                     <div id="loading-gallery-${item.id}" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
-                        <span id="progress-gallery-${item.id}" class="text-xs font-bold">Menyimpan...</span>
+                        <span id="progress-gallery-${item.id}" class="text-[10px]">Menyimpan...</span>
                     </div>
 
                     <img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -990,6 +1011,45 @@
             } catch (error) {
                 console.error("System Error:", error);
                 alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
+            } finally {
+                if(loadingDiv) loadingDiv.classList.add('hidden');
+                event.target.value = ''; // Reset Input
+            }
+        };
+
+        // FUNGSI INTI: UPLOAD LOGO PERUSAHAAN (ANTI-NYANGKUT)
+        window.uploadLogo = async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!window.isAdmin) return alert("Akses Ditolak.");
+
+            const loadingDiv = document.getElementById('loading-logo');
+            if(loadingDiv) loadingDiv.classList.remove('hidden');
+
+            try {
+                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
+                const filename = `settings/logo_${Date.now()}_${safeFilename}`;
+                const sRef = storageRef(storage, filename);
+                
+                // Menggunakan fungsi safeUpload dengan perlindungan timeout
+                await safeUpload(sRef, file);
+                const downloadURL = await getDownloadURL(sRef);
+                
+                // Simpan link gambar ke database Firestore
+                try {
+                    await updateDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL });
+                } catch (updateError) {
+                    await setDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL });
+                }
+
+                // Paksa gambar di layar langsung berubah
+                const imgEl = document.getElementById('logo-img');
+                if (imgEl) imgEl.src = downloadURL;
+                
+                window.showCloudToast("Logo Perusahaan Berhasil Diperbarui!");
+            } catch (error) {
+                console.error("System Error:", error);
+                alert("GAGAL UNGGAH LOGO!\n\n" + error.message);
             } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
                 event.target.value = ''; // Reset Input
