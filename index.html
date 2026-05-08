@@ -579,15 +579,15 @@
         import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
-        // Konfigurasi Asli Milik KSA Pertanian
+        // Konfigurasi Firebase Baru (pertanian-e129a)
         const firebaseConfig = {
-            apiKey: "AIzaSyCh_wy9P3BHrgc3VkN-YKkLLjhSHw5LwdY",
-            authDomain: "ksa-pertanian.firebaseapp.com",
-            projectId: "ksa-pertanian",
-            storageBucket: "ksa-pertanian.firebasestorage.app",
-            messagingSenderId: "429518744969",
-            appId: "1:429518744969:web:0beaf1bce674dc8a41c558",
-            measurementId: "G-5RE09M7P1X"
+            apiKey: "AIzaSyCYHE0SwCp1oQUzuEY30rmsPSt4RHDkFtY",
+            authDomain: "pertanian-e129a.firebaseapp.com",
+            projectId: "pertanian-e129a",
+            storageBucket: "pertanian-e129a.firebasestorage.app",
+            messagingSenderId: "346297194132",
+            appId: "1:346297194132:web:14ad7f6b3698f5152d8681",
+            measurementId: "G-T611BY2RR6"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -620,7 +620,7 @@
             }, 3000);
         };
 
-        // Hubungkan ke server KSA 
+        // Hubungkan ke server
         const initAuth = async () => {
             try { await signInAnonymously(auth); } catch (err) { console.error("Info: Login Anonim Gagal.", err); }
         };
