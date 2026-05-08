@@ -498,7 +498,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
         // Konfigurasi Asli Milik KSA Pertanian
         const firebaseConfig = {
@@ -655,7 +655,7 @@
                     <!-- Loading Overlay -->
                     <div id="loading-gallery-${item.id}" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
-                        <span id="progress-gallery-${item.id}" class="text-xs font-bold">0%</span>
+                        <span id="progress-gallery-${item.id}" class="text-xs font-bold">Menyimpan...</span>
                     </div>
 
                     <img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -755,7 +755,7 @@
             } catch(e) { console.error("Gagal update judul:", e); }
         };
 
-        // FUNGSI INTI: UPLOAD FILE GAMBAR KE FIREBASE STORAGE (LANGSUNG ONLINE)
+        // FUNGSI INTI: UPLOAD FILE GAMBAR KE FIREBASE STORAGE (ANTI-NYANGKUT)
         window.uploadImageToStorage = async function(event, colName, docId) {
             const file = event.target.files[0];
             if (!file) return;
@@ -764,48 +764,32 @@
             const loadingDiv = document.getElementById(`loading-${colName}-${docId}`);
             const progressTxt = document.getElementById(`progress-${colName}-${docId}`);
             if(loadingDiv) loadingDiv.classList.remove('hidden');
+            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
 
             try {
-                const filename = `${colName}/${Date.now()}_${file.name}`;
+                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
+                const filename = `${colName}/${Date.now()}_${safeFilename}`;
                 const sRef = storageRef(storage, filename);
-                const uploadTask = uploadBytesResumable(sRef, file);
-
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        if(progressTxt) progressTxt.innerText = Math.round(progress) + '%';
-                    }, 
-                    (error) => {
-                        console.error("Storage Error:", error);
-                        alert("Gagal Unggah Foto! Pastikan Rules Firebase Storage mengizinkan write.");
-                        if(loadingDiv) loadingDiv.classList.add('hidden');
-                    }, 
-                    async () => {
-                        try {
-                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                            // Simpan link gambar ke database Firestore
-                            await updateDoc(doc(db, colName, docId), { imageUrl: downloadURL });
-                            
-                            // Tampilkan Notifikasi Sukses ke Admin
-                            window.showCloudToast("Foto Berhasil Diunggah Permanen ke Cloud!");
-                        } catch (e) {
-                            console.error("Firestore Update Error:", e);
-                            alert("Gagal sinkronisasi link gambar ke database.");
-                        } finally {
-                            if(loadingDiv) loadingDiv.classList.add('hidden');
-                            event.target.value = ''; // Reset input
-                        }
-                    }
-                );
-            } catch (e) {
-                console.error(e);
-                alert("Terjadi kesalahan saat memulai unggah gambar.");
+                
+                // Menggunakan uploadBytes langsung agar tidak nyangkut/looping
+                await uploadBytes(sRef, file);
+                const downloadURL = await getDownloadURL(sRef);
+                
+                // Simpan link gambar ke database Firestore
+                await updateDoc(doc(db, colName, docId), { imageUrl: downloadURL });
+                
+                // Tampilkan Notifikasi Sukses ke Admin
+                window.showCloudToast("Foto Berhasil Diunggah Permanen ke Cloud!");
+            } catch (error) {
+                console.error("Upload Error:", error);
+                alert("Gagal Unggah Foto!\nPastikan Aturan (Rules) Storage Firebase adalah:\nallow read, write: if true;");
+            } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
                 event.target.value = ''; // Reset input
             }
         };
 
-        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI
+        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI (ANTI-NYANGKUT)
         window.uploadTentangKami = async function(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -815,56 +799,35 @@
             const progressTxt = document.getElementById('progress-tentang');
             
             if(loadingDiv) loadingDiv.classList.remove('hidden');
-            if(progressTxt) progressTxt.innerText = '0%';
+            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
 
             try {
-                // Menghilangkan karakter aneh pada nama file yang dapat membuat error Firebase
+                // Menghilangkan karakter aneh pada nama file
                 const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
                 const filename = `settings/tentang_${Date.now()}_${safeFilename}`;
                 const sRef = storageRef(storage, filename);
-                const uploadTask = uploadBytesResumable(sRef, file);
+                
+                // Menggunakan uploadBytes langsung
+                await uploadBytes(sRef, file);
+                const downloadURL = await getDownloadURL(sRef);
+                
+                // Simpan link gambar ke database Firestore
+                try {
+                    await updateDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
+                } catch (updateError) {
+                    // Jika dokumen belum ada di database, gunakan setDoc untuk membuat pertama kali
+                    await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
+                }
 
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        if(progressTxt) progressTxt.innerText = Math.round(progress) + '%';
-                    }, 
-                    (error) => {
-                        console.error("Storage Error:", error);
-                        alert("Gagal Unggah Foto!\nPastikan aturan/Rules Firebase STORAGE Anda adalah: allow read, write: if true;");
-                        if(loadingDiv) loadingDiv.classList.add('hidden');
-                        event.target.value = ''; // Reset Input
-                    }, 
-                    async () => {
-                        try {
-                            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                            
-                            // Simpan link gambar ke database Firestore
-                            try {
-                                await updateDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
-                            } catch (updateError) {
-                                // Jika dokumen belum ada di database, gunakan setDoc untuk membuat pertama kali
-                                await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
-                            }
-
-                            // Paksa gambar di layar langsung berubah tanpa harus merefresh halaman
-                            const imgEl = document.getElementById('img-tentang');
-                            if (imgEl) imgEl.src = downloadURL;
-                            
-                            // Tampilkan Notifikasi Sukses ke Admin
-                            window.showCloudToast("Foto 'Tentang Kami' Berhasil Diperbarui!");
-                        } catch (e) {
-                            console.error("Firestore Update Error:", e);
-                            alert("Gambar sukses diunggah, tapi ditolak oleh Database. Cek Rules Firestore Anda.");
-                        } finally {
-                            if(loadingDiv) loadingDiv.classList.add('hidden');
-                            event.target.value = ''; // Reset Input
-                        }
-                    }
-                );
-            } catch (e) {
-                console.error("System Error:", e);
-                alert("Terjadi kesalahan sistem saat memulai unggah gambar.");
+                // Paksa gambar di layar langsung berubah
+                const imgEl = document.getElementById('img-tentang');
+                if (imgEl) imgEl.src = downloadURL;
+                
+                window.showCloudToast("Foto 'Tentang Kami' Berhasil Diperbarui!");
+            } catch (error) {
+                console.error("System Error:", error);
+                alert("Gagal Unggah Foto!\nPastikan Aturan (Rules) Storage Firebase adalah:\nallow read, write: if true;");
+            } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
                 event.target.value = ''; // Reset Input
             }
