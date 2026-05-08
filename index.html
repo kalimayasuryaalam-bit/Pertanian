@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Kalimaja Surya Alam - Solusi Total Mekanisasi Pertanian</title>
+    <meta name="description" content="PT Kalimaja Surya Alam menyediakan alat pertanian tangguh, traktor, pompa irigasi, dan drone pertanian dengan jaminan suku cadang.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { light: '#4ade80', DEFAULT: '#16a34a', dark: '#15803d' },
+                        accent: { DEFAULT: '#eab308', dark: '#ca8a04' }
+                    },
+                    animation: {
+                        'slide-bg': 'slide 25s infinite linear',
+                    },
+                    keyframes: {
+                        slide: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '20%': { transform: 'translateX(0%)' },
+                            '25%': { transform: 'translateX(-100%)' },
+                            '45%': { transform: 'translateX(-100%)' },
+                            '50%': { transform: 'translateX(-200%)' },
+                            '70%': { transform: 'translateX(-200%)' },
+                            '75%': { transform: 'translateX(-300%)' },
+                            '95%': { transform: 'translateX(-300%)' },
+                            '100%': { transform: 'translateX(-400%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
+        
+        .hero-slider-container {
+            display: flex;
+            width: 500%; /* 5 images * 100% */
+            height: 100%;
+            animation: slide 25s infinite ease-in-out;
+        }
+        .hero-slide {
+            width: 20%; /* 100% / 5 images */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        @keyframes slide {
+            0%, 15% { transform: translateX(0); }
+            20%, 35% { transform: translateX(-20%); }
+            40%, 55% { transform: translateX(-40%); }
+            60%, 75% { transform: translateX(-60%); }
+            80%, 95% { transform: translateX(-80%); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 antialiased selection:bg-brand selection:text-white">
+
+    <!-- Tombol WhatsApp Mengambang -->
+    <a href="https://wa.me/6285150973789" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 z-50 group">
+        <i class="fab fa-whatsapp"></i>
+        <span class="absolute right-20 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none font-semibold">
+            Hubungi Kami via WA!
+        </span>
+    </a>
+
+    <!-- Header / Navbar -->
+    <header class="fixed w-full top-0 bg-white/90 backdrop-blur-md shadow-sm z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img class="h-12 w-12 rounded-full object-cover shadow-sm border-2 border-white" src="https://www.ksasemesta.com/images/0/24384851/LogoKalimaja1-VOen73dOZJxAq7S_0egLJw.jpg" alt="Logo PT KSA">
+                    <span class="font-bold text-xl tracking-tight text-gray-900 hidden sm:block">Kalimaja Surya Alam</span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#beranda" class="text-gray-700 hover:text-brand font-medium transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-gray-700 hover:text-brand font-medium transition-colors">Tentang Kami</a>
+                    <a href="#produk" class="text-gray-700 hover:text-brand font-medium transition-colors">Produk</a>
+                    <a href="#layanan" class="text-gray-700 hover:text-brand font-medium transition-colors">Layanan</a>
+                    <a href="#galeri" class="text-gray-700 hover:text-brand font-medium transition-colors">Galeri</a>
+                    <a href="#kontak" class="text-gray-700 hover:text-brand font-medium transition-colors">Kontak</a>
+                </nav>
+                
+                <div class="hidden md:flex">
+                    <a href="#kontak" class="bg-brand text-white px-6 py-2.5 rounded-full font-semibold hover:bg-brand-dark transition-colors shadow-md">
+                        Dapatkan Penawaran
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section dengan Sliding Background -->
+    <section id="beranda" class="relative pt-20 pb-32 min-h-[90vh] flex items-center overflow-hidden">
+        <!-- Slider Container -->
+        <div class="absolute inset-0 z-0">
+            <div class="hero-slider-container">
+                <!-- Slide 1: Traktor -->
+                <div class="hero-slide" style="background-image: url('https://www.ksasemesta.com/images/1920/24386990/fultimediting-ebzzUZr8zCQMfLPLhOgXlQ.png');"></div>
+                <!-- Slide 2: Team -->
+                <div class="hero-slide" style="background-image: url('https://www.ksasemesta.com/images/1024/24406589/AEP0201811-G_Yl12fW-HdoafDd8sXvvQ.jpg');"></div>
+                <!-- Slide 3: Pompa -->
+                <div class="hero-slide" style="background-image: url('https://www.ksasemesta.com/images/800x800/20997001/WhatsAppImage2025-10-14at11.20.392-yKSVNn5W93-j9YOtNVifjA.jpeg');"></div>
+                <!-- Slide 4: Implement -->
+                <div class="hero-slide" style="background-image: url('https://www.ksasemesta.com/images/800x800/24406811/WhatsAppImage2026-03-29at14.06.31-Aqon4-VeHDC3KrOVrTc9Bg.jpeg');"></div>
+                <!-- Slide 5: Field Action -->
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c10?q=80&w=2070&auto=format&fit=crop');"></div>
+            </div>
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-800/60"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand/20 text-brand-light font-semibold text-sm tracking-wider mb-4 border border-brand/30">PT KALIMAJA SURYA ALAM</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                Solusi Total <br><span class="text-accent">Mekanisasi Pertanian</span>
+            </h1>
+            <p class="mt-4 text-lg text-gray-200 max-w-2xl mb-10 leading-relaxed">
+                Hasil panen maksimal dimulai dari mesin yang andal. Kami menyediakan alat pertanian tangguh dengan jaminan suku cadang dan tim teknis yang selalu siap membantu Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#produk" class="bg-brand text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-lg">Lihat Katalog Produk</a>
+                <a href="#kontak" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Keunggulan -->
+    <section class="py-16 bg-white relative z-20 -mt-16 mx-4 sm:mx-6 lg:mx-8 rounded-2xl shadow-xl max-w-7xl xl:mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-10">
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Durabilitas Ekstrem</h3>
+                <p class="text-gray-600 text-sm">Material tangguh untuk penggunaan nonstop di lahan pertanian.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Perawatan Mudah</h3>
+                <p class="text-gray-600 text-sm">Jaminan suku cadang dan teknisi yang siap ke lokasi Anda.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Efisiensi Biaya</h3>
+                <p class="text-gray-600 text-sm">Hemat bahan bakar dengan performa kerja yang sangat cepat.</p>
+            </div>
+            <div class="text-center group">
+                <div class="w-16 h-16 mx-auto bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:bg-brand group-hover:text-white transition-all transform group-hover:-translate-y-2">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Hasil Maksimal</h3>
+                <p class="text-gray-600 text-sm">Meningkatkan kuantitas dan kualitas panen dengan teknologi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="tentang" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Tentang Kami</h4>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">Produsen Alat dan Mesin Pertanian Berkualitas</h2>
+                    <p class="text-gray-600 text-lg mb-6 text-justify leading-relaxed">
+                        Kami hadir sebagai mitra terpercaya dalam penyediaan alat dan mesin pertanian yang dirancang untuk mendukung produktivitas pertanian Indonesia. PT Kalimaja Surya Alam berkomitmen menghadirkan solusi mekanisasi yang tangguh dan tepat guna.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8 text-justify leading-relaxed">
+                        Dengan dukungan teknis profesional, kami terus berinovasi untuk menjadi bagian terdepan dari kemajuan ketahanan pangan nasional.
+                    </p>
+                    <a href="#kontak" class="inline-flex items-center text-brand font-bold text-lg hover:gap-4 transition-all">
+                        Mari Berkolaborasi Bersama Kami <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <img src="https://www.ksasemesta.com/images/1024/24406589/AEP0201811-G_Yl12fW-HdoafDd8sXvvQ.jpg" alt="Tim KSA Semesta" class="rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk Katalog -->
+    <section id="produk" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Apa Yang Kami Tawarkan</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">Keberhasilan panen Anda adalah prioritas kami. Pilih unit terbaik untuk mendukung pekerjaan Anda.</p>
+            </div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Produk 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden flex flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[10px] font-bold">
+                            Ganti Foto <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                        <button onclick="editProductLink(this)" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded shadow text-[10px] font-bold">Ganti Link</button>
+                    </div>
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://www.ksasemesta.com/images/800x800/20997001/WhatsAppImage2025-10-14at11.20.392-yKSVNn5W93-j9YOtNVifjA.jpeg" alt="Pompa Irigasi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Pompa Irigasi</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable" contenteditable="false">Daya hisap kuat untuk pengairan sawah dan kebun yang luas.</p>
+                        <a href="https://ksasemesta.com/produk/pompa-irigasi" target="_blank" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+                <!-- Produk 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden flex flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[10px] font-bold">
+                            Ganti Foto <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                        <button onclick="editProductLink(this)" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded shadow text-[10px] font-bold">Ganti Link</button>
+                    </div>
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://www.ksasemesta.com/images/800x800/24386675/SELEHECANOPY-N84sPfJR8TI8DhkeS34zyw.webp" alt="Traktor Roda 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Traktor Roda 4</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable" contenteditable="false">Tenaga besar untuk pengolahan tanah berat dengan stabilitas tinggi.</p>
+                        <a href="https://ksasemesta.com/produk/traktor-roda-4" target="_blank" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+                <!-- Produk 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden flex flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[10px] font-bold">
+                            Ganti Foto <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                        <button onclick="editProductLink(this)" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded shadow text-[10px] font-bold">Ganti Link</button>
+                    </div>
+                    <div class="h-56 overflow-hidden flex items-center justify-center bg-gray-100 p-4">
+                        <img src="https://www.ksasemesta.com/images/800x800/17444583/drone-rB2cGzMN8HZXTWEFyBjMtQ.png" alt="Drone" class="w-full h-auto max-h-full object-contain group-hover:scale-110 transition-all">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Drone Pertanian</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable" contenteditable="false">Penyemprotan pupuk dan pestisida presisi dengan kendali pintar.</p>
+                        <a href="https://ksasemesta.com/produk/drone-pertanian" target="_blank" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+                <!-- Produk 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border group relative">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden flex flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[10px] font-bold">
+                            Ganti Foto <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                        <button onclick="editProductLink(this)" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded shadow text-[10px] font-bold">Ganti Link</button>
+                    </div>
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://www.ksasemesta.com/images/800x800/24406811/WhatsAppImage2026-03-29at14.06.31-Aqon4-VeHDC3KrOVrTc9Bg.jpeg" alt="Implement" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 content-editable" contenteditable="false">Implement Traktor</h3>
+                        <p class="text-sm text-gray-600 mb-6 content-editable" contenteditable="false">Berbagai aksesoris pendukung traktor untuk segala jenis lahan.</p>
+                        <a href="https://ksasemesta.com/produk/implement-traktor" target="_blank" class="product-link block text-center py-2 bg-gray-50 text-brand font-bold rounded-lg border border-brand/20 hover:bg-brand hover:text-white transition-colors">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Kegiatan (Admin Mode Ready) -->
+    <section id="galeri" class="py-24 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Dokumentasi KSA Semesta</h4>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">Galeri Kegiatan Perusahaan</h2>
+                </div>
+                <div class="admin-tools hidden">
+                    <button onclick="addGalleryItem()" class="bg-accent hover:bg-accent-dark text-gray-900 px-6 py-3 rounded-full font-bold flex items-center gap-2 shadow-xl">
+                        <i class="fas fa-plus-circle"></i> Tambah Foto Kegiatan
+                    </button>
+                </div>
+            </div>
+            
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded-lg shadow-lg text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                    </div>
+                    <img src="https://www.ksasemesta.com/images/800x800/24386675/SELEHECANOPY-N84sPfJR8TI8DhkeS34zyw.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 class="font-bold text-sm content-editable" contenteditable="false">Serah Terima Unit Traktor</h3>
+                    </div>
+                </div>
+                <!-- Frame 2 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800">
+                    <div class="admin-tools absolute top-3 right-3 z-30 hidden">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded-lg shadow-lg text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                    </div>
+                    <img src="https://www.ksasemesta.com/images/1024/24406589/AEP0201811-G_Yl12fW-HdoafDd8sXvvQ.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 class="font-bold text-sm content-editable" contenteditable="false">Tim Lapangan KSA Semesta</h3>
+                    </div>
+                </div>
+            </div>
+            <p id="admin-notice" class="mt-8 text-center text-gray-500 italic text-sm">Gunakan password admin di bagian bawah untuk akses edit.</p>
+        </div>
+    </section>
+
+    <!-- Layanan -->
+    <section id="layanan" class="py-24 bg-gray-50 border-y">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-16">Layanan Terbaik Dari Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-brand rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Konsultasi & Pelatihan</h3>
+                    <p class="text-gray-600 text-sm">Pelatihan teknis terpadu agar mekanisasi Anda berjalan optimal.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-accent rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-wrench"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Repair & Service</h3>
+                    <p class="text-gray-600 text-sm">Teknisi ahli yang siap memberikan perawatan berkala secara cepat.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 bg-gray-800 rounded-xl text-white flex items-center justify-center text-2xl mb-6 mx-auto shadow-md"><i class="fas fa-cogs"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Suku Cadang Asli</h3>
+                    <p class="text-gray-600 text-sm">Penyediaan suku cadang lengkap untuk kelancaran operasional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mitra (Admin Mode Ready for Upload) -->
+    <section class="py-16 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-end mb-8 gap-4">
+                <h3 class="text-lg font-bold text-gray-900 uppercase tracking-widest">Mitra Kerjasama</h3>
+                <div class="admin-tools hidden">
+                    <button onclick="addPartnerItem()" class="bg-brand hover:bg-brand-dark text-white px-4 py-1.5 rounded-full text-[10px] font-bold shadow-md">
+                        <i class="fas fa-plus"></i> Tambah Mitra
+                    </button>
+                </div>
+            </div>
+            
+            <div id="partner-grid" class="flex flex-wrap justify-center items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Partner 1 -->
+                <div class="relative group">
+                    <div class="admin-tools absolute -top-4 -right-4 z-30 hidden">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[8px] font-bold">
+                            Ganti Logo <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                    </div>
+                    <img src="https://via.placeholder.com/150x60/eee/333?text=Logo+Mitra+1" alt="Partner 1" class="h-8 md:h-10 object-contain">
+                </div>
+                <!-- Partner 2 -->
+                <div class="relative group">
+                    <div class="admin-tools absolute -top-4 -right-4 z-30 hidden">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[8px] font-bold">
+                            Ganti Logo <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                    </div>
+                    <img src="https://via.placeholder.com/150x60/eee/333?text=Logo+Mitra+2" alt="Partner 2" class="h-8 md:h-10 object-contain">
+                </div>
+                <!-- Partner 3 -->
+                <div class="relative group">
+                    <div class="admin-tools absolute -top-4 -right-4 z-30 hidden">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[8px] font-bold">
+                            Ganti Logo <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                        </label>
+                    </div>
+                    <img src="https://via.placeholder.com/150x60/eee/333?text=Logo+Mitra+3" alt="Partner 3" class="h-8 md:h-10 object-contain">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak - VERSI PREMIUM KOKOH -->
+    <section id="kontak" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row">
+                
+                <!-- Info Kontak (Lat Gelap Premium) -->
+                <div class="bg-gray-900 text-white lg:w-5/12 p-10 lg:p-14 relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand rounded-full opacity-20 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-accent"></div>
+                    
+                    <h3 class="text-3xl font-bold mb-8 relative z-10">Hubungi Kami</h3>
+                    <p class="text-gray-300 mb-10 text-lg relative z-10 leading-relaxed">Dapatkan konsultasi khusus dan penawaran harga terbaik yang disesuaikan dengan kebutuhan bisnis pertanian Anda.</p>
+                    
+                    <div class="space-y-8 relative z-10">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Alamat Kantor</h4>
+                                <p class="text-gray-400 leading-relaxed text-sm">Jl. Mekar Wangi, Dangdang Cisauk<br>Kabupaten Tangerang, 15324</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Telepon & WA</h4>
+                                <p class="text-gray-400 text-sm">+62 851 5097 3789</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-brand text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">Email</h4>
+                                <p class="text-gray-400 text-sm">kalimajasuryaalam@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Kontak -->
+                <div class="lg:w-7/12 p-10 lg:p-14 bg-white">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan Langsung</h3>
+                    <form onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim.');" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand focus:border-brand outline-none transition-shadow" placeholder="Nama Anda">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand focus:border-brand outline-none transition-shadow" placeholder="08xxxxxxx">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pesan Anda</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand focus:border-brand outline-none transition-shadow resize-none" placeholder="Ceritakan kebutuhan unit Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand text-white font-bold py-4 rounded-lg hover:bg-brand-dark transition-all shadow-lg text-lg">
+                            Kirim Pesan Sekarang <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - VERSI KOKOH 3 KOLOM -->
+    <footer class="bg-gray-900 text-gray-300 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Kolom 1: Brand -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">PT Kalimaja Surya Alam</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Solusi Total Mekanisasi Pertanian. Mewujudkan pertanian Indonesia yang modern, efisien, dan berdaya saing global melalui teknologi yang andal.</p>
+                </div>
+                <!-- Kolom 2: Navigasi & Admin -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-6">Tautan Cepat</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#beranda" class="hover:text-brand transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-brand transition-colors">Tentang Kami</a></li>
+                        <li><a href="#produk" class="hover:text-brand transition-colors">Katalog Produk</a></li>
+                        <li><a href="#galeri" class="hover:text-brand transition-colors">Galeri Dokumentasi</a></li>
+                    </ul>
+                    <!-- Tombol Login Admin (Yakin537@) -->
+                    <button id="admin-btn" onclick="toggleAdminMode()" class="mt-8 text-[10px] text-gray-700 hover:text-brand font-bold uppercase tracking-widest transition-all text-left flex items-center gap-2">
+                        <i class="fas fa-user-shield"></i> Akses Admin Perusahaan
+                    </button>
+                </div>
+                <!-- Kolom 3: Media Sosial -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-6">Ikuti Kami</h4>
+                    <div class="flex space-x-5 text-2xl">
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-brand transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="mt-8 text-xs text-gray-500">Kunjungi media sosial kami untuk update terbaru pengiriman unit dan kegiatan lapangan.</p>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-600 border-t border-gray-800 pt-8">
+                &copy; 2026 PT Kalimaja Surya Alam. Seluruh Hak Cipta Dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let isAdmin = false;
+
+        function toggleAdminMode() {
+            // Password Admin: Yakin537@
+            const pass = prompt("Hanya Admin KSA: Masukkan Password Keamanan");
+            if (pass === "Yakin537@") {
+                isAdmin = true;
+                alert("Login Berhasil! Akses edit kini terbuka untuk Produk, Galeri, dan Mitra.");
+                document.querySelectorAll('.admin-tools').forEach(el => el.classList.remove('hidden'));
+                document.querySelectorAll('.content-editable').forEach(el => el.contentEditable = "true");
+                document.getElementById('admin-notice').innerText = "Mode Edit Aktif: Gunakan tombol di foto produk, galeri, atau mitra untuk merubah konten.";
+                document.getElementById('admin-notice').classList.add('text-brand');
+                document.getElementById('admin-btn').innerHTML = '<i class="fas fa-check-circle"></i> Mode Admin Aktif';
+                document.getElementById('admin-btn').classList.add('text-brand');
+            } else if (pass !== null) {
+                alert("Password Salah! Akses Ditolak.");
+            }
+        }
+
+        function editProductLink(btn) {
+            const card = btn.closest('.relative');
+            const linkTag = card.querySelector('.product-link');
+            const currentUrl = linkTag.getAttribute('href');
+            const newUrl = prompt("Masukkan Link Baru (URL) untuk tombol Lihat Detail:", currentUrl);
+            if (newUrl !== null && newUrl !== "") {
+                linkTag.setAttribute('href', newUrl);
+                alert("Link berhasil diperbarui!");
+            }
+        }
+
+        function addGalleryItem() {
+            const grid = document.getElementById('gallery-grid');
+            const newItem = document.createElement('div');
+            newItem.className = "relative h-64 rounded-xl overflow-hidden group bg-gray-800 border-2 border-brand/50";
+            newItem.innerHTML = `
+                <div class="admin-tools absolute top-3 right-3 z-30">
+                    <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded-lg shadow-lg text-xs font-bold border border-white/20">
+                        Upload <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                    </label>
+                </div>
+                <img src="https://via.placeholder.com/800x800/222/555?text=Klik+Upload" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-5">
+                    <h3 class="font-bold text-sm text-white content-editable" contenteditable="true">Judul Kegiatan...</h3>
+                </div>
+            `;
+            grid.appendChild(newItem);
+        }
+
+        function addPartnerItem() {
+            const grid = document.getElementById('partner-grid');
+            const newItem = document.createElement('div');
+            newItem.className = "relative group";
+            newItem.innerHTML = `
+                <div class="admin-tools absolute -top-4 -right-4 z-30">
+                    <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-2 py-1 rounded shadow text-[8px] font-bold">
+                        Ganti Logo <input type="file" accept="image/*" class="hidden" onchange="previewImage(event, this)">
+                    </label>
+                </div>
+                <img src="https://via.placeholder.com/150x60/eee/333?text=Logo+Baru" class="h-8 md:h-10 object-contain">
+            `;
+            grid.appendChild(newItem);
+        }
+
+        function previewImage(event, input) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = input.closest('.relative').querySelector('img');
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
