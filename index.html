@@ -46,6 +46,7 @@
             }
         };
     </script>
+    
     <style>
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -63,16 +64,6 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-        }
-
-        /* Rumus Animasi 5 Detik per Slide (Total 25 Detik) */
-        @keyframes slide {
-            0%, 16% { transform: translateX(0%); }
-            20%, 36% { transform: translateX(-20%); }
-            40%, 56% { transform: translateX(-40%); }
-            60%, 76% { transform: translateX(-60%); }
-            80%, 96% { transform: translateX(-80%); }
-            100% { transform: translateX(0%); }
         }
     </style>
 </head>
@@ -481,7 +472,7 @@
         </div>
     </section>
 
-    <!-- Galeri Kegiatan Dinamis (CMS) -->
+    <!-- 12 SLOT FIX GALERI KEGIATAN PERUSAHAAN -->
     <section id="galeri" class="py-24 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -489,17 +480,205 @@
                     <h4 class="text-brand font-bold uppercase tracking-wider mb-2">Dokumentasi Kalimaja</h4>
                     <h2 class="text-3xl md:text-4xl font-extrabold text-white">Galeri Kegiatan Perusahaan</h2>
                 </div>
-                <div class="admin-tools hidden">
-                    <button onclick="addGalleryItem()" class="bg-accent hover:bg-accent-dark text-gray-900 px-6 py-3 rounded-full font-bold flex items-center gap-2 shadow-xl">
-                        <i class="fas fa-plus-circle"></i> Tambah Kotak Foto
-                    </button>
+            </div>
+            
+            <!-- 12 Bingkai Statis yang Siap Di-Upload -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Slot Galeri 1 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 1)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-1" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-1" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-1" src="a.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-1" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(1, this.innerText)">Kegiatan Perusahaan 1</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 2 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 2)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-2" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-2" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-2" src="b.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-2" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(2, this.innerText)">Kegiatan Perusahaan 2</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 3 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 3)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-3" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-3" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-3" src="c.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-3" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(3, this.innerText)">Kegiatan Perusahaan 3</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 4 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 4)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-4" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-4" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-4" src="d.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-4" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(4, this.innerText)">Kegiatan Perusahaan 4</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 5 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 5)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-5" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-5" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-5" src="e.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-5" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(5, this.innerText)">Kegiatan Perusahaan 5</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 6 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 6)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-6" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-6" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-6" src="f.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-6" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(6, this.innerText)">Kegiatan Perusahaan 6</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 7 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 7)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-7" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-7" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-7" src="g.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-7" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(7, this.innerText)">Kegiatan Perusahaan 7</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 8 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 8)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-8" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-8" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-8" src="h.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-8" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(8, this.innerText)">Kegiatan Perusahaan 8</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 9 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 9)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-9" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-9" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-9" src="i.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-9" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(9, this.innerText)">Kegiatan Perusahaan 9</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 10 -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 10)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-10" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-10" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-10" src="j.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-10" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(10, this.innerText)">Kegiatan Perusahaan 10</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 11 (Diisi gambar A untuk menggenapkan 12 slot) -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 11)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-11" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-11" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-11" src="a.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-11" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(11, this.innerText)">Kegiatan Perusahaan 11</h3>
+                    </div>
+                </div>
+
+                <!-- Slot Galeri 12 (Diisi gambar B untuk menggenapkan 12 slot) -->
+                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
+                    <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
+                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
+                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadFixedGallery(event, 12)">
+                        </label>
+                    </div>
+                    <div id="loading-gal-12" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
+                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-12" class="text-xs font-bold">Menyimpan...</span>
+                    </div>
+                    <img id="gal-img-12" src="b.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h3 id="gal-title-12" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(12, this.innerText)">Kegiatan Perusahaan 12</h3>
+                    </div>
                 </div>
             </div>
             
-            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="col-span-full py-10 text-center text-gray-500"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat Galeri...</div>
-            </div>
-            <p id="admin-notice" class="mt-8 text-center text-gray-500 italic text-sm">Gunakan password admin di bagian bawah untuk akses edit.</p>
+            <p id="admin-notice" class="mt-8 text-center text-gray-500 italic text-sm">Gunakan password admin di bagian paling bawah web untuk akses edit dan upload.</p>
         </div>
     </section>
 
@@ -623,7 +802,6 @@
         window.isAdmin = false;
 
         let currentGaransiData = [];
-        let currentGalleryData = [];
         let currentPartnerData = [];
         let isFetched = false;
 
@@ -672,16 +850,7 @@
                 renderGaransiTable(data);
             });
 
-            // 2. Fetch Galeri
-            onSnapshot(collection(db, 'gallery'), (snapshot) => {
-                const data = [];
-                snapshot.forEach(d => data.push({ id: d.id, ...d.data() }));
-                data.sort((a, b) => a.timestamp - b.timestamp);
-                currentGalleryData = data;
-                renderGalleryGrid(data);
-            });
-
-            // 3. Fetch Mitra
+            // 2. Fetch Mitra
             onSnapshot(collection(db, 'partners'), (snapshot) => {
                 const data = [];
                 snapshot.forEach(d => data.push({ id: d.id, ...d.data() }));
@@ -690,7 +859,7 @@
                 renderPartnerGrid(data);
             });
 
-            // 4. Fetch Gambar Tentang Kami
+            // 3. Fetch Gambar Tentang Kami
             onSnapshot(doc(db, 'settings', 'tentang_image'), (docSnap) => {
                 if (docSnap.exists() && docSnap.data().imageUrl) {
                     const imgEl = document.getElementById('img-tentang');
@@ -700,7 +869,7 @@
                 console.error("Error Fetch Tentang Kami:", error);
             });
 
-            // 5. Fetch Gambar 5 Slider Utama (Carousel)
+            // 4. Fetch Gambar 5 Slider Utama (Carousel)
             for(let i=1; i<=5; i++) {
                 onSnapshot(doc(db, 'settings', 'hero_slide_' + i), (docSnap) => {
                     if (docSnap.exists() && docSnap.data().imageUrl) {
@@ -715,6 +884,23 @@
                     }
                 }, (error) => {
                     console.error(`Error Fetch Slide ${i}:`, error);
+                });
+            }
+
+            // 5. Fetch Gambar untuk 12 Slot Fixed Galeri
+            for(let i=1; i<=12; i++) {
+                onSnapshot(doc(db, 'settings', 'gallery_fixed_' + i), (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        if (data.imageUrl) {
+                            const imgEl = document.getElementById('gal-img-' + i);
+                            if (imgEl) imgEl.src = data.imageUrl;
+                        }
+                        if (data.title) {
+                            const titleEl = document.getElementById('gal-title-' + i);
+                            if (titleEl) titleEl.innerText = data.title;
+                        }
+                    }
                 });
             }
 
@@ -734,7 +920,6 @@
         // ==========================================
         window.refreshUI = function() {
             renderGaransiTable(currentGaransiData);
-            renderGalleryGrid(currentGalleryData);
             renderPartnerGrid(currentPartnerData);
         };
 
@@ -761,41 +946,6 @@
                 </tr>`;
             });
             tbody.innerHTML = html;
-        }
-
-        function renderGalleryGrid(data) {
-            const grid = document.getElementById('gallery-grid');
-            if (!grid) return;
-            if (data.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-10 text-center text-gray-500 italic">Belum ada foto galeri. ${window.isAdmin ? 'Klik Tambah Kotak Foto untuk mulai.' : ''}</div>`;
-                return;
-            }
-            let html = '';
-            data.forEach(item => {
-                const imgUrl = item.imageUrl || 'https://via.placeholder.com/800x800/222/555?text=Klik+Upload';
-                html += `
-                <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md">
-                    <!-- Alat Admin -->
-                    <div class="absolute top-3 right-3 z-30 ${window.isAdmin ? 'flex' : 'hidden'} flex-col gap-2">
-                        <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
-                            Upload <input type="file" accept="image/*" class="hidden" onchange="uploadImageToStorage(event, 'gallery', '${item.id}')">
-                        </label>
-                        <button onclick="deleteDataDoc('gallery', '${item.id}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded shadow text-xs font-bold">Hapus</button>
-                    </div>
-                    
-                    <!-- Loading Overlay -->
-                    <div id="loading-gallery-${item.id}" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
-                        <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i>
-                        <span id="progress-gallery-${item.id}" class="text-[10px]">Menyimpan...</span>
-                    </div>
-
-                    <img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                        <h3 class="font-bold text-sm text-white outline-none" ${window.isAdmin ? 'contenteditable="true"' : ''} onblur="updateTitleDoc('gallery', '${item.id}', this.innerText, '${item.title}')">${item.title || 'Judul Kegiatan...'}</h3>
-                    </div>
-                </div>`;
-            });
-            grid.innerHTML = html;
         }
 
         function renderPartnerGrid(data) {
@@ -834,16 +984,22 @@
             const pass = prompt("Hanya Admin Kalimaja: Masukkan Password Keamanan");
             if (pass === "Yakin537@") {
                 window.isAdmin = true;
-                alert("Mode Admin Aktif!\nSemua data yang Anda tambahkan/unggah sekarang akan otomatis tersimpan ke Cloud Server (Online Permanen).");
+                alert("Mode Admin Aktif!\nAnda sekarang bisa mengganti 12 slot foto di Galeri dan mengedit teks judulnya.");
                 
                 // Tampilkan semua fitur khusus admin
                 document.querySelectorAll('.admin-tools').forEach(el => el.classList.remove('hidden'));
+                
+                // Aktifkan Edit Text untuk ke-12 Judul Galeri
+                for(let i=1; i<=12; i++) {
+                    const titleEl = document.getElementById('gal-title-' + i);
+                    if(titleEl) titleEl.setAttribute('contenteditable', 'true');
+                }
                 
                 const garansiView = document.getElementById('admin-garansi-view');
                 if(garansiView) garansiView.classList.remove('hidden');
 
                 const notice = document.getElementById('admin-notice');
-                if (notice) notice.innerText = "Sistem Live Sync Cloud Server Aktif.";
+                if (notice) notice.innerText = "Klik 'Upload' pada gambar untuk mengganti, atau klik teks judul untuk mengubah teks.";
                 const btn = document.getElementById('admin-btn');
                 if (btn) btn.innerHTML = '<i class="fas fa-check-circle text-green-500"></i> Mode Cloud Server Aktif';
                 
@@ -851,14 +1007,6 @@
             } else if (pass !== null) {
                 alert("Password Salah! Akses Ditolak.");
             }
-        };
-
-        window.addGalleryItem = async function() {
-            if(!window.isAdmin) return;
-            try {
-                await addDoc(collection(db, 'gallery'), { imageUrl: '', title: 'Judul Baru (Klik Edit)', timestamp: Date.now() });
-                window.showCloudToast("Kotak Galeri Berhasil Dibuat di Cloud");
-            } catch(e) { alert("Gagal menambah kotak. Cek Rules Firestore Anda."); }
         };
 
         window.addPartnerItem = async function() {
@@ -879,22 +1027,13 @@
             }
         };
 
-        window.updateTitleDoc = async function(colName, docId, newTitle, oldTitle) {
-            if(!window.isAdmin) return;
-            if(newTitle.trim() === oldTitle) return; // Jangan request server kalau teks tidak berubah
-            try {
-                await updateDoc(doc(db, colName, docId), { title: newTitle });
-                window.showCloudToast("Teks Berhasil Disimpan ke Cloud");
-            } catch(e) { console.error("Gagal update judul:", e); }
-        };
-
         // ==========================================
         // HELPER: Anti-Nyangkut Timeout (15 Detik)
         // ==========================================
         const safeUpload = (sRef, file) => {
             return new Promise((resolve, reject) => {
                 const timer = setTimeout(() => {
-                    reject(new Error("TIMEOUT (15 Detik): Firebase Storage tidak merespon.\n\nSOLUSI PASTINYA:\n1. Buka Firebase Console.\n2. Masuk ke menu 'Storage' (di kiri).\n3. WAJIB klik tombol 'Get Started' / 'Mulai' jika belum pernah diaktifkan.\n4. Pastikan nama storageBucket di codingan sudah benar."));
+                    reject(new Error("TIMEOUT (15 Detik): Firebase Storage tidak merespon.\n\nSOLUSI PASTINYA:\n1. Buka Firebase Console.\n2. Masuk ke menu 'Storage' (di kiri).\n3. WAJIB klik tombol 'Get Started' / 'Mulai' jika belum pernah diaktifkan."));
                 }, 15000);
 
                 uploadBytes(sRef, file)
@@ -909,41 +1048,82 @@
             });
         };
 
-        // FUNGSI INTI: UPLOAD FILE GAMBAR KE FIREBASE STORAGE (ANTI-NYANGKUT)
+        // FUNGSI INTI: UPLOAD FILE GAMBAR UNTUK PARTNERS
         window.uploadImageToStorage = async function(event, colName, docId) {
             const file = event.target.files[0];
             if (!file) return;
             if (!window.isAdmin) return alert("Akses Ditolak.");
 
             const loadingDiv = document.getElementById(`loading-${colName}-${docId}`);
-            const progressTxt = document.getElementById(`progress-${colName}-${docId}`);
             if(loadingDiv) loadingDiv.classList.remove('hidden');
-            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
 
             try {
                 const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
                 const filename = `${colName}/${Date.now()}_${safeFilename}`;
                 const sRef = storageRef(storage, filename);
                 
-                // Menggunakan fungsi safeUpload dengan perlindungan timeout
                 await safeUpload(sRef, file);
                 const downloadURL = await getDownloadURL(sRef);
                 
-                // Simpan link gambar ke database Firestore
                 await updateDoc(doc(db, colName, docId), { imageUrl: downloadURL });
                 
-                // Tampilkan Notifikasi Sukses ke Admin
                 window.showCloudToast("Foto Berhasil Diunggah Permanen ke Cloud!");
             } catch (error) {
-                console.error("Upload Error:", error);
                 alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
             } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; // Reset input
+                event.target.value = '';
             }
         };
 
-        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI (ANTI-NYANGKUT)
+        // FUNGSI INTI: UPLOAD 12 SLOT TETAP GALERI
+        window.uploadFixedGallery = async function(event, slotNum) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!window.isAdmin) return alert("Akses Ditolak.");
+
+            const loadingDiv = document.getElementById(`loading-gal-${slotNum}`);
+            const progressTxt = document.getElementById(`progress-gal-${slotNum}`);
+            
+            if(loadingDiv) loadingDiv.classList.remove('hidden');
+            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
+
+            try {
+                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
+                const filename = `settings/galeri_${slotNum}_${Date.now()}_${safeFilename}`;
+                const sRef = storageRef(storage, filename);
+                
+                await safeUpload(sRef, file);
+                const downloadURL = await getDownloadURL(sRef);
+                
+                try {
+                    await setDoc(doc(db, 'settings', `gallery_fixed_${slotNum}`), { imageUrl: downloadURL }, { merge: true });
+                } catch (updateError) {
+                    console.error(updateError);
+                }
+
+                const imgEl = document.getElementById(`gal-img-${slotNum}`);
+                if (imgEl) imgEl.src = downloadURL;
+                
+                window.showCloudToast(`Foto Galeri ${slotNum} Berhasil Diperbarui!`);
+            } catch (error) {
+                alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
+            } finally {
+                if(loadingDiv) loadingDiv.classList.add('hidden');
+                event.target.value = '';
+            }
+        };
+
+        // UPDATE TEKS JUDUL 12 GALERI TETAP
+        window.updateFixedGalleryTitle = async function(slotNum, newTitle) {
+            if(!window.isAdmin) return;
+            try {
+                await setDoc(doc(db, 'settings', `gallery_fixed_${slotNum}`), { title: newTitle }, { merge: true });
+                window.showCloudToast(`Judul Foto ${slotNum} Tersimpan!`);
+            } catch (e) { console.error("Gagal update judul:", e); }
+        };
+
+        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI
         window.uploadTentangKami = async function(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -956,34 +1136,26 @@
             if(progressTxt) progressTxt.innerText = 'Menyimpan...';
 
             try {
-                // Menghilangkan karakter aneh pada nama file
                 const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
                 const filename = `settings/tentang_${Date.now()}_${safeFilename}`;
                 const sRef = storageRef(storage, filename);
                 
-                // Menggunakan fungsi safeUpload dengan perlindungan timeout
                 await safeUpload(sRef, file);
                 const downloadURL = await getDownloadURL(sRef);
                 
-                // Simpan link gambar ke database Firestore
                 try {
-                    await updateDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
-                } catch (updateError) {
-                    // Jika dokumen belum ada di database, gunakan setDoc untuk membuat pertama kali
-                    await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL });
-                }
+                    await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL }, { merge: true });
+                } catch (updateError) {}
 
-                // Paksa gambar di layar langsung berubah
                 const imgEl = document.getElementById('img-tentang');
                 if (imgEl) imgEl.src = downloadURL;
                 
                 window.showCloudToast("Foto 'Tentang Kami' Berhasil Diperbarui!");
             } catch (error) {
-                console.error("System Error:", error);
                 alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
             } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; // Reset Input
+                event.target.value = ''; 
             }
         };
 
@@ -1007,21 +1179,16 @@
                 await safeUpload(sRef, file);
                 const downloadURL = await getDownloadURL(sRef);
                 
-                // Simpan link gambar ke database Firestore
                 try {
-                    await updateDoc(doc(db, 'settings', `hero_slide_${slotNum}`), { imageUrl: downloadURL });
-                } catch (updateError) {
-                    await setDoc(doc(db, 'settings', `hero_slide_${slotNum}`), { imageUrl: downloadURL });
-                }
+                    await setDoc(doc(db, 'settings', `hero_slide_${slotNum}`), { imageUrl: downloadURL }, { merge: true });
+                } catch (updateError) {}
 
-                // Gambar di layar dan animasi otomatis berubah tanpa di-refresh
                 window.showCloudToast(`Foto Slider ${slotNum} Berhasil Diperbarui!`);
             } catch (error) {
-                console.error("System Error:", error);
                 alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
             } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; // Reset Input
+                event.target.value = ''; 
             }
         };
 
@@ -1039,28 +1206,22 @@
                 const filename = `settings/logo_${Date.now()}_${safeFilename}`;
                 const sRef = storageRef(storage, filename);
                 
-                // Menggunakan fungsi safeUpload dengan perlindungan timeout
                 await safeUpload(sRef, file);
                 const downloadURL = await getDownloadURL(sRef);
                 
-                // Simpan link gambar ke database Firestore
                 try {
-                    await updateDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL });
-                } catch (updateError) {
-                    await setDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL });
-                }
+                    await setDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL }, { merge: true });
+                } catch (updateError) {}
 
-                // Paksa gambar di layar langsung berubah
                 const imgEl = document.getElementById('logo-img');
                 if (imgEl) imgEl.src = downloadURL;
                 
                 window.showCloudToast("Logo Perusahaan Berhasil Diperbarui!");
             } catch (error) {
-                console.error("System Error:", error);
                 alert("GAGAL UNGGAH LOGO!\n\n" + error.message);
             } finally {
                 if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; // Reset Input
+                event.target.value = ''; 
             }
         };
 
