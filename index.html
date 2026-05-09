@@ -46,7 +46,6 @@
             }
         };
     </script>
-    
     <style>
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -472,7 +471,7 @@
         </div>
     </section>
 
-    <!-- 12 SLOT FIX GALERI KEGIATAN PERUSAHAAN -->
+    <!-- 12 SLOT FIX GALERI KEGIATAN PERUSAHAAN (SESUAI REQUEST ALFABET) -->
     <section id="galeri" class="py-24 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -485,7 +484,7 @@
             <!-- 12 Bingkai Statis yang Siap Di-Upload -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-                <!-- Slot Galeri 1 -->
+                <!-- Slot Galeri 1-4 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -501,7 +500,6 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 2 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -517,7 +515,6 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 3 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -533,7 +530,6 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 4 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -549,7 +545,7 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 5 -->
+                <!-- Slot Galeri 5-8 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -559,13 +555,12 @@
                     <div id="loading-gal-5" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-5" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-5" src="e.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-5" src="e.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-5" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(5, this.innerText)">Kegiatan Perusahaan 5</h3>
                     </div>
                 </div>
 
-                <!-- Slot Galeri 6 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -575,13 +570,12 @@
                     <div id="loading-gal-6" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-6" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-6" src="f.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-6" src="f.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-6" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(6, this.innerText)">Kegiatan Perusahaan 6</h3>
                     </div>
                 </div>
 
-                <!-- Slot Galeri 7 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -591,13 +585,12 @@
                     <div id="loading-gal-7" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-7" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-7" src="g.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-7" src="g.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-7" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(7, this.innerText)">Kegiatan Perusahaan 7</h3>
                     </div>
                 </div>
 
-                <!-- Slot Galeri 8 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -613,7 +606,7 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 9 -->
+                <!-- Slot Galeri 9-12 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -629,7 +622,6 @@
                     </div>
                 </div>
 
-                <!-- Slot Galeri 10 -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -639,13 +631,12 @@
                     <div id="loading-gal-10" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-10" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-10" src="j.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-10" src="j.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-10" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(10, this.innerText)">Kegiatan Perusahaan 10</h3>
                     </div>
                 </div>
 
-                <!-- Slot Galeri 11 (Diisi gambar A untuk menggenapkan 12 slot) -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -655,13 +646,12 @@
                     <div id="loading-gal-11" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-11" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-11" src="a.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-11" src="k.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-11" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(11, this.innerText)">Kegiatan Perusahaan 11</h3>
                     </div>
                 </div>
 
-                <!-- Slot Galeri 12 (Diisi gambar B untuk menggenapkan 12 slot) -->
                 <div class="relative h-64 rounded-xl overflow-hidden group bg-gray-800 shadow-md border border-gray-700">
                     <div class="absolute top-3 right-3 z-30 hidden admin-tools flex-col gap-2">
                         <label class="cursor-pointer bg-brand hover:bg-brand-dark text-white px-3 py-1.5 rounded shadow text-xs font-bold border border-white/20">
@@ -671,7 +661,7 @@
                     <div id="loading-gal-12" class="absolute inset-0 bg-black/80 hidden flex-col items-center justify-center z-40 text-white">
                         <i class="fas fa-spinner fa-spin text-3xl text-brand mb-2"></i><span id="progress-gal-12" class="text-xs font-bold">Menyimpan...</span>
                     </div>
-                    <img id="gal-img-12" src="b.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img id="gal-img-12" src="l.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
                         <h3 id="gal-title-12" class="font-bold text-sm text-white outline-none" contenteditable="false" onblur="updateFixedGalleryTitle(12, this.innerText)">Kegiatan Perusahaan 12</h3>
                     </div>
