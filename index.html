@@ -674,17 +674,24 @@
     <!-- Mitra Dinamis (CMS) -->
     <section class="py-16 bg-white border-b">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex flex-col md:flex-row justify-center items-end mb-8 gap-4">
-                <h3 class="text-lg font-bold text-gray-900 uppercase tracking-widest">Mitra Kerjasama</h3>
+            <div class="flex flex-col md:flex-row justify-center items-end mb-12 gap-4">
+                <h3 class="text-xl font-bold text-gray-900 uppercase tracking-widest">Mitra Kerjasama</h3>
                 <div class="admin-tools hidden">
                     <button onclick="addPartnerItem()" class="bg-brand hover:bg-brand-dark text-white px-4 py-1.5 rounded-full text-[10px] font-bold shadow-md">
-                        <i class="fas fa-plus"></i> Tambah Kotak Mitra
+                        <i class="fas fa-plus"></i> Tambah Mitra Ekstra
                     </button>
                 </div>
             </div>
+
+            <!-- Mitra Tetap (Bawaan Kode) -->
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 mb-4 opacity-90 hover:opacity-100 transition-opacity duration-500">
+                <img src="Desain tanpa judul (5).png" alt="Inti Teknindo Pratama" class="h-20 md:h-28 w-auto object-contain hover:scale-110 transition-transform duration-300 drop-shadow-sm">
+                <img src="ups.png" alt="PT Usaha Pratama Sejahtera" class="h-14 md:h-20 w-auto object-contain hover:scale-110 transition-transform duration-300 drop-shadow-sm">
+                <img src="hengwang.jpg" alt="Hengwang" class="h-20 md:h-28 w-auto object-contain hover:scale-110 transition-transform duration-300 drop-shadow-sm">
+            </div>
             
-            <div id="partner-grid" class="flex flex-wrap justify-center items-center gap-12 opacity-80 hover:opacity-100 transition-all duration-500">
-                <div class="w-full py-4 text-center text-gray-400"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat Mitra...</div>
+            <!-- Mitra Tambahan (Dari Database) -->
+            <div id="partner-grid" class="flex flex-wrap justify-center items-center gap-12 md:gap-24 mt-8 opacity-80 hover:opacity-100 transition-all duration-500">
             </div>
         </div>
     </section>
@@ -941,7 +948,7 @@
             const grid = document.getElementById('partner-grid');
             if (!grid) return;
             if (data.length === 0) {
-                grid.innerHTML = `<div class="w-full py-4 text-center text-gray-400 italic">Belum ada logo mitra terdaftar.</div>`;
+                grid.innerHTML = ''; // Dikosongkan agar teks 'Belum ada mitra' tidak muncul di bawah logo permanen
                 return;
             }
             let html = '';
