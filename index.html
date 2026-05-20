@@ -51,6 +51,17 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
+
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #16a34a; transition: width .25s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .soft-card { box-shadow: 0 18px 55px rgba(15, 23, 42, 0.08); }
+        .input-clean { transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease; }
+        .input-clean:focus { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(22, 163, 74, 0.12); }
+        @media (max-width: 767px) {
+            .mobile-safe-pad { padding-left: 1rem; padding-right: 1rem; }
+            .hero-slider-container { animation-duration: 30s; }
+        }
         
         .hero-slider-container {
             display: flex;
@@ -105,19 +116,35 @@
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#beranda" class="text-gray-700 hover:text-brand font-medium transition-colors">Beranda</a>
-                    <a href="#tentang" class="text-gray-700 hover:text-brand font-medium transition-colors">Tentang Kami</a>
-                    <a href="#produk" class="text-gray-700 hover:text-brand font-medium transition-colors">Produk</a>
-                    <a href="#layanan" class="text-gray-700 hover:text-brand font-medium transition-colors">Layanan</a>
-                    <a href="#garansi" class="text-gray-700 hover:text-brand font-medium transition-colors">Garansi</a>
-                    <a href="#galeri" class="text-gray-700 hover:text-brand font-medium transition-colors">Galeri</a>
-                    <a href="#kontak" class="text-gray-700 hover:text-brand font-medium transition-colors">Kontak</a>
+                    <a href="#beranda" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Beranda</a>
+                    <a href="#tentang" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Tentang Kami</a>
+                    <a href="#produk" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Produk</a>
+                    <a href="#layanan" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Layanan</a>
+                    <a href="#garansi" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Garansi</a>
+                    <a href="#galeri" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Galeri</a>
+                    <a href="#kontak" class="nav-link text-gray-700 hover:text-brand font-medium transition-colors">Kontak</a>
                 </nav>
                 
                 <div class="hidden md:flex">
                     <a href="#kontak" class="bg-brand text-white px-6 py-2.5 rounded-full font-semibold hover:bg-brand-dark transition-colors shadow-md">
                         Dapatkan Penawaran
                     </a>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 rounded-full bg-gray-100 text-gray-800 flex items-center justify-center hover:bg-brand hover:text-white transition-all" aria-label="Buka menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden pb-5 animate-fade-in">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-xl p-4 flex flex-col gap-2">
+                    <a href="#beranda" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Beranda</a>
+                    <a href="#tentang" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Tentang Kami</a>
+                    <a href="#produk" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Produk</a>
+                    <a href="#layanan" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Layanan</a>
+                    <a href="#garansi" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Garansi</a>
+                    <a href="#galeri" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold hover:bg-brand/10 hover:text-brand">Galeri</a>
+                    <a href="#kontak" onclick="toggleMobileMenu(false)" class="px-4 py-3 rounded-xl font-semibold bg-brand text-white text-center">Dapatkan Penawaran</a>
                 </div>
             </div>
         </div>
@@ -393,7 +420,7 @@
             </div>
 
             <!-- PORTAL CEK STATUS (Tanpa Akun) -->
-            <div class="bg-white rounded-3xl shadow-xl p-8 mb-10 border border-brand/20 max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center relative overflow-hidden">
+            <div class="bg-white rounded-3xl soft-card p-8 mb-10 border border-brand/20 max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent rounded-full opacity-10 blur-2xl"></div>
                 <div class="md:w-5/12 z-10">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2"><i class="fas fa-search text-brand"></i> Cek Status</h3>
@@ -410,32 +437,43 @@
             </div>
 
             <!-- FORM REGISTRASI GARANSI BARU -->
-            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-brand/20 max-w-4xl mx-auto">
+            <div class="bg-white rounded-3xl soft-card p-8 md:p-12 border border-brand/20 max-w-4xl mx-auto">
                 <h3 class="text-xl font-bold text-gray-900 mb-6 border-b pb-4"><i class="fas fa-plus-circle text-accent mr-2"></i> Pendaftaran Unit Baru</h3>
                 <form onsubmit="submitGaransi(event)" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Produk</label>
-                        <select id="g_jenis" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none bg-gray-50 text-gray-800 cursor-pointer">
-                            <option value="Pompa Air Irigasi" selected>Pompa Air Irigasi</option>
-                            <option value="Alat Berat">Alat Berat</option>
-                            <option value="Hydraulic System">Hydraulic System</option>
-                            <option value="Spare Part Industri">Spare Part Industri</option>
-                        </select>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Jenis Produk</label>
+                            <select id="g_jenis" required class="input-clean w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none bg-gray-50 text-gray-800 cursor-pointer">
+                                <option value="Pompa Air Irigasi" selected>Pompa Air Irigasi</option>
+                                <option value="Alat Berat">Alat Berat</option>
+                                <option value="Hydraulic System">Hydraulic System</option>
+                                <option value="Spare Part Industri">Spare Part Industri</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Pembelian / Pendaftaran</label>
+                            <input type="date" id="g_tanggal" required class="input-clean w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow text-gray-700 cursor-pointer bg-gray-50">
+                        </div>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Spesifikasi / Tipe Produk</label>
-                        <input type="text" id="g_spek" required placeholder="Contoh: Pompa Air Diesel 3 Inch / Excavator PC200" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Spesifikasi / Tipe Produk</label>
+                        <input type="text" id="g_spek" required placeholder="Contoh: Pompa Air Diesel 3 Inch / Excavator PC200" class="input-clean w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pemilik / Perusahaan / Instansi</label>
-                        <input type="text" id="g_cpcl" required placeholder="Detail Nama Perusahaan / Individu Lengkap" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Pemilik / Perusahaan / Instansi</label>
+                        <input type="text" id="g_pemilik" required placeholder="Contoh: Dinas Pertanian Kab. Tangerang / PT / Kelompok Tani" class="input-clean w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Pembelian / Pendaftaran</label>
-                        <input type="date" id="g_tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow text-gray-700 cursor-pointer">
+
+                    <div class="bg-green-50 border border-green-200 rounded-2xl p-5">
+                        <label class="block text-sm font-bold text-green-900 mb-2">Data CPCL Pengadaan Kementan</label>
+                        <textarea id="g_cpcl" required rows="3" placeholder="CPCL = Calon Petani dan Calon Lokasi. Contoh: Poktan Makmur Jaya - Desa Dangdang, Kec. Cisauk, Kab. Tangerang - Komoditas Padi - Luas 25 Ha" class="input-clean w-full px-4 py-3 rounded-xl border border-green-200 focus:ring-2 focus:ring-brand outline-none transition-shadow resize-none bg-white"></textarea>
+                        <p class="text-xs text-green-800 mt-2"><i class="fas fa-info-circle mr-1"></i> Isi sesuai data penerima/manfaat dan lokasi kegiatan pengadaan Kementan.</p>
                     </div>
+
                     <div class="pt-4">
-                        <button type="submit" id="g_submit_btn" class="w-full bg-brand text-white font-bold py-4 rounded-lg hover:bg-brand-dark transition-all shadow-lg text-lg flex items-center justify-center gap-2">
+                        <button type="submit" id="g_submit_btn" class="w-full bg-brand text-white font-bold py-4 rounded-xl hover:bg-brand-dark transition-all shadow-lg text-lg flex items-center justify-center gap-2">
                             <i class="fas fa-shield-check"></i> Daftarkan Garansi
                         </button>
                     </div>
@@ -456,13 +494,14 @@
                                 <th class="px-6 py-4 text-sm font-bold">Produk</th>
                                 <th class="px-6 py-4 text-sm font-bold">Spesifikasi / Tipe</th>
                                 <th class="px-6 py-4 text-sm font-bold">Pemilik / Perusahaan</th>
+                                <th class="px-6 py-4 text-sm font-bold">CPCL Kementan</th>
                                 <th class="px-6 py-4 text-sm font-bold">Tanggal</th>
                                 <th class="px-6 py-4 text-sm font-bold text-blue-700">Kode Akses</th>
                                 <th class="px-6 py-4 text-sm font-bold text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="garansi-table-body">
-                            <tr><td colspan="7" class="px-6 py-8 text-center text-gray-500 font-medium">Menghubungkan ke Database...</td></tr>
+                            <tr><td colspan="8" class="px-6 py-8 text-center text-gray-500 font-medium">Menghubungkan ke Database...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -794,6 +833,16 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
+        window.toggleMobileMenu = function(forceState) {
+            const menu = document.getElementById('mobile-menu');
+            if (!menu) return;
+            if (forceState === false) {
+                menu.classList.add('hidden');
+                return;
+            }
+            menu.classList.toggle('hidden');
+        };
+
         // Mode Admin Global
         window.isAdmin = false;
 
@@ -919,23 +968,43 @@
             renderPartnerGrid(currentPartnerData);
         };
 
+        function escapeHTML(value) {
+            return String(value || '').replace(/[&<>"']/g, (char) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        function formatDateID(value) {
+            if (!value) return '-';
+            const date = new Date(value + 'T00:00:00');
+            if (Number.isNaN(date.getTime())) return escapeHTML(value);
+            return date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
         function renderGaransiTable(data) {
             const tbody = document.getElementById('garansi-table-body');
             if (!tbody) return;
             if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="px-6 py-8 text-center text-gray-500 font-medium">Belum ada unit yang didaftarkan.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" class="px-6 py-8 text-center text-gray-500 font-medium">Belum ada unit yang didaftarkan.</td></tr>';
                 return;
             }
             let html = '';
             data.forEach((item, index) => {
+                const pemilik = item.pemilik || item.namaPemilik || item.instansi || item.cpcl || '-';
+                const cpclText = item.cpcl || '-';
                 html += `
-                <tr class="border-b border-gray-200 hover:bg-green-50">
+                <tr class="border-b border-gray-200 hover:bg-green-50 align-top">
                     <td class="px-6 py-4">${index + 1}</td>
-                    <td class="px-6 py-4 font-bold text-brand uppercase">${item.jenis}</td>
-                    <td class="px-6 py-4">${item.spek}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">${item.cpcl}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">${item.tanggal}</td>
-                    <td class="px-6 py-4 font-mono font-bold text-blue-700">${item.kodeAkses || '-'}</td>
+                    <td class="px-6 py-4 font-bold text-brand uppercase">${escapeHTML(item.jenis)}</td>
+                    <td class="px-6 py-4 min-w-[220px]">${escapeHTML(item.spek)}</td>
+                    <td class="px-6 py-4 min-w-[220px]">${escapeHTML(pemilik)}</td>
+                    <td class="px-6 py-4 min-w-[260px] text-sm text-gray-700">${escapeHTML(cpclText)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${formatDateID(item.tanggal)}</td>
+                    <td class="px-6 py-4 font-mono font-bold text-blue-700 whitespace-nowrap">${escapeHTML(item.kodeAkses || '-')}</td>
                     <td class="px-6 py-4 text-center ${window.isAdmin ? '' : 'hidden'}">
                         <button onclick="deleteDataDoc('garansi', '${item.id}')" class="text-red-600 bg-red-50 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded"><i class="fas fa-trash-alt"></i></button>
                     </td>
@@ -980,257 +1049,151 @@
             const pass = prompt("Hanya Admin Kalimaja: Masukkan Password Keamanan");
             if (pass === "Yakin537@") {
                 window.isAdmin = true;
-                alert("Mode Admin Aktif!\nAnda sekarang bisa mengganti 12 slot foto di Galeri dan mengedit teks judulnya.");
+                alert("Mode Admin Aktif. Semua kontrol edit & upload sekarang tampil.");
                 
-                // Tampilkan semua fitur khusus admin
-                document.querySelectorAll('.admin-tools').forEach(el => el.classList.remove('hidden'));
+                // Tampilkan semua admin tools
+                document.querySelectorAll('.admin-tools').forEach(el => {
+                    el.classList.remove('hidden');
+                    el.classList.add('flex');
+                });
+                document.getElementById('admin-slider-panel')?.classList.remove('hidden');
+                document.getElementById('admin-garansi-view')?.classList.remove('hidden');
                 
-                // Aktifkan Edit Text untuk ke-12 Judul Galeri
+                // Aktifkan editing judul galeri
                 for(let i=1; i<=12; i++) {
-                    const titleEl = document.getElementById('gal-title-' + i);
-                    if(titleEl) titleEl.setAttribute('contenteditable', 'true');
+                    const title = document.getElementById('gal-title-' + i);
+                    if(title) title.contentEditable = true;
                 }
                 
-                const garansiView = document.getElementById('admin-garansi-view');
-                if(garansiView) garansiView.classList.remove('hidden');
+                // Refresh agar tombol delete muncul di item dinamis
+                refreshUI();
+            } else {
+                alert("Password salah.");
+            }
+        };
 
-                const notice = document.getElementById('admin-notice');
-                if (notice) notice.innerText = "Klik 'Upload' pada gambar untuk mengganti, atau klik teks judul untuk mengubah teks.";
-                const btn = document.getElementById('admin-btn');
-                if (btn) btn.innerHTML = '<i class="fas fa-check-circle text-green-500"></i> Mode Cloud Server Aktif';
-                
-                window.refreshUI();
-            } else if (pass !== null) {
-                alert("Password Salah! Akses Ditolak.");
+        window.deleteDataDoc = async function(collectionName, id) {
+            if (confirm("Yakin ingin menghapus data ini dari server permanen?")) {
+                try {
+                    await deleteDoc(doc(db, collectionName, id));
+                    showCloudToast("Data berhasil dihapus dari server.");
+                } catch (e) { alert("Gagal menghapus data."); }
+            }
+        };
+
+        // ==========================================
+        // UPLOAD GAMBAR (Storage -> Firestore)
+        // ==========================================
+        async function uploadFileToStorage(file, path, loadingId, progressId) {
+            const loading = document.getElementById(loadingId);
+            const progress = document.getElementById(progressId);
+            if(loading) loading.classList.remove('hidden');
+            if(loading) loading.classList.add('flex');
+            if(progress) progress.innerText = "Mengupload...";
+
+            try {
+                const ext = file.name.split('.').pop();
+                const fileName = `${path}_${Date.now()}.${ext}`;
+                const fileRef = storageRef(storage, fileName);
+                await uploadBytes(fileRef, file);
+                const url = await getDownloadURL(fileRef);
+                return url;
+            } catch (e) {
+                console.error(e);
+                alert("Upload gagal. Pastikan Firebase Storage Rules sudah diatur.");
+                return null;
+            } finally {
+                if(loading) {
+                    loading.classList.add('hidden');
+                    loading.classList.remove('flex');
+                }
+            }
+        }
+
+        window.uploadLogo = async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const url = await uploadFileToStorage(file, 'logo_image', 'loading-logo');
+            if (url) {
+                await setDoc(doc(db, 'settings', 'logo_image'), { imageUrl: url, updatedAt: Date.now() });
+                showCloudToast("Logo berhasil diperbarui di server.");
+            }
+        };
+
+        window.uploadTentangKami = async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const url = await uploadFileToStorage(file, 'tentang_image', 'loading-tentang', 'progress-tentang');
+            if (url) {
+                await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: url, updatedAt: Date.now() });
+                showCloudToast("Foto Tentang Kami berhasil disimpan.");
+            }
+        };
+
+        window.uploadHeroSlide = async function(event, slot) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const url = await uploadFileToStorage(file, `hero_slide_${slot}`, `loading-hero-${slot}`, `progress-hero-${slot}`);
+            if (url) {
+                await setDoc(doc(db, 'settings', 'hero_slide_' + slot), { imageUrl: url, updatedAt: Date.now() });
+                showCloudToast("Slider " + slot + " berhasil diperbarui.");
+            }
+        };
+
+        window.uploadFixedGallery = async function(event, slot) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const url = await uploadFileToStorage(file, `gallery_fixed_${slot}`, `loading-gal-${slot}`, `progress-gal-${slot}`);
+            if (url) {
+                const currentTitle = document.getElementById('gal-title-' + slot)?.innerText || `Kegiatan Perusahaan ${slot}`;
+                await setDoc(doc(db, 'settings', 'gallery_fixed_' + slot), { imageUrl: url, title: currentTitle, updatedAt: Date.now() }, { merge: true });
+                showCloudToast("Galeri slot " + slot + " berhasil diperbarui.");
+            }
+        };
+
+        window.updateFixedGalleryTitle = async function(slot, title) {
+            if(!window.isAdmin) return;
+            try {
+                await setDoc(doc(db, 'settings', 'gallery_fixed_' + slot), { title: title, updatedAt: Date.now() }, { merge: true });
+                showCloudToast("Judul galeri tersimpan.");
+            } catch (e) { console.error(e); }
+        };
+
+        window.uploadImageToStorage = async function(event, collectionName, id) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const loadingId = `loading-${collectionName}-${id}`;
+            const url = await uploadFileToStorage(file, `${collectionName}_${id}`, loadingId);
+            if (url) {
+                await updateDoc(doc(db, collectionName, id), { imageUrl: url, updatedAt: Date.now() });
+                showCloudToast("Logo mitra berhasil diperbarui.");
             }
         };
 
         window.addPartnerItem = async function() {
-            if(!window.isAdmin) return;
+            const name = prompt("Nama mitra baru:");
+            if (!name) return;
             try {
-                await addDoc(collection(db, 'partners'), { imageUrl: '', timestamp: Date.now() });
-                window.showCloudToast("Kotak Mitra Berhasil Dibuat di Cloud");
-            } catch(e) { alert("Gagal menambah kotak. Cek Rules Firestore Anda."); }
-        };
-
-        window.deleteDataDoc = async function(colName, docId) {
-            if(!window.isAdmin) return;
-            if(confirm("Yakin menghapus item ini permanen dari Database Server?")) {
-                try {
-                    await deleteDoc(doc(db, colName, docId));
-                    window.showCloudToast("Data Terhapus Permanen dari Server");
-                } catch(e) { alert("Gagal menghapus."); }
-            }
+                await addDoc(collection(db, 'partners'), {
+                    name,
+                    imageUrl: '',
+                    timestamp: Date.now()
+                });
+                showCloudToast("Mitra baru ditambahkan. Silakan upload logo.");
+            } catch (e) { alert("Gagal menambah mitra."); }
         };
 
         // ==========================================
-        // HELPER: Anti-Nyangkut Timeout (15 Detik)
-        // ==========================================
-        const safeUpload = (sRef, file) => {
-            return new Promise((resolve, reject) => {
-                const timer = setTimeout(() => {
-                    reject(new Error("TIMEOUT (15 Detik): Firebase Storage tidak merespon.\n\nSOLUSI PASTINYA:\n1. Buka Firebase Console.\n2. Masuk ke menu 'Storage' (di kiri).\n3. WAJIB klik tombol 'Get Started' / 'Mulai' jika belum pernah diaktifkan."));
-                }, 15000);
-
-                uploadBytes(sRef, file)
-                    .then(snapshot => {
-                        clearTimeout(timer);
-                        resolve(snapshot);
-                    })
-                    .catch(err => {
-                        clearTimeout(timer);
-                        reject(err);
-                    });
-            });
-        };
-
-        // FUNGSI INTI: UPLOAD FILE GAMBAR UNTUK PARTNERS
-        window.uploadImageToStorage = async function(event, colName, docId) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!window.isAdmin) return alert("Akses Ditolak.");
-
-            const loadingDiv = document.getElementById(`loading-${colName}-${docId}`);
-            if(loadingDiv) loadingDiv.classList.remove('hidden');
-
-            try {
-                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-                const filename = `${colName}/${Date.now()}_${safeFilename}`;
-                const sRef = storageRef(storage, filename);
-                
-                await safeUpload(sRef, file);
-                const downloadURL = await getDownloadURL(sRef);
-                
-                await updateDoc(doc(db, colName, docId), { imageUrl: downloadURL });
-                
-                window.showCloudToast("Foto Berhasil Diunggah Permanen ke Cloud!");
-            } catch (error) {
-                alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
-            } finally {
-                if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = '';
-            }
-        };
-
-        // FUNGSI INTI: UPLOAD 12 SLOT TETAP GALERI
-        window.uploadFixedGallery = async function(event, slotNum) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!window.isAdmin) return alert("Akses Ditolak.");
-
-            const loadingDiv = document.getElementById(`loading-gal-${slotNum}`);
-            const progressTxt = document.getElementById(`progress-gal-${slotNum}`);
-            
-            if(loadingDiv) loadingDiv.classList.remove('hidden');
-            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
-
-            try {
-                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-                const filename = `settings/galeri_${slotNum}_${Date.now()}_${safeFilename}`;
-                const sRef = storageRef(storage, filename);
-                
-                await safeUpload(sRef, file);
-                const downloadURL = await getDownloadURL(sRef);
-                
-                try {
-                    await setDoc(doc(db, 'settings', `gallery_fixed_${slotNum}`), { imageUrl: downloadURL }, { merge: true });
-                } catch (updateError) {
-                    console.error(updateError);
-                }
-
-                const imgEl = document.getElementById(`gal-img-${slotNum}`);
-                if (imgEl) imgEl.src = downloadURL;
-                
-                window.showCloudToast(`Foto Galeri ${slotNum} Berhasil Diperbarui!`);
-            } catch (error) {
-                alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
-            } finally {
-                if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = '';
-            }
-        };
-
-        // UPDATE TEKS JUDUL 12 GALERI TETAP
-        window.updateFixedGalleryTitle = async function(slotNum, newTitle) {
-            if(!window.isAdmin) return;
-            try {
-                await setDoc(doc(db, 'settings', `gallery_fixed_${slotNum}`), { title: newTitle }, { merge: true });
-                window.showCloudToast(`Judul Foto ${slotNum} Tersimpan!`);
-            } catch (e) { console.error("Gagal update judul:", e); }
-        };
-
-        // FUNGSI INTI: UPLOAD FOTO TENTANG KAMI
-        window.uploadTentangKami = async function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!window.isAdmin) return alert("Akses Ditolak.");
-
-            const loadingDiv = document.getElementById('loading-tentang');
-            const progressTxt = document.getElementById('progress-tentang');
-            
-            if(loadingDiv) loadingDiv.classList.remove('hidden');
-            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
-
-            try {
-                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-                const filename = `settings/tentang_${Date.now()}_${safeFilename}`;
-                const sRef = storageRef(storage, filename);
-                
-                await safeUpload(sRef, file);
-                const downloadURL = await getDownloadURL(sRef);
-                
-                try {
-                    await setDoc(doc(db, 'settings', 'tentang_image'), { imageUrl: downloadURL }, { merge: true });
-                } catch (updateError) {}
-
-                const imgEl = document.getElementById('img-tentang');
-                if (imgEl) imgEl.src = downloadURL;
-                
-                window.showCloudToast("Foto 'Tentang Kami' Berhasil Diperbarui!");
-            } catch (error) {
-                alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
-            } finally {
-                if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; 
-            }
-        };
-
-        // FUNGSI INTI: UPLOAD FOTO UNTUK SLIDER UTAMA
-        window.uploadHeroSlide = async function(event, slotNum) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!window.isAdmin) return alert("Akses Ditolak.");
-
-            const loadingDiv = document.getElementById(`loading-hero-${slotNum}`);
-            const progressTxt = document.getElementById(`progress-hero-${slotNum}`);
-            
-            if(loadingDiv) loadingDiv.classList.remove('hidden');
-            if(progressTxt) progressTxt.innerText = 'Menyimpan...';
-
-            try {
-                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-                const filename = `settings/hero_${slotNum}_${Date.now()}_${safeFilename}`;
-                const sRef = storageRef(storage, filename);
-                
-                await safeUpload(sRef, file);
-                const downloadURL = await getDownloadURL(sRef);
-                
-                try {
-                    await setDoc(doc(db, 'settings', `hero_slide_${slotNum}`), { imageUrl: downloadURL }, { merge: true });
-                } catch (updateError) {}
-
-                window.showCloudToast(`Foto Slider ${slotNum} Berhasil Diperbarui!`);
-            } catch (error) {
-                alert("GAGAL UNGGAH FOTO!\n\n" + error.message);
-            } finally {
-                if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; 
-            }
-        };
-
-        // FUNGSI INTI: UPLOAD LOGO PERUSAHAAN (ANTI-NYANGKUT)
-        window.uploadLogo = async function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!window.isAdmin) return alert("Akses Ditolak.");
-
-            const loadingDiv = document.getElementById('loading-logo');
-            if(loadingDiv) loadingDiv.classList.remove('hidden');
-
-            try {
-                const safeFilename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-                const filename = `settings/logo_${Date.now()}_${safeFilename}`;
-                const sRef = storageRef(storage, filename);
-                
-                await safeUpload(sRef, file);
-                const downloadURL = await getDownloadURL(sRef);
-                
-                try {
-                    await setDoc(doc(db, 'settings', 'logo_image'), { imageUrl: downloadURL }, { merge: true });
-                } catch (updateError) {}
-
-                const imgEl = document.getElementById('logo-img');
-                if (imgEl) imgEl.src = downloadURL;
-                
-                window.showCloudToast("Logo Perusahaan Berhasil Diperbarui!");
-            } catch (error) {
-                alert("GAGAL UNGGAH LOGO!\n\n" + error.message);
-            } finally {
-                if(loadingDiv) loadingDiv.classList.add('hidden');
-                event.target.value = ''; 
-            }
-        };
-
-        // ==========================================
-        // FUNGSI GARANSI
+        // GARANSI
         // ==========================================
         window.submitGaransi = async function(event) {
             event.preventDefault();
 
             const btn = document.getElementById('g_submit_btn');
             const jenis = document.getElementById('g_jenis').value;
-            const spek = document.getElementById('g_spek').value;
-            const cpcl = document.getElementById('g_cpcl').value;
+            const spek = document.getElementById('g_spek').value.trim();
+            const pemilik = document.getElementById('g_pemilik').value.trim();
+            const cpcl = document.getElementById('g_cpcl').value.trim();
             const tanggal = document.getElementById('g_tanggal').value;
 
             const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -1241,7 +1204,7 @@
 
             try {
                 await addDoc(collection(db, 'garansi'), {
-                    jenis, spek, cpcl, tanggal, kodeAkses: accessCode, timestamp: Date.now()
+                    jenis, spek, pemilik, cpcl, tanggal, kodeAkses: accessCode, timestamp: Date.now()
                 });
                 
                 alert("SUKSES!\n\nUnit Anda telah resmi terdaftar di sistem Purna Jual Kalimaja.\n\nKODE AKSES ANDA: " + accessCode + "\n\n*PENTING: Harap catat dan simpan KODE AKSES ini baik-baik.");
@@ -1269,7 +1232,13 @@
             if (found) {
                 resultDiv.innerHTML = `<div class="bg-green-50 p-5 rounded-xl mt-4 text-green-900 border border-green-200 shadow-inner">
                     <h4 class="font-bold mb-2"><i class="fas fa-check-circle"></i> AKTIF (TERDAFTAR)</h4>
-                    <p class="text-sm">Produk: ${found.jenis} | Spek: ${found.spek}<br>Milik: ${found.cpcl}<br>Terdaftar: ${found.tanggal}</p>
+                    <div class="text-sm leading-relaxed">
+                        <strong>Produk:</strong> ${escapeHTML(found.jenis)}<br>
+                        <strong>Spek:</strong> ${escapeHTML(found.spek)}<br>
+                        <strong>Pemilik/Instansi:</strong> ${escapeHTML(found.pemilik || found.cpcl || '-')}<br>
+                        <strong>CPCL Kementan:</strong> ${escapeHTML(found.cpcl || '-')}<br>
+                        <strong>Terdaftar:</strong> ${formatDateID(found.tanggal)}
+                    </div>
                 </div>`;
             } else {
                 resultDiv.innerHTML = `<div class="bg-red-50 p-4 rounded-xl mt-4 text-red-700 border border-red-200 text-sm shadow-inner"><i class="fas fa-exclamation-triangle mr-1"></i> Kode tidak valid atau data tidak ditemukan.</div>`;
