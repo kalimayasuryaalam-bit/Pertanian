@@ -554,7 +554,7 @@
                         Peralatan Tangguh Untuk Proyek & Pertanian
                     </h1>
                     <p class="text-base md:text-xl text-gray-200 max-w-2xl mb-8 leading-relaxed">
-                        PT Kalimaja Surya Alam mendukung kebutuhan pompa irigasi, alat berat, sistem hidrolik, spare part, dan layanan garansi digital dengan data CPCL Kementan.
+                        PT Kalimaja Surya Alam mendukung kebutuhan pompa irigasi, alat berat, sistem hidrolik, spare part, dan layanan garansi digital dengan data penerima dan lokasi unit.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 mb-8">
                         <a href="#produk" class="premium-button bg-brand text-white px-7 py-3.5 shadow-lg shadow-green-900/35"><i class="fas fa-box-open"></i> Lihat Produk</a>
@@ -568,7 +568,7 @@
                         </div>
                         <div class="border-l-4 border-accent bg-yellow-400/18 backdrop-blur-md px-4 py-3 text-white shadow-lg shadow-black/10">
                             <div class="text-2xl font-black">02</div>
-                            <div class="text-xs md:text-sm text-gray-200 font-semibold">CPCL Kementan</div>
+                            <div class="text-xs md:text-sm text-gray-200 font-semibold">Data Unit</div>
                         </div>
                         <div class="border-l-4 border-white bg-white/16 backdrop-blur-md px-4 py-3 text-white shadow-lg shadow-black/10">
                             <div class="text-2xl font-black">03</div>
@@ -705,8 +705,8 @@
             </div>
             <div class="fresh-card rounded-2xl p-4 md:p-6 transition-all border-t-4 border-green-700">
                 <div class="text-brand text-2xl mb-3"><i class="fas fa-file-signature"></i></div>
-                <h3 class="font-black text-gray-900 text-base md:text-xl mb-1">CPCL</h3>
-                <p class="text-gray-600 text-xs md:text-sm leading-relaxed">Data pengadaan lebih lengkap dan rapi.</p>
+                <h3 class="font-black text-gray-900 text-base md:text-xl mb-1">Data Unit</h3>
+                <p class="text-gray-600 text-xs md:text-sm leading-relaxed">Data penerima dan lokasi lebih lengkap.</p>
             </div>
         </div>
     </section>
@@ -876,14 +876,16 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Spesifikasi / Tipe Produk</label>
-                        <input type="text" id="g_spek" required placeholder="Contoh: Pompa Air Diesel 3 Inch / Excavator PC200" class="input-clean w-full px-4 py-3 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Spesifikasi / Tipe Produk</label>
+                            <input type="text" id="g_spek" required placeholder="Contoh: Pompa Air Diesel 3 Inch / Excavator PC200" class="input-clean w-full px-4 py-3 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow">
+                        </div>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nomor Engine Pompa</label>
-                        <input type="text" id="g_engine" required placeholder="Contoh: EN-2026-KSA-001 / No. mesin pada unit pompa" class="input-clean w-full px-4 py-3 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow uppercase">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nomor Engine Pompa</label>
+                            <input type="text" id="g_engine" required placeholder="Contoh: EN-2026-KSA-001 / No. mesin pada unit pompa" class="input-clean w-full px-4 py-3 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-brand outline-none transition-shadow uppercase">
+                        </div>
                     </div>
 
                     <div>
@@ -892,9 +894,9 @@
                     </div>
 
                     <div class="bg-gradient-to-br from-green-100 via-lime-50 to-yellow-50 border border-green-300 rounded-2xl p-4 md:p-5 shadow-inner">
-                        <label class="block text-sm font-bold text-green-900 mb-2">Data CPCL Pengadaan Kementan</label>
-                        <textarea id="g_cpcl" required rows="3" placeholder="CPCL = Calon Petani dan Calon Lokasi. Contoh: Poktan Makmur Jaya - Desa Dangdang, Kec. Cisauk, Kab. Tangerang - Komoditas Padi - Luas 25 Ha" class="input-clean w-full px-4 py-3 rounded-2xl border border-green-200 focus:ring-2 focus:ring-brand outline-none transition-shadow resize-none bg-white"></textarea>
-                        <p class="text-xs text-green-800 mt-2"><i class="fas fa-info-circle mr-1"></i> Isi sesuai data penerima/manfaat dan lokasi kegiatan pengadaan Kementan.</p>
+                        <label class="block text-sm font-bold text-green-900 mb-2">Data Penerima & Lokasi Unit</label>
+                        <textarea id="g_cpcl" required rows="3" placeholder="Contoh: Poktan Makmur Jaya - Desa Dangdang, Kec. Cisauk, Kab. Tangerang - Komoditas Padi - Luas 25 Ha" class="input-clean w-full px-4 py-3 rounded-2xl border border-green-200 focus:ring-2 focus:ring-brand outline-none transition-shadow resize-none bg-white"></textarea>
+                        <p class="text-xs text-green-800 mt-2"><i class="fas fa-info-circle mr-1"></i> Isi data penerima/manfaat dan lokasi penempatan unit secara lengkap.</p>
                     </div>
 
                     <div class="pt-4">
@@ -920,7 +922,7 @@
                                 <th class="px-6 py-4 text-sm font-bold">Spesifikasi / Tipe</th>
                                 <th class="px-6 py-4 text-sm font-bold">No. Engine Pompa</th>
                                 <th class="px-6 py-4 text-sm font-bold">Pemilik / Perusahaan</th>
-                                <th class="px-6 py-4 text-sm font-bold">CPCL Kementan</th>
+                                <th class="px-6 py-4 text-sm font-bold">Penerima & Lokasi</th>
                                 <th class="px-6 py-4 text-sm font-bold">Tanggal</th>
                                 <th class="px-6 py-4 text-sm font-bold text-blue-700">Kode Akses</th>
                                 <th class="px-6 py-4 text-sm font-bold text-center">Aksi</th>
@@ -1675,7 +1677,7 @@
                         <strong>Spek:</strong> ${escapeHTML(found.spek)}<br>
                         <strong>No. Engine Pompa:</strong> ${escapeHTML(found.engine || found.nomorEngine || '-')}<br>
                         <strong>Pemilik/Instansi:</strong> ${escapeHTML(found.pemilik || found.cpcl || '-')}<br>
-                        <strong>CPCL Kementan:</strong> ${escapeHTML(found.cpcl || '-')}<br>
+                        <strong>Penerima & Lokasi:</strong> ${escapeHTML(found.cpcl || '-')}<br>
                         <strong>Terdaftar:</strong> ${formatDateID(found.tanggal)}
                     </div>
                 </div>`;
